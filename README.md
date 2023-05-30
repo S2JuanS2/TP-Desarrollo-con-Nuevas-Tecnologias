@@ -2,8 +2,11 @@
 
 Alumnos: 
 Bruck, María Paula
+
 Del Rio, Juan Sebastián
+
 Ruano Frugoli, Clara
+
 
 Link al doc.
 
