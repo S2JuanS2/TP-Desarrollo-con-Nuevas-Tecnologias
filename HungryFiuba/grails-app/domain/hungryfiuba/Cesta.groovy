@@ -2,11 +2,22 @@ package hungryfiuba
 
 class Cesta {
 
-    //Articulo articulo
+    List<Articulo> articulos
+    int cantidadDeArticulos
 
     static constraints = {
 
-        Articulo nullable: false
+        articulos nullable: false
 
+    }
+
+    Cesta() {
+        articulos = []
+        cantidadDeArticulos = 0
+    }
+
+    void agregarArticulo(Articulo articulo) {
+        articulos.add(articulo)
+        cantidadDeArticulos++
     }
 }

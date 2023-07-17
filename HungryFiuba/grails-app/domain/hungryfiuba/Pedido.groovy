@@ -21,4 +21,11 @@ class Pedido {
         //momentoDeEntrega nullable: false
     }
 
+    Pedido(Cliente cliente,Cesta cesta) {
+       this.cliente = cliente
+       this.cesta = cesta
+       cantidadDeArticulos = cesta.getCantidadDeArticulos
+       precioTotal = cesta.getTotalPrice
+    }
+
 }
