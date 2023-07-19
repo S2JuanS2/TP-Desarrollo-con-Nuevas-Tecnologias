@@ -22,4 +22,5 @@ class Articulo {
         this.codigo = codigo
         this.stock = stock
     }
+
 }

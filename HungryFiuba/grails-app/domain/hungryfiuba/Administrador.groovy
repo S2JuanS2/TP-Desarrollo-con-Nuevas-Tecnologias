@@ -18,4 +18,9 @@ class Administrador {
         Articulo articulo = new Articulo(nombre,precio,codigo,stock)
         articulo.save() //Para guardar en la base de datos? xd ni idea
     }
+
+//Quizas se puede buscar en la base de datos por código de artículo y meterle el nuevo artículo
+    void modificarArticulo(int id_old_articulo, Articulo new) {
+        
+    }
 }

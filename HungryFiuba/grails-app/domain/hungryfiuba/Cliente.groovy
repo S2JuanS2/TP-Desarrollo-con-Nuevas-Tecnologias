@@ -36,4 +36,12 @@ class Cliente {
         return pedido
     }
 
+    void agregarArticuloALaCesta(Articulo articulo) {
+        this.cesta.agregarArticulo(articulo);
+    }
+
+    void eliminarArticuloDeLaCesta(Articulo articulo) {
+        this.cesta.eliminarArticulo(articulo);
+    }
+
 }
