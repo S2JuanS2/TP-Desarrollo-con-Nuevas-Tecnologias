@@ -6,7 +6,6 @@ class Cliente {
     String apellido
     String identificadorTipo
     String identificadorValor
-    //LocalDate fechaDeNacimiento
     Cesta cesta
 
 
@@ -16,7 +15,6 @@ class Cliente {
         apellido nullable: false, blank: false
         identificadorTipo nullable: false, blank: false
         identificadorValor nullable: false, blank: false
-        //fechaDeNacimiento nullable: false, blank: false
 
     }
 
@@ -29,12 +27,13 @@ class Cliente {
         cesta = new Cesta()
     }
 
-    void agregarArticulos() {
-        
-    }
-
     Pedido crearPedido() {
-       Pedido pedido = new Pedido(this) 
+        //No me acuerdo la sintaxis para recuperar un artículo de la base de datos
+        //Pero acá iría eso
+        Articulo articulo //el que saqué de la base de datos
+        cesta.agregarArticulo(Articulo) //Acá no sé cómo se define que esto se hace hasta que no hay más artículos
+        Pedido pedido = new Pedido(this,this.cesta)
+        return pedido
     }
 
 }

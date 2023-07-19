@@ -13,7 +13,13 @@ class Articulo {
         precio nullable: false, min: 0.0
         codigo nullable: false
         stock nullable: false
-        
 
+    }
+
+    Articulo(String nombre, BigDecimal precio, int codigo, int stock) {
+        this.nombre = nombre
+        this.precio = precio
+        this.codigo = codigo
+        this.stock = stock
     }
 }
