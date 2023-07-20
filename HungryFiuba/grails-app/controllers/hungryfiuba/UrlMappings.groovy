@@ -3,6 +3,10 @@ package hungryfiuba
 class UrlMappings {
 
     static mappings = {
+
+        "/register"(controller: 'cliente', action: 'register')
+
+
         "/$controller/$action?/$id?(.$format)?"{
             constraints {
                 // apply constraints here
@@ -12,5 +16,6 @@ class UrlMappings {
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')
+
     }
 }

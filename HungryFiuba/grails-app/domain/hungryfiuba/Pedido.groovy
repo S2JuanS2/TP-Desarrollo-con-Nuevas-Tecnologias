@@ -1,5 +1,7 @@
 package hungryfiuba
 
+import java.time.LocalDateTime
+
 class Pedido {
 
     Cliente cliente
@@ -8,8 +10,8 @@ class Pedido {
     int cantidadDeArticulos
     BigDecimal precioTotal
 
-    //LocalDateTime momentoDeCreacion
-    //LocalDateTime momentoDeEntrega
+    LocalDateTime momentoDeCreacion
+    LocalDateTime momentoDeEntrega
 
 
     static constraints = {
@@ -17,8 +19,8 @@ class Pedido {
         cliente nullable: false
         cesta nullable: false
         precioTotal nullable: false
-        //momentoDeCreacion nullable: false
-        //momentoDeEntrega nullable: false
+        momentoDeCreacion nullable: false
+        momentoDeEntrega nullable: false
     }
 
     Pedido(Cliente cliente,Cesta cesta) {

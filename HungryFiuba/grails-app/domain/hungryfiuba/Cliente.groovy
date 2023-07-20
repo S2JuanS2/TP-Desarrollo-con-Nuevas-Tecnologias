@@ -6,7 +6,7 @@ class Cliente {
     String apellido
     String identificadorTipo
     String identificadorValor
-    Cesta cesta
+    //Cesta cesta
 
 
     static constraints = {
@@ -24,24 +24,24 @@ class Cliente {
         this.apellido = apellido
         this.identificadorTipo = identificadorTipo
         this.identificadorValor = identificadorValor
-        cesta = new Cesta()
+        //cesta = new Cesta()
     }
 
     Pedido crearPedido() {
         //No me acuerdo la sintaxis para recuperar un artículo de la base de datos
         //Pero acá iría eso
         Articulo articulo //el que saqué de la base de datos
-        cesta.agregarArticulo(Articulo) //Acá no sé cómo se define que esto se hace hasta que no hay más artículos
-        Pedido pedido = new Pedido(this,this.cesta)
-        return pedido
+        //cesta.agregarArticulo(Articulo) //Acá no sé cómo se define que esto se hace hasta que no hay más artículos
+        //Pedido pedido = new Pedido(this,this.cesta)
+        //return pedido
     }
 
     void agregarArticuloALaCesta(Articulo articulo) {
-        this.cesta.agregarArticulo(articulo);
+        //this.cesta.agregarArticulo(articulo);
     }
 
     void eliminarArticuloDeLaCesta(Articulo articulo) {
-        this.cesta.eliminarArticulo(articulo);
+        //this.cesta.eliminarArticulo(articulo);
     }
 
 }
