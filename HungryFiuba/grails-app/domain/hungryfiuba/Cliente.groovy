@@ -6,6 +6,7 @@ class Cliente {
     String apellido
     String identificadorTipo
     String identificadorValor
+    String contrasena
     Cesta cesta
 
 
@@ -15,15 +16,17 @@ class Cliente {
         apellido nullable: false, blank: false
         identificadorTipo nullable: false, blank: false
         identificadorValor nullable: false, blank: false
+        contrasena nullable: true, blank: false
         cesta nullable: true
     }
 
 
-    Cliente(String nombre,String apellido,String identificadorTipo,String identificadorValor) {
+    Cliente(String nombre,String apellido,String identificadorTipo,String identificadorValor,String contrasena) {
         this.nombre = nombre
         this.apellido = apellido
         this.identificadorTipo = identificadorTipo
         this.identificadorValor = identificadorValor
+        this.contrasena = contrasena
         cesta = new Cesta()
     }
 
