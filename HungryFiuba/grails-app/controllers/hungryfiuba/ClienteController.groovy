@@ -16,6 +16,7 @@ class ClienteController {
             apellido: params.apellido,
             identificadorTipo: params.idTipo,
             identificadorValor: params.idValor
+            contrasena: params.contrasena
     ).save(failOnError: true)
 
     def clientes = Cliente.list()
