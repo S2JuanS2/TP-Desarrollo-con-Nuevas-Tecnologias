@@ -6,7 +6,7 @@ class Cliente {
     String apellido
     String identificadorTipo
     String identificadorValor
-    //Cesta cesta
+    Cesta cesta
 
 
     static constraints = {
@@ -24,7 +24,7 @@ class Cliente {
         this.apellido = apellido
         this.identificadorTipo = identificadorTipo
         this.identificadorValor = identificadorValor
-        //cesta = new Cesta()
+        cesta = new Cesta()
     }
 
     Pedido crearPedido() {

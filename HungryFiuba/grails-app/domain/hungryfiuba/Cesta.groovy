@@ -11,9 +11,11 @@ class Cesta {
 
     }
 
+
+
     Cesta() {
         articulos = []
-        cantidadDeArticulos = 0
+        cantidadDeArticulos = 
     }
 
 //En estos hay que recibir el artículo? O el id y buscarlo por id en la base de datos?

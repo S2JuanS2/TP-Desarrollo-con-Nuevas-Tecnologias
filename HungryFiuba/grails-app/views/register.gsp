@@ -4,22 +4,26 @@
         <asset:stylesheet src="register.css"/>
     </head>
     <body>
+<div class="contenedor">
+    <g:form action="crearCliente" method="POST">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" pattern="[A-Za-z]+" required /> <br/>
 
-        <div class="contenedor">
-            <g:form action="crearCliente" method="POST">
-            <label>nombre:</label> 
-                <input type="text" name="nombre" /> <br/>
-            <label>apellido:</label> 
-                <input type="text" name="apellido" /> <br/>
-            <label>identificador tipo:</label> 
-                <input type="text" name="idTipo" /> <br/>
-            <label>identificador valor:</label> 
-                <input type="text" name="idValor" /> <br/>
+        <label>Apellido:</label>
+        <input type="text" name="apellido" pattern="[A-Za-z]+" required /> <br/>
 
+        <label>Identificador tipo:</label>
+        <select name="idTipo" required>
+            <option value="padron">Padrón</option>
+            <option value="dni">DNI</option>
+        </select> <br/>
 
-            <button type="submit">Register</button>
-            </g:form>
-        </div>
+        <label>Identificador valor:</label>
+        <input type="number" name="idValor" required /> <br/>
+
+        <button type="submit">Register</button>
+    </g:form>
+</div>
         
     </body>
 
