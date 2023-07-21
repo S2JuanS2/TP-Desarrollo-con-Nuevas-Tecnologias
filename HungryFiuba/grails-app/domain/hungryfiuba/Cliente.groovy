@@ -15,7 +15,7 @@ class Cliente {
         apellido nullable: false, blank: false
         identificadorTipo nullable: false, blank: false
         identificadorValor nullable: false, blank: false
-
+        cesta nullable: true
     }
 
 
