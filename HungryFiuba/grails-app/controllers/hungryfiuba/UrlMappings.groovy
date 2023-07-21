@@ -14,6 +14,11 @@ class UrlMappings {
             }
         }
 
+        
+    "/mostrarInicio"(controller: "mostrarInicio") {
+        action = [POST: "autenticar"]
+    }
+
         "/"(view:"/index")// algun dia le ponemos mostrarinicio
         "500"(view:'/error')
         "404"(view:'/notFound')
