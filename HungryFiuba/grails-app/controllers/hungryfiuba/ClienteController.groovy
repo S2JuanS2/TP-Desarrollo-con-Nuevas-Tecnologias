@@ -21,8 +21,9 @@ class ClienteController {
 
     def clientes = Cliente.list()
     def articulos = Articulo.list()
-
-    render(view: '/mostrarClientes', model: [clientes: clientes, articulos: articulos]) //prueba de doble modelo, funca
+    
+    
+   render(view: '/registroExitoso', model: [clientes: clientes, articulos: articulos]) //prueba de doble modelo, funca
 
     }
 }
