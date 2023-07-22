@@ -12,5 +12,11 @@
        
     </g:each>
 
+    <g:each var="articulo" in="${articulos}">  <!--TEST-->
+
+    <h2>${articulo.nombre}</h2>
+       
+    </g:each>
+
     </body>
 </html>

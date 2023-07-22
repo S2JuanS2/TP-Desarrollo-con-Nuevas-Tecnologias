@@ -15,13 +15,14 @@ class ClienteController {
             nombre: params.nombre,
             apellido: params.apellido,
             identificadorTipo: params.idTipo,
-            identificadorValor: params.idValor
+            identificadorValor: params.idValor,
             contrasena: params.contrasena
     ).save(failOnError: true)
 
     def clientes = Cliente.list()
+    def articulos = Articulo.list()
 
-    render(view: '/mostrarClientes', model: [clientes: clientes])
+    render(view: '/mostrarClientes', model: [clientes: clientes, articulos: articulos]) //prueba de doble modelo, funca
 
     }
 }

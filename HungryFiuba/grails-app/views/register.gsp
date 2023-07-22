@@ -3,7 +3,7 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Inicio - Mi Empresa</title>
+    <title>HungryFIUBA -registro</title>
     <asset:stylesheet src="inicio.css"/>
     </head>
 
@@ -11,11 +11,11 @@
 
         <div class="container">
             <div class="header">
-            <h1>Mi Empresa</h1>
+            <h1>HungryFIUBA</h1>
             <img src="ruta_de_la_imagen.jpg" alt="Logo de la empresa">
             </div>
             <div class="description">
-            <p>¡Bienvenido a Mi Empresa! Somos una compañía dedicada a...</p>
+            <p>¡Bienvenido!</p>
             </div>
             <div class="login-form">
             <h2>Registro</h2>
@@ -33,7 +33,8 @@
                 <option value="padron">Padrón</option>
                 <option value="dni">DNI</option>
                 </select>
-                
+                <br/>
+                <br/>
                 <label for="valor">Identificador valor:</label>
                 <input type="number" id="valor" name="idValor" required>
                 
@@ -45,7 +46,7 @@
             </div>
         </div>
 
-        <!--
+        <!--  ESTO ES PARA CAMBIAR EL TEXTO DEL ERROR DE FORMATO, PERO ALGO NO ME FUNCIONÓ.
         <script>
 
             document.getElementById("formulario").addEventListener("submit",function(event) {
