@@ -7,6 +7,7 @@ class UrlMappings {
         "/register"(controller: 'cliente', action: 'register')
         "/inicio"(controller: 'administrador', action: 'vistaInicio')
         "/articulosDisponibles"(controller: 'articulo', action: 'mostrarArticulos')
+        "/registroExitoso"(view:'registroExitoso')
 
         "/$controller/$action?/$id?(.$format)?"{
             constraints {

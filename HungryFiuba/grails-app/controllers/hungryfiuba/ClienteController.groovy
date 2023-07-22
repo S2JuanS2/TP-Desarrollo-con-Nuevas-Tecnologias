@@ -8,7 +8,7 @@ class ClienteController {
 
         render(view: "/register")
     }
-
+    
     def crearCliente(){
 
         Cliente cliente = new Cliente(
@@ -22,8 +22,7 @@ class ClienteController {
     def clientes = Cliente.list()
     def articulos = Articulo.list()
     
-    
-   render(view: '/registroExitoso', model: [clientes: clientes, articulos: articulos]) //prueba de doble modelo, funca
-
+    render(view: '/registroExitoso')
+   
     }
 }
