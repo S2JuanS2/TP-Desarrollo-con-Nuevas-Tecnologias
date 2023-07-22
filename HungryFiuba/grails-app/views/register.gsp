@@ -22,10 +22,10 @@
             <g:form id="formulario" action="crearCliente" method="POST">
 
                 <label>Nombre:</label>
-                <input type="text" name="nombre" id="nombre" pattern="[A-Za-z]+" required /> <br/>
+                <input type="text" name="nombre" id="nombre" pattern="[A-Za-z ]+" required minlength="2" maxlength="50" /> <br/>
 
                 <label>Apellido:</label>
-                <input type="text" name="apellido" pattern="[A-Za-z]+" required /> <br/>
+                <input type="text" name="apellido" pattern="[A-Za-z ]+" required minlength="2" maxlength="50" /> <br/>
 
                 <label for="identificador">Identificador:</label>
                 <select id="identificador" name="idTipo" required>
@@ -36,10 +36,10 @@
                 <br/>
                 <br/>
                 <label for="valor">Identificador valor:</label>
-                <input type="number" id="valor" name="idValor" required>
+                <input type="number" id="valor" name="idValor" required min="1" max="200000">
                 
                 <label for="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" required>
+                <input type="password" id="contrasena" name="contrasena" required minlength="8" maxlength="40">
                 
                 <button type="submit">Registrarse</button>
             </g:form>
