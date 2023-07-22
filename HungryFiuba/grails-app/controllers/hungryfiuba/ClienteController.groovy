@@ -9,6 +9,12 @@ class ClienteController {
         render(view: "/register")
     }
     
+    def mostrarClientes() {
+        def clientes = Cliente.list()
+
+        render(view: '/mostrarClientes', model: [clientes: clientes])
+    }
+
     def crearCliente(){
 
         Cliente cliente = new Cliente(
