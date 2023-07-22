@@ -7,10 +7,6 @@ class AdministradorController {
     def vistaInicio(){
         render(view: "/inicio")
     }
-
-    def mostrarArticulos() {
-        render(view: 'mostrarArticulos')
-    }
     
     def autenticar() {
         def identificadorTipo = params.idTipo
