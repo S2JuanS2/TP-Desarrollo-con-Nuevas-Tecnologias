@@ -31,12 +31,11 @@ class Cliente {
     }
 
     Pedido crearPedido() {
-        //No me acuerdo la sintaxis para recuperar un artículo de la base de datos
-        //Pero acá iría eso
-        Articulo articulo //el que saqué de la base de datos
-        //cesta.agregarArticulo(Articulo) //Acá no sé cómo se define que esto se hace hasta que no hay más artículos
-        //Pedido pedido = new Pedido(this,this.cesta)
-        //return pedido
+        /*def nombre = params.nombre
+        Articulo articulo = Articulo.findByNombre(nombre)
+        cesta.agregarArticulo(articulo) //Acá no sé cómo se define que esto se hace hasta que no hay más artículos
+        Pedido pedido = new Pedido(this,this.cesta)
+        return pedido*/
     }
 
     void agregarArticuloALaCesta(Articulo articulo) {
