@@ -1,0 +1,31 @@
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.articulo-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.articulo-nombre {
+    font-size: 24px;
+    color: #333;
+}
+
+.articulo-precio {
+    font-size: 18px;
+    color: #666;
+}
+
+.articulo-imagen {
+    max-width: 300px;
+    max-height: 200px;
+}
+
+.articulo-stock {
+    font-size: 16px;
+    color: #777;
+}

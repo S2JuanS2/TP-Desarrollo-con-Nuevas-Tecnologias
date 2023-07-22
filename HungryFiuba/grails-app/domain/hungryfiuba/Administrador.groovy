@@ -14,9 +14,9 @@ class Administrador {
         this.nombre = nombre
     }
 
-    Articulo cargarStock(String nombre, BigDecimal precio, int codigo, int stock){
-        Articulo articulo = new Articulo(nombre,precio,codigo,stock)
-        articulo.save() //Para guardar en la base de datos? xd ni idea SI
+    Articulo cargarStock(String nombre, BigDecimal precio, int codigo, int stock,String imagenUrl){
+        Articulo articulo = new Articulo(nombre,precio,codigo,stock,imagenUrl)
+        articulo.save()
     }
 
 //Quizas se puede buscar en la base de datos por código de artículo y meterle el nuevo artículo
