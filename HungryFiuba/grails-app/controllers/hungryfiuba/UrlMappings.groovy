@@ -10,13 +10,14 @@ class UrlMappings {
         "/registroExitoso"(view:'registroExitoso')
         "/mostrarClientes"(controller: 'cliente', action: 'mostrarClientes')
         "/administrador/registroFallido"(view:'registroFallido')
-        "/mostrarCesta"(controller: 'articulo',action: '')
+        "/mostrarCesta"(controller: "cliente", action: "mostrarCesta")
 
         "/$controller/$action?/$id?(.$format)?"{
             constraints {
                 // apply constraints here
             }
         }
+        
         
         "/"(view:"/index")// algun dia le ponemos mostrarinicio
         "500"(view:'/error')

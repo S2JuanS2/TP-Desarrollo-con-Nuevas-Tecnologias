@@ -29,7 +29,5 @@ class Pedido {
        cantidadDeArticulos = cesta.getCantidadDeArticulos
        precioTotal = cesta.getTotalPrice
     }
-
-    //Metodos? No sé si sería enviar, recibir, etc, eso no se como se maneja xd
-
+    
 }
