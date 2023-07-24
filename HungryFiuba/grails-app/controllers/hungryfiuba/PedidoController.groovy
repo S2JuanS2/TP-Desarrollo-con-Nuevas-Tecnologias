@@ -4,9 +4,12 @@ class PedidoController {
 
     static scaffold = Pedido
     def crearPedido(){
-        Cesta cesta = New Cesta()
-        Pedido pedido = New Pedido(session.cliente, cesta)
+        Cesta cesta = new Cesta()
+        cesta.save(failOnError: true)
+        Pedido pedido = new Pedido(session.cliente, cesta)
         pedido.save(failOnError: true)
+
+        render "pedido creado" //llamar a una nueva vista
     }
     def mostrarCesta() {
         if (session.cliente) {

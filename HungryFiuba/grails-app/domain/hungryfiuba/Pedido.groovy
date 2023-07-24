@@ -10,8 +10,8 @@ class Pedido {
     int cantidadDeArticulos
     BigDecimal precioTotal
 
-    LocalDateTime momentoDeCreacion
-    LocalDateTime momentoDeEntrega
+    //LocalDateTime momentoDeCreacion
+    //LocalDateTime momentoDeEntrega
 
 
     static constraints = {
@@ -19,15 +19,16 @@ class Pedido {
         cliente nullable: false
         cesta nullable: false
         precioTotal nullable: false
-        momentoDeCreacion nullable: false
-        momentoDeEntrega nullable: false
+        //momentoDeCreacion nullable: false
+        //momentoDeEntrega nullable: false
     }
 
     Pedido(Cliente cliente,Cesta cesta) {
        this.cliente = cliente
        this.cesta = cesta
-       cantidadDeArticulos = 5//cesta.getCantidadDeArticulos
-       precioTotal = cesta.getTotalPrice
+       cantidadDeArticulos = 0
+       precioTotal = 0
+
     }
     
 }

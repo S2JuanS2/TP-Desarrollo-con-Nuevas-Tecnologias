@@ -9,7 +9,6 @@ class Cesta {
     static constraints = {
 
         articulos nullable: true
-        cliente nullable: false, unique: true
 
     }
 
