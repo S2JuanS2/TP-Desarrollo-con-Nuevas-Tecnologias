@@ -6,10 +6,14 @@ class ArticuloController {
 
     def mostrarArticulos(){
 
-        def articulos = Articulo.list()
+        if (session.cliente) {
 
-        render(view: '/mostrarArticulos', model: [articulos: articulos])
-
+            def articulos = Articulo.list()
+            render(view: '/mostrarArticulos', model: [articulos: articulos])
+            
+        } else {
+            render(view: "/registroFallido")
+        }
     }
 
 }
