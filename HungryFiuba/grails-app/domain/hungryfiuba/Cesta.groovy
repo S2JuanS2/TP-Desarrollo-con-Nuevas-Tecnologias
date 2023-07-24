@@ -4,7 +4,7 @@ class Cesta {
 
     List<Articulo> articulos
     int cantidadDeArticulos
-    Cliente cliente  //relación uno a uno
+    
 
     static constraints = {
 

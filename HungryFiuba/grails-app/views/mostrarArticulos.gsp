@@ -15,7 +15,7 @@
                 <div class="articulo-precio">Precio: ${articulo.precio}</div>
                 <div class="articulo-stock">Stock disponible: ${articulo.stock}</div>
                 <img class="articulo-imagen" src="${articulo.imagenUrl}" alt="Imagen del artículo"/>
-                <g:link controller="cliente" action="agregarArticulo" params="[articulo:'${articulo.nombre}']" target="_self"> 
+                <g:link controller="pedido" action="agregarArticulo" params="[articulo:'${articulo.nombre}']" target="_self"> 
                     <button class="agregar-carrito-btn">Agregar al carrito</button>
                 </g:link>
             </div>
@@ -23,6 +23,9 @@
     </div>
     <g:link controller="Administrador" action="logout">
         <button>Logout</button>
+    </g:link>
+    <g:link controller="Pedido" action="crearPedido">
+        <button>CrearPedido</button>
     </g:link>
     </body>
 </html>

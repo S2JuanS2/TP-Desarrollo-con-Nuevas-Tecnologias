@@ -3,7 +3,6 @@ package hungryfiuba
 class ClienteController {
 
     static scaffold = Cliente
-
     def register(){
 
         render(view: "/register")
@@ -36,13 +35,10 @@ class ClienteController {
             contrasena: params.contrasena
         )
 
-        Cesta cesta = new Cesta()
-
-        cesta.cliente = cliente
-        cliente.cesta = cesta
+       
 
         cliente.save(failOnError: true)
-        cesta.save(failOnError: true)
+    
 
         def clientes = Cliente.list()
         def articulos = Articulo.list()

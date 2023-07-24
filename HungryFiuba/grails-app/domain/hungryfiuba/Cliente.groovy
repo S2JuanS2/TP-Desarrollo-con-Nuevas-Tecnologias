@@ -7,7 +7,6 @@ class Cliente {
     String identificadorTipo
     String identificadorValor
     String contrasena
-    Cesta cesta //Relación uno a uno
 
 
     static constraints = {
@@ -17,7 +16,6 @@ class Cliente {
         identificadorTipo nullable: false, blank: false
         identificadorValor nullable: false, blank: false
         contrasena nullable: false, blank: false
-        cesta nullable: false, unique: true
     }
 
 

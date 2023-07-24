@@ -26,7 +26,7 @@ class Pedido {
     Pedido(Cliente cliente,Cesta cesta) {
        this.cliente = cliente
        this.cesta = cesta
-       cantidadDeArticulos = cesta.getCantidadDeArticulos
+       cantidadDeArticulos = 5//cesta.getCantidadDeArticulos
        precioTotal = cesta.getTotalPrice
     }
     
