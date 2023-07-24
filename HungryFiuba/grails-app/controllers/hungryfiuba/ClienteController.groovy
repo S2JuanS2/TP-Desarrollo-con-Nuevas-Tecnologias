@@ -16,13 +16,10 @@ class ClienteController {
     }
 
     def mostrarCesta() {
-        // Verificar si el cliente está autenticado
-        def cliente = session.cliente
-        if (cliente) {
-            // Obtener la cesta del cliente
-            def cesta = cliente.cesta
+        if (session.cliente) {
+            // Obtener la cesta del cliente - No es necesario ya esta en la sesión
             // Pasar el cliente y la cesta a la vista mostrarCesta.gsp
-            render(view: "mostrarCesta", model: [cliente: cliente, cesta: cesta])
+            render(view: "/mostrarCesta")
         } else {
             // Si no hay cliente autenticado, redirigir a la página de inicio de sesión
             render(view: "/registroFallido")
