@@ -7,7 +7,6 @@
     <body>
 
     <h1>LISTADO DE ARTICULOS</h1>
-    <h2>Bienvenido, ${session.cliente.nombre}!</h2>
     <div class="articulos-container">
         <g:each var="articulo" in="${articulos}">
             <div class="articulo-container">
@@ -24,8 +23,8 @@
     <g:link controller="Administrador" action="logout">
         <button>Logout</button>
     </g:link>
-    <g:link controller="Pedido" action="crearPedido">
-        <button>CrearPedido</button>
+    <g:link controller="Pedido" action="pedidoCreado">
+        <button>Finalizar Pedido</button>
     </g:link>
     </body>
 </html>

@@ -3,14 +3,18 @@ package hungryfiuba
 class PedidoController {
 
     static scaffold = Pedido
-    def crearPedido(){
+    def comenzarPedido(){
         Cesta cesta = new Cesta()
         cesta.save(failOnError: true)
         Pedido pedido = new Pedido(session.cliente, cesta)
         pedido.save(failOnError: true)
 
-        render(view: "/pedidoCreado") //llamar a una nueva vista
+        render(view: "/bienvenida") //llamar a una nueva vista
     }
+    def pedidoCreado(){
+        render(view: "/pedidoCreado")
+    }
+    
     def mostrarCesta() {
         if (session.cliente) {
             // Obtener la cesta del cliente - No es necesario ya esta en la sesión

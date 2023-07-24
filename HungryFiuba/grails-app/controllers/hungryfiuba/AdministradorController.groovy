@@ -6,7 +6,7 @@ class AdministradorController {
 
     def vistaInicio(){
         if(session.cliente){
-            redirect(controller: "articulo", action: "mostrarArticulos")
+            redirect(controller: "pedido", action: "comenzarPedido")
         }
         render(view: "/inicio")
     }
