@@ -28,13 +28,5 @@ class Cliente {
         this.identificadorValor = identificadorValor
         this.contrasena = contrasena
     }
-
-    void agregarArticuloALaCesta(Articulo articulo) {
-        this.cesta.agregarArticulo(articulo);
-    }
-
-    void eliminarArticuloDeLaCesta(Articulo articulo) {
-        this.cesta.eliminarArticulo(articulo);
-    }
-
+    
 }

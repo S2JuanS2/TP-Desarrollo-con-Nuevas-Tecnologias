@@ -57,9 +57,13 @@ class ClienteController {
 
         Articulo articulo = Articulo.findByNombre(params.nombre)
 
-        if(cliente){
-            cliente.agregarArticuloALaCesta(articulo)
+        if(cliente && articulo){
+            //cliente.cesta.agregarArticulo(articulo)
+
         }
+        cliente.save(flush: true)
+
+        render(view: "/mostrarArticulos")
     }
 
 
