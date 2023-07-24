@@ -6,6 +6,7 @@
     <body>
 
     <h1>LISTADO DE CLIENTES</h1>
+    <h2>TEST</h2>
 
     <g:each var="cliente" in="${clientes}">
 
