@@ -9,7 +9,7 @@ class PedidoController {
         Pedido pedido = new Pedido(session.cliente, cesta)
         pedido.save(failOnError: true)
 
-        render "pedido creado" //llamar a una nueva vista
+        render(view: "/pedidoCreado") //llamar a una nueva vista
     }
     def mostrarCesta() {
         if (session.cliente) {
@@ -29,10 +29,9 @@ class PedidoController {
         Articulo articulo = Articulo.findByNombre(params.nombre)
 
         if(cliente && articulo){
-            //cliente.cesta.agregarArticulo(articulo)
-
+            pedido.cesta.agregarArticulo(articulo)
         }
-        cliente.save(flush: true)
+      //  pedido.save(failOnError: true)
 
         render(view: "/mostrarArticulos")
     }
