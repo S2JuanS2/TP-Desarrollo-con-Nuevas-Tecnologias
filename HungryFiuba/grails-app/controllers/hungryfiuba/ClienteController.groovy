@@ -42,4 +42,17 @@ class ClienteController {
     render(view: '/registroExitoso')
    
     }
+
+    def agregarArticulo(){
+
+        Cliente cliente = session.cliente
+
+        Articulo articulo = Articulo.findByNombre(params.nombre)
+
+        if(cliente){
+            cliente.agregarArticuloALaCesta(articulo)
+        }
+    }
+
+
 }
