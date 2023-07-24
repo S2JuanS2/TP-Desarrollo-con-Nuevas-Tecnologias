@@ -4,10 +4,12 @@ class Cesta {
 
     List<Articulo> articulos
     int cantidadDeArticulos
+    Cliente cliente  //relación uno a uno
 
     static constraints = {
 
         articulos nullable: true
+        cliente nullable: false, unique: true
 
     }
 

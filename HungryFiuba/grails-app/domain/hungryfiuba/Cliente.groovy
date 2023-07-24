@@ -7,7 +7,7 @@ class Cliente {
     String identificadorTipo
     String identificadorValor
     String contrasena
-    Cesta cesta
+    Cesta cesta //Relación uno a uno
 
 
     static constraints = {
@@ -17,7 +17,7 @@ class Cliente {
         identificadorTipo nullable: false, blank: false
         identificadorValor nullable: false, blank: false
         contrasena nullable: false, blank: false
-        cesta nullable: true
+        cesta nullable: false, unique: true
     }
 
 
@@ -27,7 +27,6 @@ class Cliente {
         this.identificadorTipo = identificadorTipo
         this.identificadorValor = identificadorValor
         this.contrasena = contrasena
-        cesta = new Cesta()
     }
 
     void agregarArticuloALaCesta(Articulo articulo) {

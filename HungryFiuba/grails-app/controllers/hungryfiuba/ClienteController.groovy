@@ -34,12 +34,20 @@ class ClienteController {
             identificadorTipo: params.idTipo,
             identificadorValor: params.idValor,
             contrasena: params.contrasena
-    ).save(failOnError: true)
+        )
 
-    def clientes = Cliente.list()
-    def articulos = Articulo.list()
-    
-    render(view: '/registroExitoso')
+        Cesta cesta = new Cesta()
+
+        cesta.cliente = cliente
+        cliente.cesta = cesta
+
+        cliente.save(failOnError: true)
+        cesta.save(failOnError: true)
+
+        def clientes = Cliente.list()
+        def articulos = Articulo.list()
+        
+        render(view: '/registroExitoso')
    
     }
 
