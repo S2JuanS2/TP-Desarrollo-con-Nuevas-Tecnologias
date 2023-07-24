@@ -11,6 +11,7 @@ class UrlMappings {
         "/mostrarClientes"(controller: 'cliente', action: 'mostrarClientes')
         "/administrador/registroFallido"(view:'registroFallido')
         "/mostrarCesta"(controller: "pedido", action: "mostrarCesta")
+        "/pedidoCreado"(controller:"articulo", action:"mostrarArticulos")
 
         "/$controller/$action?/$id?(.$format)?"{
             constraints {

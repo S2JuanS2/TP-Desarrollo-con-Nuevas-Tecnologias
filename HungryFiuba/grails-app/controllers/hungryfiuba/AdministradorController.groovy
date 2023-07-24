@@ -25,7 +25,7 @@ class AdministradorController {
         if(cliente != null){
             if (cliente && cliente.contrasena == contrasena ) {    
                 session.cliente = cliente
-                redirect(controller: "articulo", action: "mostrarArticulos")
+                render(view: "/bienvenida")
             } else {
                 render(view: "/registroFallido")
             }
