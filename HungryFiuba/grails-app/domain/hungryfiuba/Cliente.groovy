@@ -7,6 +7,9 @@ class Cliente {
     String identificadorTipo
     String identificadorValor
     String contrasena
+    Cesta cesta
+
+    static belongsTo = [cesta: Cesta]
 
 
     static constraints = {

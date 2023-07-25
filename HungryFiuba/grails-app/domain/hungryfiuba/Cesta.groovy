@@ -2,26 +2,25 @@ package hungryfiuba
 
 class Cesta {
 
-    static hasMany = [articulos: Articulo]
-    //List<Articulo> articulos
+    List<Articulo> articulos
     int cantidadDeArticulos
     
+    static hasMany = [articulos: Articulo]
 
     static constraints = {
 
-       // hasMany nullable: true
+       articulos nullable: true
 
     }
 
     Cesta() {
-        //hasMany = []
+        articulos = []
         cantidadDeArticulos = 0
     }
 
     void agregarArticulo(Articulo articulo) {
        //cesta.addToArticulos(articulo)
        cantidadDeArticulos++
-       cesta.save(flush: true)
     }
 
 

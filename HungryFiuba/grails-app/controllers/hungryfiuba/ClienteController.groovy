@@ -34,8 +34,10 @@ class ClienteController {
             identificadorValor: params.idValor,
             contrasena: params.contrasena
         )
-
-       
+        
+        Cesta cesta = new Cesta()
+        //aca accedo en memoria y no base de datos por eso no tira error proxy
+        cliente.cesta = cesta
 
         cliente.save(failOnError: true)
     
