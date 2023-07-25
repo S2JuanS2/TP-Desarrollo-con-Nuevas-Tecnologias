@@ -35,7 +35,7 @@ class PedidoController {
         if(cliente && articulo){
             pedido.cesta.agregarArticulo(articulo)
         }
-      //  pedido.save(failOnError: true)
+        cliente.save(failOnError: true)
 
         render(view: "/mostrarArticulos")
     }

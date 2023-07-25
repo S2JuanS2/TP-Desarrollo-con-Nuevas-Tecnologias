@@ -19,7 +19,7 @@ class Cesta {
     }
 
     void agregarArticulo(Articulo articulo) {
-       cesta.addToArticulos(articulo)
+       //cesta.addToArticulos(articulo)
        cantidadDeArticulos++
        cesta.save(flush: true)
     }
