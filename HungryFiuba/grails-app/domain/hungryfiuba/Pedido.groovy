@@ -2,6 +2,14 @@ package hungryfiuba
 
 import java.time.LocalDateTime
 
+enum EstadoPedido {
+
+    EN_CONFIRMACION,
+    EN_PREPARACION,
+    LISTO_PARA_ENTREGAR,
+    CANCELADO
+}
+
 class Pedido {
 
     Cliente cliente
@@ -9,6 +17,8 @@ class Pedido {
 
     int cantidadDeArticulos
     BigDecimal precioTotal
+
+    EstadoPedido estado
 
     //LocalDateTime momentoDeCreacion
     //LocalDateTime momentoDeEntrega
@@ -26,6 +36,8 @@ class Pedido {
     Pedido(Cliente cliente,Cesta cesta) {
         this.cliente = cliente
         this.cesta = cesta
+        estado = EstadoPedido.EN_CONFIRMACION
+        
         cantidadDeArticulos = cesta.cantidadDeArticulos
         
         List<Articulo> articulos = cesta.articulos
