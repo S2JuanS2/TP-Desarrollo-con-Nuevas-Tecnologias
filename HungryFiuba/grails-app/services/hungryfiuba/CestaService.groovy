@@ -13,7 +13,9 @@ class CestaService {
 
         //si llamo a un metodo del dominio por alguna razón no persiste en la base de datos.
         cliente.cesta.cantidadDeArticulos++
+        articulo.stock--
         cliente.cesta.articulos.add(articulo)
+
 
         cliente.cesta.save(flush: true)
 
