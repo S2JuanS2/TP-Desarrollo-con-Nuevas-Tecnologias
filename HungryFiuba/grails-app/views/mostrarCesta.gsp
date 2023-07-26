@@ -9,8 +9,11 @@
     <h1>CESTA DE COMPRAS</h1>
     <h2>Cliente: ${session.cliente.nombre} ${session.cliente.apellido}</h2>
     <div class="articulos-container">
-        <g:each var="articulo" in="${cestas}">
-               <h3>Cantidad de Artículos: ${articulo.cantidadDeArticulos}</h3>
+        <g:each var="cesta" in="${cestas}">
+               <h3>Cantidad de Artículos: ${cesta.articulos.size()}</h3>
+               <g:each var="articulo" in="${cesta.articulos}">
+               <p>articulo: ${articulo.nombre} </p>
+               </g:each>
         </g:each>
     </div>
     <g:link controller="Administrador" action="logout">

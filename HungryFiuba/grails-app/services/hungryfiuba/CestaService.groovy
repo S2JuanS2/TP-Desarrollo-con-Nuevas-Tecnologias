@@ -11,7 +11,9 @@ class CestaService {
         Cliente cliente = Cliente.get(clienteId)
         Articulo articulo = Articulo.get(articuloId)
 
-        cliente.cesta.agregarArticulo(articulo)
+        //si llamo a un metodo del dominio por alguna razón no persiste en la base de datos.
+        cliente.cesta.cantidadDeArticulos++
+        cliente.cesta.articulos.add(articulo)
 
         cliente.cesta.save(flush: true)
 
