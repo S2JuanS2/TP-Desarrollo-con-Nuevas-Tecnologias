@@ -21,7 +21,7 @@ class Pedido {
 
     EstadoPedido estado
 
-    //LocalDateTime momentoDeCreacion
+    LocalDateTime momentoDeCreacion
     //LocalDateTime momentoDeEntrega
 
 
@@ -30,8 +30,8 @@ class Pedido {
         cliente nullable: false
         cesta nullable: false
         precioTotal nullable: false
-        //momentoDeCreacion nullable: false
-        //momentoDeEntrega nullable: false
+        momentoDeCreacion nullable: false
+      
     }
 
     Pedido(Cliente cliente,Cesta cesta) {
@@ -40,6 +40,7 @@ class Pedido {
         estado = EstadoPedido.EN_CONFIRMACION
         
         cantidadDeArticulos = cesta.cantidadDeArticulos
+        momentoDeCreacion = LocalDateTime.now()
         
         List<Articulo> articulos = cesta.articulos
         def suma = 0

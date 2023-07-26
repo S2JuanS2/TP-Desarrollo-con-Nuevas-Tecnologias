@@ -10,6 +10,7 @@
     <h2>Detalles: N°${pedido.id}</h2>
         <p>Precio total: $${pedido.precioTotal} </p>
         <p>Estado del pedido: ${pedido.estado} </p>
+        <p>Hora de realizacion: ${pedido.momentoDeCreacion.getHour()}:${pedido.momentoDeCreacion.getMinute()} </p>
         <h2>Lista de articulos</h2>
         <g:each var="articulo" in="${pedido.cesta.articulos}">
         <p>${articulo.nombre}.......................................$${articulo.precio}</p>

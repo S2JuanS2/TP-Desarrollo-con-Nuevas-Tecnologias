@@ -27,11 +27,13 @@ class PedidoController {
 
         def listaPedidos = Pedido.list()
         boolean clienteExisteEnPedidos = listaPedidos.any { pedido -> pedido.cliente == cliente }
-
-        if(cesta.cantidadDeArticulos>0 ){
+        LocalDateTime now = LocalDateTime.now()
+        if(cesta.cantidadDeArticulos>0){
             if(!clienteExisteEnPedidos ){
                 pedidoService.guardarPedido(cliente.id)
                 redirect(action: "pedidoCreado")
+            }else if(now.getHour() < 17){
+                render(view:"/comedorCerrado")
             }else{
                 render(view: "/pedidoEnCurso", model:[pedidos: listaPedidos])
             }

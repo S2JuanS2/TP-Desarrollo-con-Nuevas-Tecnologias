@@ -14,7 +14,7 @@ class UrlMappings {
         "/pedidoCreado"(controller:"articulo", action:"mostrarArticulos")
         "/pedido/cestaVacia"(view:"cestaVacia")
         "/pedido/pedidoEnCurso"(view:"pedidoEnCurso")
-        
+        "/pedido/comedorCerrado"(view:"comedorCerrado")
         "/$controller/$action?/$id?(.$format)?"{
             constraints {
                 // apply constraints here
