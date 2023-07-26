@@ -1,4 +1,5 @@
 package hungryfiuba
+import java.time.LocalDateTime
 
 class PedidoController {
 
@@ -27,7 +28,7 @@ class PedidoController {
 
         def listaPedidos = Pedido.list()
         boolean clienteExisteEnPedidos = listaPedidos.any { pedido -> pedido.cliente == cliente }
-        LocalDateTime now = LocalDateTime.now()
+        LocalDateTime hora = LocalDateTime.now()
         if(cesta.cantidadDeArticulos>0){
             if(!clienteExisteEnPedidos ){
                 pedidoService.guardarPedido(cliente.id)
