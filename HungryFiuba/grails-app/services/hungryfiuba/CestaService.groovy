@@ -13,7 +13,7 @@ class CestaService {
 
         cliente.cesta.agregarArticulo(articulo)
 
-        cesta.save()
+        cliente.cesta.save(flush: true)
 
     }
 }

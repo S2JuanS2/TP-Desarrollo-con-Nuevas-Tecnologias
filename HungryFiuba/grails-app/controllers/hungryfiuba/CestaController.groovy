@@ -22,13 +22,17 @@ class CestaController {
 
         Cliente cliente = session.cliente
 
-        Articulo articulo = Articulo.findByNombre(params.articulo)
+        def articuloId = params.articulo
 
-        if(cliente){
+        def articulo = Articulo.get(articuloId)
+
+        if(cliente && articulo){
             cestaService.agregarArticuloACesta(articulo.id, cliente.id)
+            render(view: "/mostrarArticulos")
+        }else{
+            render(view: "/inicio")
         }
 
-        render(view: "/mostrarArticulos")
     }
 
 }
