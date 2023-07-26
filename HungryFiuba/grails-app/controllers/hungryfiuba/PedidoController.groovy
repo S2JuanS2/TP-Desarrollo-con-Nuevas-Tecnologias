@@ -31,10 +31,12 @@ class PedidoController {
         LocalDateTime hora = LocalDateTime.now()
         if(cesta.cantidadDeArticulos>0){
             if(!clienteExisteEnPedidos ){
-                pedidoService.guardarPedido(cliente.id)
-                redirect(action: "pedidoCreado")
-            }else if(now.getHour() < 17){
-                render(view:"/comedorCerrado")
+                if((hora.getHour()) >= 20){
+                    render(view:"/comedorCerrado")
+                }else{
+                    pedidoService.guardarPedido(cliente.id)
+                    redirect(action: "pedidoCreado")
+                }
             }else{
                 render(view: "/pedidoEnCurso", model:[pedidos: listaPedidos])
             }
