@@ -4,7 +4,8 @@ class Cesta {
 
     List<Articulo> articulos
     int cantidadDeArticulos
-    
+    int montoTotal
+
     static hasMany = [articulos: Articulo]
 
     static constraints = {
@@ -16,6 +17,7 @@ class Cesta {
     Cesta() {
         articulos = []
         cantidadDeArticulos = 0
+        montoTotal = 0
     }
     
 

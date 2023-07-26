@@ -25,8 +25,9 @@ class CestaController {
         def articuloId = params.articulo
 
         def articulo = Articulo.get(articuloId)
+        def precioArticulo= cliente.cesta.montoTotal + articulo.precio
         if(cliente && articulo){
-            if(articulo.stock > 0){
+            if(articulo.stock > 0 && precioArticulo <= 5000 ){
                 cestaService.agregarArticuloACesta(articulo.id, cliente.id)
             }
             redirect(controller:"articulo", action: "mostrarArticulos")

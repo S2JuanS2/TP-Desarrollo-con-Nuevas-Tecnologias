@@ -15,6 +15,7 @@
                <g:each var="articulo" in="${cesta.articulos}">
                <p>articulo: ${articulo.nombre} </p>
                </g:each>
+               <p>precio: ${cesta.montoTotal} </p>
         </g:each>
     </div>
     <g:link controller="Administrador" action="logout">
