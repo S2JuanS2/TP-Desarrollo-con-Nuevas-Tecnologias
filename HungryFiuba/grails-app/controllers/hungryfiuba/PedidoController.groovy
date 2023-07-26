@@ -29,22 +29,25 @@ class PedidoController {
         def listaPedidos = Pedido.list()
         boolean clienteExisteEnPedidos = listaPedidos.any { pedido -> pedido.cliente == cliente }
         LocalDateTime hora = LocalDateTime.now()
-        if(cesta.cantidadDeArticulos>0){
-            if(!clienteExisteEnPedidos ){
-                if((hora.getHour()) >= 20){
-                    render(view:"/comedorCerrado")
+        if(cliente.estado != EstadoCuenta.BLOQUEADA){ 
+            if(cesta.cantidadDeArticulos>0){
+                if(!clienteExisteEnPedidos ){
+                    if((hora.getHour()) >= 20){
+                        render(view:"/comedorCerrado")
+                    }else{
+                        pedidoService.guardarPedido(cliente.id)
+                        redirect(action: "pedidoCreado")
+                    }
                 }else{
-                    pedidoService.guardarPedido(cliente.id)
-                    redirect(action: "pedidoCreado")
+                    render(view: "/pedidoEnCurso", model:[pedidos: listaPedidos])
                 }
             }else{
-                render(view: "/pedidoEnCurso", model:[pedidos: listaPedidos])
+                render(view:"/cestaVacia")
             }
-        }else{
-            render(view:"/cestaVacia")
-        }
         
-
+        }else{
+            render(view:"/cuentaBloqueada")
+        }
     }
     
 }

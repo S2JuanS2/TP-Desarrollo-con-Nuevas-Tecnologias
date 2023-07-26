@@ -38,7 +38,7 @@ class ClienteController {
         Cesta cesta = new Cesta()
         //aca accedo en memoria y no base de datos por eso no tira error proxy
         cliente.cesta = cesta
-
+        cliente.estado = EstadoCuenta.NO_BLOQUEADA
         cliente.save(failOnError: true)
         
         render(view: '/registroExitoso')

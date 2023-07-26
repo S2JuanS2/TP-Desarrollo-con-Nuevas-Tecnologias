@@ -1,5 +1,8 @@
 package hungryfiuba
-
+enum EstadoCuenta{
+    BLOQUEADA,
+    NO_BLOQUEADA
+}
 class Cliente {
 
     String nombre
@@ -8,6 +11,7 @@ class Cliente {
     String identificadorValor
     String contrasena
     Cesta cesta
+    EstadoCuenta estado
 
     static belongsTo = [cesta: Cesta]
 
@@ -19,6 +23,7 @@ class Cliente {
         identificadorTipo nullable: false, blank: false
         identificadorValor nullable: false, blank: false
         contrasena nullable: false, blank: false
+        estado nullable: false
     }
 
 
@@ -28,6 +33,7 @@ class Cliente {
         this.identificadorTipo = identificadorTipo
         this.identificadorValor = identificadorValor
         this.contrasena = contrasena
+        estado = EstadoCuenta.NO_BLOQUEADA
     }
     
 }

@@ -15,6 +15,8 @@ class UrlMappings {
         "/pedido/cestaVacia"(view:"cestaVacia")
         "/pedido/pedidoEnCurso"(view:"pedidoEnCurso")
         "/pedido/comedorCerrado"(view:"comedorCerrado")
+        "/pedido/cuentaBloqueada"(view:"cuentaBloqueada")
+
         "/$controller/$action?/$id?(.$format)?"{
             constraints {
                 // apply constraints here
