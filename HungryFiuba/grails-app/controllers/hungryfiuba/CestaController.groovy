@@ -28,7 +28,7 @@ class CestaController {
 
         if(cliente && articulo){
             cestaService.agregarArticuloACesta(articulo.id, cliente.id)
-            render(view: "/mostrarArticulos")
+            redirect(controller:"articulo", action: "mostrarArticulos")
         }else{
             render(view: "/inicio")
         }
