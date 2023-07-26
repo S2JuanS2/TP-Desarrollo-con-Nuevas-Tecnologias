@@ -13,6 +13,7 @@ class UrlMappings {
         "/mostrarCesta"(controller: "cesta", action: "mostrarCesta")
         "/pedidoCreado"(controller:"articulo", action:"mostrarArticulos")
         "/pedido/cestaVacia"(view:"cestaVacia")
+        "/pedido/pedidoEnCurso"(view:"pedidoEnCurso")
         
         "/$controller/$action?/$id?(.$format)?"{
             constraints {

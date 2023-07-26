@@ -5,7 +5,7 @@
     <asset:stylesheet src="registroExitoso.css"/>
 </head>
 <body>
-    <h1>Pedido Creado con Exito</h1>
+    <h1>Pedido en curso</h1>
     <g:each var="pedido" in="${pedidos}">
     <h2>Detalles: N°${pedido.id}</h2>
         <p>Precio total: $${pedido.precioTotal} </p>

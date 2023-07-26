@@ -7,6 +7,7 @@ enum EstadoPedido {
     EN_CONFIRMACION,
     EN_PREPARACION,
     LISTO_PARA_ENTREGAR,
+    ENTREGADO,
     CANCELADO
 }
 

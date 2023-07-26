@@ -24,9 +24,17 @@ class PedidoController {
         def cliente = session.cliente
         cliente = Cliente.get(cliente.id)
         Cesta cesta = cliente.cesta
-        if(cesta.cantidadDeArticulos>0){
-            pedidoService.guardarPedido(cliente.id)
-            redirect(action: "pedidoCreado")
+
+        def listaPedidos = Pedido.list()
+        boolean clienteExisteEnPedidos = listaPedidos.any { pedido -> pedido.cliente == cliente }
+
+        if(cesta.cantidadDeArticulos>0 ){
+            if(!clienteExisteEnPedidos ){
+                pedidoService.guardarPedido(cliente.id)
+                redirect(action: "pedidoCreado")
+            }else{
+                render(view: "/pedidoEnCurso", model:[pedidos: listaPedidos])
+            }
         }else{
             render(view:"/cestaVacia")
         }
