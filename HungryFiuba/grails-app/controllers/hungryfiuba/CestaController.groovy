@@ -10,8 +10,12 @@ class CestaController {
 
         if (session.cliente) {
             //Si hay autenticación
-            def cestas = Cesta.list()
-            render(view: '/mostrarCesta', model: [cestas: cestas])
+
+            Cliente cliente = session.cliente
+            
+            def cesta = Cesta.get(cliente.id)
+
+            render(view: '/mostrarCesta', model: [cesta: cesta])
         } else {
             // Si no hay cliente autenticado, redirigir a la página de inicio de sesión
             render(view: "/registroFallido")
@@ -25,7 +29,9 @@ class CestaController {
         def articuloId = params.articulo
 
         def articulo = Articulo.get(articuloId)
-        def precioArticulo= cliente.cesta.montoTotal + articulo.precio
+
+        def cesta = Cesta.get(cliente.id)
+        def precioArticulo= cesta.montoTotal + articulo.precio
         if(cliente && articulo){
             if(articulo.stock > 0 && precioArticulo <= 5000 ){
                 cestaService.agregarArticuloACesta(articulo.id, cliente.id)
