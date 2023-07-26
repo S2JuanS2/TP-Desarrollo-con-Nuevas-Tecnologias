@@ -24,10 +24,17 @@ class Pedido {
     }
 
     Pedido(Cliente cliente,Cesta cesta) {
-       this.cliente = cliente
-       this.cesta = cesta
-       cesta.cantidadDeArticulos = cantidadDeArticulos
-       precioTotal = 0
+        this.cliente = cliente
+        this.cesta = cesta
+        cantidadDeArticulos = cesta.cantidadDeArticulos
+        
+        List<Articulo> articulos = cesta.articulos
+        def suma = 0
+        articulos.each { articulo ->
+            suma += articulo.precio
+        }
+
+        precioTotal = suma
 
     }
     

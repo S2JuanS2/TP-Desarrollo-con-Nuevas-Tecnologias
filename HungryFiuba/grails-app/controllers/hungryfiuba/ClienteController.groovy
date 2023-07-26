@@ -40,15 +40,12 @@ class ClienteController {
         cliente.cesta = cesta
 
         cliente.save(failOnError: true)
-    
-
-        def clientes = Cliente.list()
-        def articulos = Articulo.list()
         
         render(view: '/registroExitoso')
    
     }
 
+    //ESTO YA NO SE USA MAS?? 
     def agregarArticulo(){
 
         Cliente cliente = session.cliente

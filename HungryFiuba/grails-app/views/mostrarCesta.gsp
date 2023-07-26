@@ -4,6 +4,7 @@
 <head>
     <title>Cesta de Compras</title>
     <asset:stylesheet src="mostrarCesta.css"/>
+    <asset:stylesheet src="registroExitoso.css"/>
 </head>
 <body>
     <h1>CESTA DE COMPRAS</h1>
@@ -19,5 +20,6 @@
     <g:link controller="Administrador" action="logout">
         <button>Logout</button>
     </g:link>
+    <a href="/inicio">Volver</a>
 </body>
 </html>
