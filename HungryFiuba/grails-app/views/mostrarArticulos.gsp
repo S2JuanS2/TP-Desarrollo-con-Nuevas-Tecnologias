@@ -17,6 +17,11 @@
                 <img class="articulo-imagen" src="${articulo.imagenUrl}" alt="Imagen del artículo"/>
                 <g:link controller="cesta" action="agregarArticulo" params="[articulo: articulo.id]" > 
                     <button class="agregar-carrito-btn" data-articulo-id="${articulo.id}" data-stock="${articulo.stock}">Agregar a la cesta</button>
+                    <div id="customAlert" class="custom-alert">
+                        <div class="custom-alert-content">
+                            <span id="customAlertMessage"></span>
+                        </div>
+                    </div>
                 </g:link>
             </div>
         </g:each>
@@ -33,12 +38,21 @@
             var articuloStock = boton.dataset.stock;
             boton.addEventListener('click', function() {
                 if(articuloStock > 0){
-                    alert('¡Articulo añadido!');
+                    showCustomAlert("Articulo agregado con éxito")
                 }else{
-                    alert('¡No hay mas stock!');
+                    showCustomAlert("¡No hay más stock!")
                 }
             });
         });
+
+    function showCustomAlert(mensaje){
+        const customAlert = document.getElementById('customAlert');
+        customAlert.style.display = 'block';
+
+        const message = mensaje;
+        const customAlertMessage = document.getElementById('customAlertMessage')
+        customAlertMessage.innerText = message;
+    }
     </script>
 
     </body>

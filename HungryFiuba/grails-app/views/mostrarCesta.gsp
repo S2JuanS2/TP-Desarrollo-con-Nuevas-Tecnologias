@@ -18,6 +18,11 @@
                         <img class="articulo-imagen" src="${articulo.imagenUrl}" alt="Imagen del artículo"/>
                         <g:link controller="cesta" action="eliminarArticulo" params="[articulo: articulo.id]" > 
                             <button class="agregar-carrito-btn">Eliminar de la cesta</button>
+                            <div id="customAlert" class="custom-alert">
+                                <div class="custom-alert-content">
+                                <span id="customAlertMessage"></span>
+                                </div>
+                            </div>
                         </g:link>
                     </div>
                 </g:each>
@@ -28,5 +33,26 @@
         <button>Logout</button>
     </g:link>
     <a href="/inicio">Volver</a>
+
+
+    <script>
+        var botonesArticulo = document.querySelectorAll('.agregar-carrito-btn');
+        botonesArticulo.forEach(function(boton) {
+            boton.addEventListener('click', function() {
+                    showCustomAlert("Articulo eliminado con éxito")
+            });
+        });
+
+        function showCustomAlert(mensaje){
+            const customAlert = document.getElementById('customAlert');
+            customAlert.style.display = 'block';
+
+            const message = mensaje;
+            const customAlertMessage = document.getElementById('customAlertMessage')
+            customAlertMessage.innerText = message;
+        }
+        
+    </script>
+
     </body>
 </html>
