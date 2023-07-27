@@ -13,17 +13,17 @@ enum EstadoPedido {
 
 class Pedido {
 
-    Cliente cliente
-    Cesta cesta
-
     int cantidadDeArticulos
     BigDecimal precioTotal
-
     EstadoPedido estado
 
     LocalDateTime momentoDeCreacion
     //LocalDateTime momentoDeEntrega
 
+    Cliente cliente
+    Cesta cesta
+
+    static belongsTo = [cesta: Cesta, cliente: Cliente]
 
     static constraints = {
 
