@@ -13,6 +13,7 @@ class Cliente {
     Cesta cesta
     EstadoCuenta estado
     int deuda
+    int strikes
 
     static belongsTo = [cesta: Cesta]
 
@@ -35,7 +36,9 @@ class Cliente {
         this.identificadorTipo = identificadorTipo
         this.identificadorValor = identificadorValor
         this.contrasena = contrasena
-        
+        this.deuda = 0
+        this.strikes = 0
+        this.estadoCuenta = EstadoCuenta.NO_BLOQUEADA
     }
     
 }

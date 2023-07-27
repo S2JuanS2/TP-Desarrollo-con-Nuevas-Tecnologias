@@ -11,11 +11,17 @@ enum EstadoPedido {
     CANCELADO
 }
 
+enum EstadoDelPago {
+    PAGO,
+    PENDIENTE_DE_PAGO
+}
+
 class Pedido {
 
     int cantidadDeArticulos
     BigDecimal precioTotal
     EstadoPedido estado
+    EstadoDelPago estadoPago
 
     LocalDateTime momentoDeCreacion
     //LocalDateTime momentoDeEntrega
@@ -31,24 +37,24 @@ class Pedido {
         cesta nullable: false
         precioTotal nullable: false
         momentoDeCreacion nullable: false
-      
+        estadoPago nullable: false
     }
 
     Pedido(Cliente cliente,Cesta cesta) {
         this.cliente = cliente
         this.cesta = cesta
-        estado = EstadoPedido.EN_CONFIRMACION
+        this.estado = EstadoPedido.EN_CONFIRMACION
+        this.estadoPago = EstadoDelPago.PENDIENTE_DE_PAGO
+        this.cantidadDeArticulos = this.cesta.cantidadDeArticulos
+        this.momentoDeCreacion = LocalDateTime.now()
         
-        cantidadDeArticulos = cesta.cantidadDeArticulos
-        momentoDeCreacion = LocalDateTime.now()
-        
-        List<Articulo> articulos = cesta.articulos
+        List<Articulo> articulos = this.cesta.articulos
         def suma = 0
         articulos.each { articulo ->
             suma += articulo.precio
         }
 
-        precioTotal = suma
+        this.precioTotal = suma
 
     }
     
