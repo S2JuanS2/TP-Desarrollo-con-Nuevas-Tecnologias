@@ -10,6 +10,8 @@ class PedidoService {
         Cliente cliente = Cliente.get(clienteId)
         Cesta cesta = cliente.cesta
 
+        cliente.deuda += cesta.montoTotal
+
         Pedido pedido = new Pedido(cliente, cesta)
         pedido.save(failOnError: true)
         
@@ -50,6 +52,8 @@ class PedidoService {
     def pagarPedido(long pedidoId){
 
         Pedido pedido = Pedido.get(pedidoId)
+        
+        pedido.cliente.deuda -= pedido.precioTotal
 
         pedido.estadoPago = EstadoDelPago.PAGADO
         pedido.save(flush: true)

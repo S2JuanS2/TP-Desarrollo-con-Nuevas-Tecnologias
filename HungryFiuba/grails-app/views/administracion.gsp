@@ -13,6 +13,7 @@
         <tr>
             <th>Cliente</th>
             <th>Deuda</th>
+            <th>Strikes</th>
             <th>Estado de cuenta</th>
             <th>Pedido Id</th>
             <th>Precio</th>
@@ -25,6 +26,7 @@
             <tr>
                 <th>${pedido.cliente.nombre} ${pedido.cliente.apellido}</th>
                 <th>$ ${pedido.cliente.deuda}</th>
+                <th> ${pedido.cliente.strikes}</th>
                 <th>${pedido.cliente.estado}</th>
                 <th>${pedido.id}</th>
                 <th>$ ${pedido.precioTotal}</th>
