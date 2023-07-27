@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Registro fallido</title>
+    <title>Pedido pago</title>
     <asset:stylesheet src="registroExitoso.css"/>
 </head>
 <body>
-    <h1>¡Credenciales Incorrectas!</h1>
+    <h1>Su pedido ha sido abonado con éxito.</h1>
     <a href="/inicio">Volver a Inicio</a>
 </body>
 </html>

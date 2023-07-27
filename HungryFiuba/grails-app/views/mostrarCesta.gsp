@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Mostrar Articulos</title>
+        <title>Mostrar Cesta</title>
         <asset:stylesheet src="mostrarArticulos.css"/>
         <asset:stylesheet src="registroExitoso.css"/>
     </head>

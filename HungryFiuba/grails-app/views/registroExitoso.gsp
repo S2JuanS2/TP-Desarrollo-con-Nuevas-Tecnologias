@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Registro exitoso</title>
     <asset:stylesheet src="registroExitoso.css"/>
 </head>
 <body>

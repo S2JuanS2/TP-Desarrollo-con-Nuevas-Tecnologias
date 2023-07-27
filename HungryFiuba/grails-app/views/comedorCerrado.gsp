@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Comedor cerrado</title>
     <asset:stylesheet src="registroExitoso.css"/>
 </head>
 <body>

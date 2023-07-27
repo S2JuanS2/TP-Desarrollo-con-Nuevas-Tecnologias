@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Pedido en curso</title>
     <asset:stylesheet src="registroExitoso.css"/>
 </head>
 <body>
@@ -17,6 +17,9 @@
     <h3>Precio total: $${pedido.precioTotal} </h3>
     <g:link controller="pedido" action="cancelarPedido">
         <button>Cancelar pedido</button>
+    </g:link>
+    <g:link controller="pedido" action="pagarPedido">
+        <button>Pagar pedido</button>
     </g:link>
     <a href="/inicio">Volver a Inicio</a>
     <g:link controller="Administrador" action="logout">
