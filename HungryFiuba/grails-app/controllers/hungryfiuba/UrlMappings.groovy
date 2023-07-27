@@ -16,6 +16,7 @@ class UrlMappings {
         "/pedido/pedidoEnCurso"(view:"pedidoEnCurso")
         "/pedido/comedorCerrado"(view:"comedorCerrado")
         "/pedido/cuentaBloqueada"(view:"cuentaBloqueada")
+        "/pagarDeuda"(controller:"pedido",action:"pagarDeuda")
 
         "/$controller/$action?/$id?(.$format)?"{
             constraints {

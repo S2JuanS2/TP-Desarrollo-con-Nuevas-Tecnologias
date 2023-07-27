@@ -51,7 +51,9 @@ class PedidoController {
             render(view:"/cuentaBloqueada")
         }
     }
-    
+    def pagarDeuda(){
+        render(view:"/pagarDeuda")
+    }
     def cancelarPedido(){
 
         def cliente = session.cliente
