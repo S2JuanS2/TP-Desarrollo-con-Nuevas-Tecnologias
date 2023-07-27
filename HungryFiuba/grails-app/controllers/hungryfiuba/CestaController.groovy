@@ -43,4 +43,17 @@ class CestaController {
 
     }
 
+        def eliminarArticulo(){
+
+        Cliente cliente = session.cliente
+        def articuloId = params.articulo //es un string
+        def articulo = Articulo.get(articuloId)
+
+        cestaService.eliminarArticuloACesta(articulo.id, cliente.id)
+
+        redirect(controller: "cesta", action: "mostrarCesta")
+
+
+    }
+
 }

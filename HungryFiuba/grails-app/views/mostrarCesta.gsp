@@ -17,6 +17,9 @@
                         <div class="articulo-nombre">${articulo.nombre}</div>
                         <div class="articulo-precio">Precio: $${articulo.precio}</div>
                         <img class="articulo-imagen" src="${articulo.imagenUrl}" alt="Imagen del artículo"/>
+                        <g:link controller="cesta" action="eliminarArticulo" params="[articulo: articulo.id]" > 
+                            <button class="agregar-carrito-btn">Eliminar del carrito</button>
+                        </g:link>
                     </div>
                 </g:each>
                 </div>
