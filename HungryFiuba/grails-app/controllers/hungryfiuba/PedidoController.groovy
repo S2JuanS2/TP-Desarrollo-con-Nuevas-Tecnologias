@@ -77,6 +77,7 @@ class PedidoController {
         }else{
             render(view:"/pedidoYaPago")
         }
+        
     }
 
 }
