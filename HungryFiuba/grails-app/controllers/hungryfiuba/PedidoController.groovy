@@ -52,4 +52,13 @@ class PedidoController {
         }
     }
     
+    //NO ME FUNCIONÓ
+    def eliminarPedido(){
+
+        def cliente = session.cliente
+        Pedido.findByCliente(cliente).delete()
+
+        render(view: "/bienvenida")
+    }
+
 }

@@ -15,7 +15,9 @@
         <p>${articulo.nombre}.......................................$${articulo.precio}</p>
     </g:each>
     <h3>Precio total: $${pedido.precioTotal} </h3>
-    <a href="/inicio">Cancelar Pedido</a>
+    <g:link controller="pedido" action="eliminarPedido">
+        <button>Cancelar pedido</button>
+    </g:link>
     <a href="/inicio">Volver a Inicio</a>
     <g:link controller="Administrador" action="logout">
         <button>Logout</button>
