@@ -32,7 +32,7 @@ class PedidoController {
         if(cliente.estado != EstadoCuenta.BLOQUEADA){ 
             if(cesta.cantidadDeArticulos>0){
                 if(!clienteExisteEnPedidos ){
-                    if((hora.getHour()) >= 20){
+                    if((hora.getHour()) >= 23){
                         render(view:"/comedorCerrado")
                     }else{
                         pedidoService.guardarPedido(cliente.id)
