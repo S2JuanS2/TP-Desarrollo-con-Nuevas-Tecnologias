@@ -37,4 +37,12 @@ class AdministradorController {
         session.cliente = null
         render(view:"/inicio")
     }
+
+    def vistaAdministrador(){
+
+        def pedidos = Pedido.list()
+        def articulos = Articulo.list()
+        render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos])
+
+    }
 }

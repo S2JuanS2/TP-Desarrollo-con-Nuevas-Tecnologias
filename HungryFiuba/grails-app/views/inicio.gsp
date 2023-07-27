@@ -35,6 +35,9 @@
         <button type="submit">Ingresar</button>
       </g:form>
       <p>¿Aún no tienes una cuenta? <a href="/register">Regístrate aquí</a></p>
+      <g:link controller="Administrador" action="vistaAdministrador">
+        <button>Administrar</button>
+      </g:link>
     </div>
   </div>
 </body>
