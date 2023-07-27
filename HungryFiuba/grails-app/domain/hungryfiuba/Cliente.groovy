@@ -12,6 +12,7 @@ class Cliente {
     String contrasena
     Cesta cesta
     EstadoCuenta estado
+    int deuda
 
     static belongsTo = [cesta: Cesta]
 
@@ -24,6 +25,7 @@ class Cliente {
         identificadorValor nullable: false, blank: false
         contrasena nullable: false, blank: false
         estado nullable: false
+        deuda nullable: true
     }
 
 
@@ -33,7 +35,8 @@ class Cliente {
         this.identificadorTipo = identificadorTipo
         this.identificadorValor = identificadorValor
         this.contrasena = contrasena
-        estado = EstadoCuenta.NO_BLOQUEADA
+        this.estado = EstadoCuenta.NO_BLOQUEADA
+        this.deuda = 100
     }
     
 }
