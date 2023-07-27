@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pagar deuda</title>
+    <asset:stylesheet src="registroExitoso.css"/>
+</head>
+<body>
+    <h1>Pago de deuda</h1>
+    <p>Usted tiene una deuda pendiente de: ${session.cliente.deuda}<br></p>
+    <p>Ingrese su número de comprobante de pago:<br></p>
+    <form>
+        <label for="numComprobante">Número de Comprobante:</label>
+        <input type="number" id="numComprobante" name="numComprobante" required>
+        <br>
+        <input type="submit" value="Pagar">
+    </form>
+    <a href="/inicio">Volver a Inicio</a>
+</body>
+</html>
