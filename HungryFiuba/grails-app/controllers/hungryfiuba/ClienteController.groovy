@@ -38,9 +38,9 @@ class ClienteController {
         Cesta cesta = new Cesta()
         //aca accedo en memoria y no base de datos por eso no tira error proxy
         cliente.cesta = cesta
-        cliente.estado = EstadoCuenta.BLOQUEADA
+        //cliente.estado = EstadoCuenta.BLOQUEADA
         cliente.deuda = 1000
-        //cliente.estado = EstadoCuenta.NO_BLOQUEADA
+        cliente.estado = EstadoCuenta.NO_BLOQUEADA
         cliente.save(failOnError: true)
         
         render(view: '/registroExitoso')
@@ -62,11 +62,26 @@ class ClienteController {
 
         render(view: "/mostrarArticulos")
     }
+
     def registrarDeuda(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
         clienteService.actualizarDeuda(cliente.id)
         render(view: "/deudaPaga", model: [cliente: cliente])
+    }
+
+    def penalizarCliente() {
+        def cliente = session.cliente
+        Pedido pedido = Pedido.getByCliente(cliente)
+        LocalDateTime ahora = LocalDateTime.now()
+        Duration duracion = Duration.between(pedido.momentoDeCreacion, ahora)
+        if (duracion.toSeconds() >= 3600 && (pedido.estado == EstadoPedido.EN_PREPARACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR)) {
+            pedido.estado = EstadoPedido.CANCELADO
+            if(pedido.estadoPago == EstadoDelPago.PENDIENTE_DE_PAGO) {
+                if(cliente.strikes < 3) cliente.strikes++
+                if(clientes.strikes == 3) cliente.estadoCuenta == EstadoCuenta.BLOQUEADA
+            }
+        }
     }
 
 }
