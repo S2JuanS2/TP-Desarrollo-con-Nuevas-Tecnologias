@@ -1,0 +1,12 @@
+label{
+    color: blue;
+    text-transform: uppercase;
+}
+
+.contenedor{
+    border: 3px solid black;
+    position: absolute;
+    left: 30%;
+    margin-top: 250px;
+    padding: 5px;
+}
