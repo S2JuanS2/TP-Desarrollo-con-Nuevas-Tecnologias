@@ -9,11 +9,14 @@
     <p>Usted tiene una deuda pendiente de: ${session.cliente.deuda}<br></p>
     <p>Ingrese su número de comprobante de pago:<br></p>
     <form>
-        <label for="numComprobante">Número de Comprobante:</label>
+        
         <input type="number" id="numComprobante" name="numComprobante" required>
         <br>
-        <input type="submit" value="Pagar">
+        
     </form>
+    <g:link controller="Pedido" action="registrarDeuda">
+        <button>Enviar comprobante</button>
+    </g:link>
     <a href="/inicio">Volver a Inicio</a>
 </body>
 </html>

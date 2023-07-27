@@ -54,6 +54,9 @@ class PedidoController {
     def pagarDeuda(){
         render(view:"/pagarDeuda")
     }
+    def registarDeuda(){
+        render(view:"/pagarDeuda")
+    }
     def cancelarPedido(){
 
         def cliente = session.cliente
