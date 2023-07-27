@@ -10,12 +10,18 @@ class CestaController {
 
         if (session.cliente) {
             //Si hay autenticación
-
+            
             Cliente cliente = session.cliente
             
             def cesta = Cesta.get(cliente.id)
-
-            render(view: '/mostrarCesta', model: [cesta: cesta])
+            cliente = Cliente.get(cliente.id)
+            def listaPedidos = Pedido.list()
+            boolean clienteExisteEnPedidos = listaPedidos.any { pedido -> pedido.cliente == cliente }
+            if(!clienteExisteEnPedidos){
+                render(view: '/mostrarCesta', model: [cesta: cesta])
+            }else{
+                render(view: "/pedidoEnCurso")
+            }
         } else {
             // Si no hay cliente autenticado, redirigir a la página de inicio de sesión
             render(view: "/registroFallido")
