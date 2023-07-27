@@ -48,15 +48,17 @@ class PedidoController {
             }
         
         }else{
-            render(view:"/cuentaBloqueada")
+            render(view: "/cuentaBloqueada", model:[cliente: cliente])
+           
         }
     }
     def pagarDeuda(){
-        render(view:"/pagarDeuda")
+        Cliente cliente = session.cliente
+        cliente = Cliente.get(cliente.id)
+        render(view: "/pagarDeuda", model:[cliente: cliente])
+        
     }
-    def registarDeuda(){
-        render(view:"/pagarDeuda")
-    }
+    
     def cancelarPedido(){
 
         def cliente = session.cliente

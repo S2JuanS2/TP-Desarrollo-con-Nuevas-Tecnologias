@@ -1,7 +1,7 @@
 package hungryfiuba
 
 class ClienteController {
-
+    def clienteService
     static scaffold = Cliente
     def register(){
 
@@ -62,6 +62,11 @@ class ClienteController {
 
         render(view: "/mostrarArticulos")
     }
-
+    def registrarDeuda(){
+        Cliente cliente = session.cliente
+        cliente = Cliente.get(cliente.id)
+        clienteService.actualizarDeuda(cliente.id)
+        render(view: "/deudaPaga", model: [cliente: cliente])
+    }
 
 }

@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Pago de deuda</h1>
-    <p>Usted tiene una deuda pendiente de: ${session.cliente.deuda}<br></p>
+    <p>Usted tiene una deuda pendiente de: ${cliente.deuda}<br></p>
     <p>Ingrese su número de comprobante de pago:<br></p>
     <form>
         
@@ -14,7 +14,7 @@
         <br>
         
     </form>
-    <g:link controller="Pedido" action="registrarDeuda">
+    <g:link controller="Cliente" action="registrarDeuda">
         <button>Enviar comprobante</button>
     </g:link>
     <a href="/inicio">Volver a Inicio</a>

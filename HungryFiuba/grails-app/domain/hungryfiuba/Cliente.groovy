@@ -35,8 +35,7 @@ class Cliente {
         this.identificadorTipo = identificadorTipo
         this.identificadorValor = identificadorValor
         this.contrasena = contrasena
-        this.estado = EstadoCuenta.NO_BLOQUEADA
-        this.deuda = 100
+        
     }
     
 }
