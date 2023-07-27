@@ -24,4 +24,15 @@ class ArticuloController {
         }
     }
 
+    //HARDOCDEADO PARA TEST
+    def agregarArticuloAdministrador(){
+
+        def articulo = new Articulo("Pepsi", 320, 72, 10, "https://tusuper.com.ar/image/cache/catalog/P2020/Bebidas/Pepsi%201,5l-800x800.jpg")
+
+        articulo.save()
+
+        redirect(controller: "administrador", action: "vistaAdministrador")
+
+    }   
+
 }

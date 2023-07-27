@@ -70,6 +70,7 @@ class ClienteController {
         render(view: "/deudaPaga", model: [cliente: cliente])
     }
 
+    /*
     def penalizarCliente() {
         def cliente = session.cliente
         Pedido pedido = Pedido.getByCliente(cliente)
@@ -83,5 +84,6 @@ class ClienteController {
             }
         }
     }
+    */
 
 }

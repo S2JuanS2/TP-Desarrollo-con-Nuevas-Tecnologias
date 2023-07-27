@@ -13,7 +13,9 @@
         <tr>
             <th>Cliente</th>
             <th>Estado de cuenta</th>
-            <th>Pedido</th>
+            <th>Pedido Id</th>
+            <th>Precio</th>
+            <th>Estado del pago</th>
             <th>Estado del pedido</th>
             <th>Confirmar</th>
             <th>Cancelar</th>
@@ -23,6 +25,8 @@
                 <th>${pedido.cliente.nombre} ${pedido.cliente.apellido}</th>
                 <th>${pedido.cliente.estado}</th>
                 <th>${pedido.id}</th>
+                <th>$ ${pedido.precioTotal}</th>
+                <th>${pedido.estadoPago}</th>
                 <th>${pedido.estado}</th>
                 <th><button>Confirmar</button></th>
                 <th><button>Cancelar</button></th>
@@ -33,21 +37,28 @@
     <table>
         <tr>
             <th>Nombre</th>
-            <th>stock</th>
             <th>Precio</th>
+            <th>stock</th>
             <th>codigo</th>
+            <th>Acción</th>
+            <th>Acción</th>
         </tr>
         <g:each var="articulo" in="${articulos}">
             <tr>
                 <th>${articulo.nombre}</th>
+                <th>$ ${articulo.precio}</th>
                 <th>${articulo.stock}</th>
                 <th>${articulo.codigo}</th>
+                <th><g:link><button>Aumentar stock</button></g:link></th>
+                <th><g:link><button>Descontar stock</button></g:link></th>
             </tr>
         </g:each>
     </table>
 
-        <g:link>
-            <button>Agregar Articulos</button>
+        <g:link controller="Articulo" action="agregarArticuloAdministrador">
+            <button>Agregar Articulo</button>
         </g:link>
+
+        <a href="/inicio">Volver</a>
 
 </html>
