@@ -16,7 +16,7 @@
                 <div class="articulo-stock">Stock disponible: ${articulo.stock}</div>
                 <img class="articulo-imagen" src="${articulo.imagenUrl}" alt="Imagen del artículo"/>
                 <g:link controller="cesta" action="agregarArticulo" params="[articulo: articulo.id]" > 
-                    <button class="agregar-carrito-btn" data-articulo-id="${articulo.id}" data-stock="${articulo.stock}">Agregar al carrito</button>
+                    <button class="agregar-carrito-btn" data-articulo-id="${articulo.id}" data-stock="${articulo.stock}">Agregar a la cesta</button>
                 </g:link>
             </div>
         </g:each>

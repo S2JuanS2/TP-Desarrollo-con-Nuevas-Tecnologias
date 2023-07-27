@@ -12,7 +12,8 @@ class ArticuloController {
 
         if (session.cliente) {
             if(clienteExisteEnPedidos){
-                render(view: "/pedidoEnCurso")
+                def pedido = Pedido.findByCliente(cliente)
+                render(view: "/pedidoEnCurso", model: [pedido: pedido])
             }else{
                 def articulos = Articulo.list()
                 render(view: '/mostrarArticulos', model: [articulos: articulos])

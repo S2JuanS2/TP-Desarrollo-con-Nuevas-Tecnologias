@@ -20,7 +20,8 @@ class CestaController {
             if(!clienteExisteEnPedidos){
                 render(view: '/mostrarCesta', model: [cesta: cesta])
             }else{
-                render(view: "/pedidoEnCurso")
+                def pedido = Pedido.findByCliente(cliente)
+                render(view: "/pedidoEnCurso", model: [pedido: pedido])
             }
         } else {
             // Si no hay cliente autenticado, redirigir a la página de inicio de sesión

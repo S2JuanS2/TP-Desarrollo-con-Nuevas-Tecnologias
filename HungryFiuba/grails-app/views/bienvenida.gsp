@@ -10,7 +10,7 @@
         <button>Crear Pedido</button>
     </g:link>
         <g:link controller="Articulo" action="mostrarArticulos">
-        <button>Agregar articulos</button>
+        <button>Ver articulos</button>
     </g:link>
     <g:link controller="Cesta" action="mostrarCesta">
         <button>Ver cesta</button>

@@ -44,4 +44,13 @@ h1 {
     height: auto;
 }
 
+.monto-total{
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+}
+
+.cantidad-articulos{
+    color: white;
+    font-size: 16px;
+}
 /* Estilos para el botón "Agregar al carrito" */

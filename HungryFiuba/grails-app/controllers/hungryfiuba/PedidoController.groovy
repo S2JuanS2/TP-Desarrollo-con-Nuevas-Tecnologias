@@ -14,8 +14,9 @@ class PedidoController {
 
     def pedidoCreado(){
 
-        def pedidos = Pedido.list()
-        render(view: "/pedidoCreado", model: [pedidos: pedidos])
+        Cliente cliente = session.cliente
+        def pedido = Pedido.findByCliente(cliente)
+        render(view: "/pedidoCreado", model: [pedido: pedido])
     }
     def cestaVacia(){
         render(view: "/cestaVacia" )
@@ -39,7 +40,8 @@ class PedidoController {
                         redirect(action: "pedidoCreado")
                     //}
                 }else{
-                    render(view: "/pedidoEnCurso", model:[pedidos: listaPedidos])
+                    def pedidoParticular = Pedido.findByCliente(cliente)
+                    render(view: "/pedidoEnCurso", model:[pedido: pedidoParticular])
                 }
             }else{
                 render(view:"/cestaVacia")
