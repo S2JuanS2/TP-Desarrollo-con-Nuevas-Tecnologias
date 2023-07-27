@@ -10,6 +10,7 @@
     <p>Cliente: ${session.cliente.nombre} ${session.cliente.apellido}</p>
     <p>Hora de realizacion: ${pedido.momentoDeCreacion.getHour()}:${pedido.momentoDeCreacion.getMinute()} </p>
     <p>Estado del pedido: ${pedido.estado} </p>
+    <p>Estado del pago: ${pedido.estadoPago}</p>
     <h3>Lista de articulos</h3>
     <g:each var="articulo" in="${pedido.cesta.articulos}">
         <p>${articulo.nombre}.......................................$${articulo.precio}</p>

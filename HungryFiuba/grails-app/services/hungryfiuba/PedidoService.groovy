@@ -26,6 +26,35 @@ class PedidoService {
 
     }
 
+    @Transactional
+    def eliminarPedido(long pedidoId){
+
+        def pedido = Pedido.get(pedidoId)
+
+        pedido.delete(flush: true)
+
+    }
+
+    @Transactional
+    def confirmarPedido(long pedidoId){
+
+        def pedido = Pedido.get(pedidoId)
+
+        pedido.estado = EstadoPedido.EN_PREPARACION
+
+        pedido.save(flush: true)
+
+    }
+
+    @Transactional
+    def pagarPedido(long pedidoId){
+
+        Pedido pedido = Pedido.get(pedidoId)
+
+        pedido.estadoPago = EstadoDelPago.PAGADO
+        pedido.save(flush: true)
+    }
+
 
 
 }

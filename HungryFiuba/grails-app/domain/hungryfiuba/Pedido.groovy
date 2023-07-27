@@ -12,8 +12,9 @@ enum EstadoPedido {
 }
 
 enum EstadoDelPago {
-    PAGO,
-    PENDIENTE_DE_PAGO
+
+    PENDIENTE_DE_PAGO,
+    PAGADO
 }
 
 class Pedido {

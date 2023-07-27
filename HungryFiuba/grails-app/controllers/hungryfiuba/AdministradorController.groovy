@@ -4,6 +4,8 @@ class AdministradorController {
 
     static scaffold = Administrador
 
+    def pedidoService
+
     def vistaInicio(){
         if(session.cliente){
             redirect(controller: "pedido", action: "comenzarPedido")
@@ -44,5 +46,25 @@ class AdministradorController {
         def articulos = Articulo.list()
         render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos])
 
+    }
+
+    def confirmarPedido(){
+
+        def pedido = Pedido.get(params.pedido)
+        pedidoService.confirmarPedido(pedido.id)
+
+        def pedidos = Pedido.list()
+        def articulos = Articulo.list()
+        render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos])
+    }
+
+    def cancelarPedido(){
+
+        def pedido = Pedido.get(params.pedido)
+        pedidoService.eliminarPedido(pedido.id)
+
+        def pedidos = Pedido.list()
+        def articulos = Articulo.list()
+        render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos])
     }
 }

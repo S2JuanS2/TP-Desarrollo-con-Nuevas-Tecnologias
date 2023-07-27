@@ -12,6 +12,7 @@
     <table>
         <tr>
             <th>Cliente</th>
+            <th>Deuda</th>
             <th>Estado de cuenta</th>
             <th>Pedido Id</th>
             <th>Precio</th>
@@ -23,13 +24,14 @@
         <g:each var="pedido" in="${pedidos}">
             <tr>
                 <th>${pedido.cliente.nombre} ${pedido.cliente.apellido}</th>
+                <th>$ ${pedido.cliente.deuda}</th>
                 <th>${pedido.cliente.estado}</th>
                 <th>${pedido.id}</th>
                 <th>$ ${pedido.precioTotal}</th>
                 <th>${pedido.estadoPago}</th>
                 <th>${pedido.estado}</th>
-                <th><button>Confirmar</button></th>
-                <th><button>Cancelar</button></th>
+                <th><g:link controller="Administrador" action="confirmarPedido" params="[pedido: pedido.id]" ><button>Confirmar</button></g:link></th>
+                <th><g:link controller="Administrador" action="cancelarPedido" params="[pedido: pedido.id]" ><button>Cancelar</button></g:link></th>
             </tr>
         </g:each>
     </table>

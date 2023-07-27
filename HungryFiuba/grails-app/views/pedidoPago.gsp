@@ -5,7 +5,7 @@
     <asset:stylesheet src="registroExitoso.css"/>
 </head>
 <body>
-    <h1>Su pedido ha sido abonado con éxito.</h1>
+    <h1>${session.nombre} su pedido ha sido abonado con éxito.</h1>
     <a href="/inicio">Volver a Inicio</a>
 </body>
 </html>

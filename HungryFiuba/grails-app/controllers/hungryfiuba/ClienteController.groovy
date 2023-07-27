@@ -1,4 +1,5 @@
 package hungryfiuba
+import java.time.LocalDateTime
 
 class ClienteController {
     def clienteService
@@ -38,9 +39,9 @@ class ClienteController {
         Cesta cesta = new Cesta()
         //aca accedo en memoria y no base de datos por eso no tira error proxy
         cliente.cesta = cesta
-        //cliente.estado = EstadoCuenta.BLOQUEADA
+        cliente.estado = EstadoCuenta.BLOQUEADA
         cliente.deuda = 1000
-        cliente.estado = EstadoCuenta.NO_BLOQUEADA
+        //cliente.estado = EstadoCuenta.NO_BLOQUEADA
         cliente.save(failOnError: true)
         
         render(view: '/registroExitoso')

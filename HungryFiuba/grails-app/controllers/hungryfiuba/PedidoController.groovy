@@ -68,4 +68,13 @@ class PedidoController {
         render(view: "/bienvenida")
     }
 
+    def pagarPedido(){
+        def cliente = session.cliente
+        Pedido pedido = Pedido.findByCliente(cliente)
+
+        pedidoService.pagarPedido(pedido.id)
+
+        render(view: "/pedidoPago")
+    }
+
 }
