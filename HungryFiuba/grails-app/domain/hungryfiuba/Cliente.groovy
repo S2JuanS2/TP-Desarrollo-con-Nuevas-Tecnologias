@@ -14,6 +14,10 @@ class Cliente {
     EstadoCuenta estado
     int deuda
     int strikes
+    int aspectoUnoSuma
+    int aspectoDosSuma
+    int aspectoTresSuma
+    int calificacionesPendientes
 
     static belongsTo = [cesta: Cesta]
 

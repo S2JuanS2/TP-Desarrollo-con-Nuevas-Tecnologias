@@ -13,4 +13,19 @@ class ClienteService {
         cliente.save(flush: true)
         
     }
+    @Transactional
+    def actualizarCalificacion(long clienteId,int estrella, int aspecto){
+        Cliente cliente = Cliente.get(clienteId)
+        if(aspecto == 1){
+            cliente.aspectoUnoSuma += estrella  
+        }else if(aspecto == 2){
+            cliente.aspectoDosSuma += estrella
+        }else if(aspecto == 3){
+            cliente.aspectoTresSuma += estrella
+        }
+        else if(aspecto == 0){
+            cliente.calificacionesPendientes--
+        }
+    cliente.save(flush: true) 
+    }
 }

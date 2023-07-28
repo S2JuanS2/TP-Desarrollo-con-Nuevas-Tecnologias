@@ -3,6 +3,7 @@ package hungryfiuba
 class Administrador {
 
     String nombre
+    int cantidadCalificaciones
 
     static constraints = {
 
