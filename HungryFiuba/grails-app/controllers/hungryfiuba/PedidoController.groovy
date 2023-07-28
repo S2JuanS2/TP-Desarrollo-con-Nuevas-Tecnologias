@@ -61,8 +61,8 @@ class PedidoController {
     
     def cancelarPedido(){
 
-        def cliente = session.cliente
-        def pedido = Pedido.findByCliente(cliente)
+        Cliente cliente = session.cliente
+        Pedido pedido = Pedido.findByCliente(cliente)
         pedidoService.eliminarPedido(cliente.id, pedido.id)
     
         render(view: "/bienvenida")

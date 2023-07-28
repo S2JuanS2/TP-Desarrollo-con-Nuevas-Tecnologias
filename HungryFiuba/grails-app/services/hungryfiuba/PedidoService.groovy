@@ -17,21 +17,12 @@ class PedidoService {
         
     }
 
-    @Transactional
-    def eliminarPedido(long clienteId, long pedidoId){
-
-        def cliente = Cliente.get(clienteId)
-        def pedido = Pedido.get(pedidoId)
-        def cesta = pedido.cesta
-
-        pedido.delete(flush: true)
-
-    }
+    
 
     @Transactional
     def eliminarPedido(long pedidoId){
 
-        def pedido = Pedido.get(pedidoId)
+        Pedido pedido = Pedido.get(pedidoId)
 
         pedido.delete(flush: true)
 
@@ -40,10 +31,12 @@ class PedidoService {
     @Transactional
     def confirmarPedido(long pedidoId){
 
-        def pedido = Pedido.get(pedidoId)
-
-        pedido.estado = EstadoPedido.EN_PREPARACION
-
+        Pedido pedido = Pedido.get(pedidoId)
+        if(pedido.estado == EstadoPedido.EN_PREPARACION){
+            pedido.estado = EstadoPedido.LISTO_PARA_ENTREGAR
+        }else if(pedido.estado == EstadoPedido.EN_CONFIRMACION){
+            pedido.estado = EstadoPedido.EN_PREPARACION
+        }
         pedido.save(flush: true)
 
     }

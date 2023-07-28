@@ -1,5 +1,8 @@
 package hungryfiuba
 
+import java.time.LocalDateTime
+
+
 class AdministradorController {
 
     static scaffold = Administrador
@@ -50,7 +53,7 @@ class AdministradorController {
 
     def confirmarPedido(){
 
-        def pedido = Pedido.get(params.pedido)
+        Pedido pedido = Pedido.get(params.pedido)
         pedidoService.confirmarPedido(pedido.id)
 
         def pedidos = Pedido.list()
@@ -60,9 +63,24 @@ class AdministradorController {
 
     def cancelarPedido(){
 
-        def pedido = Pedido.get(params.pedido)
+        Pedido pedido = Pedido.get(params.pedido)
+        LocalDateTime ahora = LocalDateTime.now()
+        //Cliente cliente = Pedido.cliente
+        
+        // Calcular la diferencia entre el LocalDateTime actual y el momento de creación en horas
+       // long horasTranscurridas = pedido.momentoDeCreacion.until(ahora, ChronoUnit.HOURS)horasTranscurridas >= 1
+// si no paso una hora el admin no peiude camcelar el pedio
+        if (pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR) {
+            if(pedido.estadoPago == EstadoDelPago.PENDIENTE_DE_PAGO) {
+                if(pedido.cliente.strikes < 3){
+                    pedido.cliente.strikes++
+                } 
+                if(pedido.cliente.strikes == 3){
+                    pedido.cliente.estadoCuenta = EstadoCuenta.BLOQUEADA
+                } 
+            }
         pedidoService.eliminarPedido(pedido.id)
-
+        }
         def pedidos = Pedido.list()
         def articulos = Articulo.list()
         render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos])

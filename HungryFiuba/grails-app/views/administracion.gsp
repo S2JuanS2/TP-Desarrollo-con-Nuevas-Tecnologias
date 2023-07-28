@@ -30,10 +30,10 @@
                 <th>${pedido.cliente.estado}</th>
                 <th>${pedido.id}</th>
                 <th>$ ${pedido.precioTotal}</th>
-                <th>${pedido.estadoPago}</th>
                 <th>${pedido.estado}</th>
-                <th><g:link controller="Administrador" action="confirmarPedido" params="[pedido: pedido.id]" ><button>Confirmar</button></g:link></th>
-                <th><g:link controller="Administrador" action="cancelarPedido" params="[pedido: pedido.id]" ><button>Cancelar</button></g:link></th>
+                <th>${pedido.estadoPago}</th>
+                <th><g:link controller="administrador" action="confirmarPedido" params="[pedido: pedido.id]" ><button>Confirmar</button></g:link></th>
+                <th><g:link controller="administrador" action="cancelarPedido" params="[pedido: pedido.id]" ><button>Cancelar</button></g:link></th>
             </tr>
         </g:each>
     </table>
