@@ -15,6 +15,10 @@ table{
     border: 1px solid #ddd;
 }
 
+.sub-table{
+    display: none;
+}
+
 th, td{
 
     border: 1px solid #ddd;
@@ -39,6 +43,14 @@ a {
     text-decoration: none;
 }
 
+.volver{
+    margin-top: 50px;
+}
+
+.agregar{
+    font-size: 15px;
+}
+
 button, a{
     display: inline-block;
     background-color: #4CAF50;
@@ -55,3 +67,4 @@ button, a{
 button:hover, a:hover{
     background-color: #347c37;
 }
+

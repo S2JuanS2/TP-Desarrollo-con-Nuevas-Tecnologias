@@ -27,12 +27,43 @@ class ArticuloController {
     //HARDOCDEADO PARA TEST
     def agregarArticuloAdministrador(){
 
-        def articulo = new Articulo("Pepsi", 320, 72, 10, "https://tusuper.com.ar/image/cache/catalog/P2020/Bebidas/Pepsi%201,5l-800x800.jpg")
+        Articulo articulo = new Articulo(
+        nombre: params.nombre,
+        precio: params.precio,
+        codigo: params.codigo,
+        stock: params.stock,
+        imagenUrl: params.imagenUrl
+        )
 
         articulo.save()
+        redirect(controller: "administrador", action: "vistaAdministrador")
+    }   
+
+    def aumentarStock(){
+
+        Articulo.withTransaction{
+            
+            Articulo articulo = Articulo.get(params.articulo)
+
+            articulo.stock++
+            articulo.save(flush: true)
+        }
 
         redirect(controller: "administrador", action: "vistaAdministrador")
+    }
 
-    }   
+    def reducirStock(){
+
+        Articulo.withTransaction{
+
+            Articulo articulo = Articulo.get(params.articulo)
+
+            if(articulo.stock > 0){
+                articulo.stock--
+                articulo.save()
+            }
+        }
+        redirect(controller: "administrador", action: "vistaAdministrador")
+    }
 
 }

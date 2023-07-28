@@ -58,7 +58,7 @@ class AdministradorController {
 
         def pedidos = Pedido.list()
         def articulos = Articulo.list()
-        render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos])
+        redirect(controller: "administrador", action: "vistaAdministrador")
     }
 
     def cancelarPedido(){
@@ -83,6 +83,6 @@ class AdministradorController {
         }
         def pedidos = Pedido.list()
         def articulos = Articulo.list()
-        render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos])
+        redirect(controller: "administrador", action: "vistaAdministrador")
     }
 }
