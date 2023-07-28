@@ -20,6 +20,9 @@
                 <th>Estado del pedido</th>
                 <th>Confirmar</th>
                 <th>Cancelar</th>
+                <th>Calif.1</th>
+                <th>Calif.2</th>
+                <th>Calif.3</th>
             </tr>
             <g:each var="pedido" in="${pedidos}">
                 <tr  onmouseover="showTable()" onmouseout="hideTable()">
@@ -33,6 +36,9 @@
                     <th>${pedido.estadoPago}</th>
                     <th><g:link controller="administrador" action="confirmarPedido" params="[pedido: pedido.id]" >Confirmar</g:link></th>
                     <th><g:link controller="administrador" action="cancelarPedido" params="[pedido: pedido.id]" >Cancelar</g:link></th>
+                    <th>${pedido.cliente.aspectoUnoSuma}</th>
+                    <th>${pedido.cliente.aspectoDosSuma}</th>
+                    <th>${pedido.cliente.aspectoTresSuma}</th>
                 </tr>
             </g:each>
 
@@ -89,8 +95,11 @@
             <button type="submit" class="agregar">Agregar articulo</button>
         </g:form>
 
+        <h2>Estadísticas</h2>
+        <p>nombre: ${admin.nombre}</p>
+        <p>calif: ${admin.cantidadCalificaciones}</p>
+
         <a href="/inicio" class="volver" >Volver</a>
-        
 
         <script>
             function showTable(){

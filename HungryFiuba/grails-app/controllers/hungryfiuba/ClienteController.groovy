@@ -2,8 +2,12 @@ package hungryfiuba
 import java.time.LocalDateTime
 
 class ClienteController {
+
     def clienteService
+    def administradorService
+
     static scaffold = Cliente
+    
     def register(){
 
         render(view: "/register")
@@ -171,31 +175,31 @@ class ClienteController {
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
         clienteService.actualizarCalificacion(cliente.id,1, 3)
-        render(view:"/finCalificacion")
+        redirect(controller: "cliente", action: "finCalificacion")
     }
     def tercerApectoDosEstrellas(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
         clienteService.actualizarCalificacion(cliente.id,2, 3)
-        render(view:"/finCalificacion")
+        redirect(controller: "cliente", action: "finCalificacion")
     }
     def tercerApectoTresEstrellas(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
         clienteService.actualizarCalificacion(cliente.id,3, 3)
-        render(view:"/finCalificacion")
+        redirect(controller: "cliente", action: "finCalificacion")
     }
     def tercerApectoCuatroEstrellas(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
         clienteService.actualizarCalificacion(cliente.id,4, 3)
-        render(view:"/finCalificacion")
+        redirect(controller: "cliente", action: "finCalificacion")
     }
     def tercerApectoCincoEstrellas(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
         clienteService.actualizarCalificacion(cliente.id,5, 3)
-        render(view:"/finCalificacion")
+        redirect(controller: "cliente", action: "finCalificacion")
     }
     def finCalificacion(){
         Cliente cliente = session.cliente

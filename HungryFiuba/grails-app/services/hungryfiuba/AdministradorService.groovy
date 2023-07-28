@@ -7,9 +7,9 @@ class AdministradorService {
 
     @Transactional
     def calificaciones(){
-        Administrador administrador = Administrador.get(cantidadCalificaciones)
+        Administrador administrador = Administrador.findByNombre("admin")
         administrador.cantidadCalificaciones++
-        administrador.save(flush: true) 
+        administrador.save(flush: true)
     }
 
 }

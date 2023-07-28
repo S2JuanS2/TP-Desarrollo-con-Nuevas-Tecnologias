@@ -45,9 +45,20 @@ class AdministradorController {
 
     def vistaAdministrador(){
 
+        Administrador admin = Administrador.findByNombre("admin")
+
+        if(!admin){
+            Administrador administrador = new Administrador(
+                nombre: "admin",
+                cantidadCalificaciones: 0
+            )
+            administrador.save()
+            admin = administrador
+        }
+
         def pedidos = Pedido.list()
         def articulos = Articulo.list()
-        render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos])
+        render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos, admin: admin])
 
     }
 

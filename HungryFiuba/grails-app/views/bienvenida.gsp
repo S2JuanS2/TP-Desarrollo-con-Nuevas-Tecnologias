@@ -22,10 +22,7 @@
         <p>Sólo podrás crear un pedido en simultáneo, podrás cancelar el pedido sólo cuando se encuentre en estado de confirmación.</p>
         <p>El limite máximo de compra son $5000, no hay limite de articulos.</p>
     </div>
-    </g:link>
-    <g:link controller="Cliente" action="calificacionesPendientes">
-        <button>Calificaciones Pendientes</button>
-    </g:link>
+    <g:link controller="Cliente" action="calificacionesPendientes">Calificaciones Pendientes</g:link>
     <footer>
         <p>HungryFIUBA</p>
     </footer>
