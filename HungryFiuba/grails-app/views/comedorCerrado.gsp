@@ -7,5 +7,8 @@
 <body>
     <h1>Comedor Cerrado</h1>
     <a href="/inicio">Volver a Inicio</a>
+    <footer>
+        <p>HungryFIUBA</p>
+    </footer>
 </body>
 </html>

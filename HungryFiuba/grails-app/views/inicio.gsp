@@ -10,10 +10,9 @@
   <div class="container">
     <div class="header">
       <h1>HungryFIUBA</h1>
-      <img src="" alt="Logo de la empresa">
+      <asset:image src="logo.png" class="imagen" alt="Logo de la empresa"></asset:image>
     </div>
     <div class="description">
-      <p>¡Bienvenido!</p>
     </div>
     <div class="login-form">
       <h2>Iniciar Sesión</h2>

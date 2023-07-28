@@ -18,5 +18,8 @@
         <button>Enviar comprobante</button>
     </g:link>
     <a href="/inicio">Volver a Inicio</a>
+    <footer>
+        <p>HungryFIUBA</p>
+    </footer>
 </body>
 </html>

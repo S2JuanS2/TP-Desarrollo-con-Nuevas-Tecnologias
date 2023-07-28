@@ -2,6 +2,27 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: rgb(19, 34, 66);
+    margin: 0;
+    padding: 0;
+}
+
+.conteiner{
+
+    text-align: center;
+    display: inline-block;
+}
+
+.estado{
+    text-align: left;
+}
+
+.term{
+    text-decoration: underline;
+}
+
+.imagen{
+
+    width: 400px;
 }
 
 h1, h2, h3,p{
@@ -28,4 +49,19 @@ button, a{
 
 button:hover, a:hover{
     background-color: #347c37;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+
+footer p{
+    margin: 0;
+    padding-top: 5px;
 }

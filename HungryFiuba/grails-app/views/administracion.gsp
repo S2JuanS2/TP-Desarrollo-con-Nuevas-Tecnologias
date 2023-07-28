@@ -32,8 +32,8 @@
                 <th>$ ${pedido.precioTotal}</th>
                 <th>${pedido.estado}</th>
                 <th>${pedido.estadoPago}</th>
-                <th><g:link controller="administrador" action="confirmarPedido" params="[pedido: pedido.id]" ><button>Confirmar</button></g:link></th>
-                <th><g:link controller="administrador" action="cancelarPedido" params="[pedido: pedido.id]" ><button>Cancelar</button></g:link></th>
+                <th><g:link controller="administrador" action="confirmarPedido" params="[pedido: pedido.id]" >Confirmar</g:link></th>
+                <th><g:link controller="administrador" action="cancelarPedido" params="[pedido: pedido.id]" >Cancelar</g:link></th>
             </tr>
         </g:each>
     </table>
@@ -53,16 +53,13 @@
                 <th>$ ${articulo.precio}</th>
                 <th>${articulo.stock}</th>
                 <th>${articulo.codigo}</th>
-                <th><g:link><button>Aumentar stock</button></g:link></th>
-                <th><g:link><button>Descontar stock</button></g:link></th>
+                <th><g:link>Aumentar stock</g:link></th>
+                <th><g:link>Descontar stock</g:link></th>
             </tr>
         </g:each>
     </table>
 
-        <g:link controller="Articulo" action="agregarArticuloAdministrador">
-            <button>Agregar Articulo</button>
-        </g:link>
-
+        <g:link controller="Articulo" action="agregarArticuloAdministrador">Agregar Articulo</g:link>
         <a href="/inicio">Volver</a>
 
 </html>

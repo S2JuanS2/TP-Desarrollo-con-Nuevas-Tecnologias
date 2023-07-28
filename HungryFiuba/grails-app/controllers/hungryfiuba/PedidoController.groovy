@@ -37,6 +37,7 @@ class PedidoController {
                      //   render(view:"/comedorCerrado")
                     //}else{
                         pedidoService.guardarPedido(cliente.id)
+                        session.cliente = cliente
                         redirect(action: "pedidoCreado")
                     //}
                 }else{

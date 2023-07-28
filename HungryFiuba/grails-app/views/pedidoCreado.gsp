@@ -16,15 +16,12 @@
         <p>${articulo.nombre}.......................................$${articulo.precio}</p>
     </g:each>
     <h3>Precio total: $${pedido.precioTotal} </h3>
-    <g:link controller="pedido" action="cancelarPedido">
-        <button>Cancelar pedido</button>
-    </g:link>
-    <g:link controller="pedido" action="pagarPedido">
-        <button>Pagar pedido</button>
-    </g:link>
+    <g:link controller="pedido" action="cancelarPedido">Cancelar pedido</g:link>
+    <g:link controller="pedido" action="pagarPedido">Pagar pedido</g:link>
     <a href="/inicio">Volver a Inicio</a>
-    <g:link controller="Administrador" action="logout">
-        <button>Logout</button>
-    </g:link>
+    <g:link controller="Administrador" action="logout">Cerrar sesión</g:link>
+    <footer>
+        <p>HungryFIUBA</p>
+    </footer>
 </body>
 </html>

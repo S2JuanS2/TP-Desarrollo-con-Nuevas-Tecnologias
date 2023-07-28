@@ -12,9 +12,9 @@
         <g:each var="articulo" in="${articulos}">
             <div class="articulo-container">
                 <div class="articulo-nombre">${articulo.nombre}</div>
-                <div class="articulo-precio">Precio: ${articulo.precio}</div>
-                <div class="articulo-stock">Stock disponible: ${articulo.stock}</div>
                 <img class="articulo-imagen" src="${articulo.imagenUrl}" alt="Imagen del artículo"/>
+                <div class="articulo-precio">Precio: $${articulo.precio}</div>
+                <div class="articulo-stock">Stock disponible: ${articulo.stock}</div>
                 <g:link controller="cesta" action="agregarArticulo" params="[articulo: articulo.id]" > 
                     <button class="agregar-carrito-btn" data-articulo-id="${articulo.id}" data-stock="${articulo.stock}">Agregar a la cesta</button>
                     <div id="customAlert" class="custom-alert">
@@ -26,9 +26,7 @@
             </div>
         </g:each>
     </div>
-    <g:link controller="Administrador" action="logout">
-        <button>Logout</button>
-    </g:link>
+    <g:link controller="Administrador" action="logout">Cerrar sesión</g:link>
     <a href="/inicio">Volver</a>
 
     <script>
@@ -55,5 +53,8 @@
     }
     </script>
 
+    <footer>
+        <p>HungryFIUBA</p>
+    </footer>
     </body>
 </html>

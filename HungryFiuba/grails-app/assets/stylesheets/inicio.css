@@ -74,3 +74,8 @@ a {
 a:hover{
   color: rgb(42, 182, 65);
 }
+
+.imagen{
+
+  width: 200px;
+}

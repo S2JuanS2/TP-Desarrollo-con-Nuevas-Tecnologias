@@ -12,10 +12,9 @@
         <div class="container">
             <div class="header">
             <h1>HungryFIUBA</h1>
-            <img src="ruta_de_la_imagen.jpg" alt="Logo de la empresa">
+            <asset:image src="logo.png" class="imagen" alt="Logo de la empresa"></asset:image>
             </div>
             <div class="description">
-            <p>¡Bienvenido!</p>
             </div>
             <div class="login-form">
             <h2>Registro</h2>
@@ -43,28 +42,8 @@
                 
                 <button type="submit">Registrarse</button>
             </g:form>
+            <a href="/inicio">Volver a Inicio</a>
             </div>
         </div>
-
-        <!--  ESTO ES PARA CAMBIAR EL TEXTO DEL ERROR DE FORMATO, PERO ALGO NO ME FUNCIONÓ.
-        <script>
-
-            document.getElementById("formulario").addEventListener("submit",function(event) {
-                event.preventDefault();
-
-                var nombreInput = document.getElementById("nombre").value.trim();
-
-                var nombreFormat = /^[A-Za-z]+$/;
-
-                if(!nombreFormat.test(nombreInput)){
-                    alert("Solo letras mayúsculas y minúsculas.");
-                    document.getElementById("nombre").focus();
-                }
-                    
-                });
-
-        </script>
-        -->
-
     </body>
 </html>

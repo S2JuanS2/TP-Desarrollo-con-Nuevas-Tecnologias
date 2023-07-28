@@ -76,7 +76,7 @@ class AdministradorController {
                     pedido.cliente.strikes++
                 } 
                 if(pedido.cliente.strikes == 3){
-                    pedido.cliente.estadoCuenta = EstadoCuenta.BLOQUEADA
+                    pedido.cliente.estado = EstadoCuenta.BLOQUEADA
                 } 
             }
         pedidoService.eliminarPedido(pedido.id)

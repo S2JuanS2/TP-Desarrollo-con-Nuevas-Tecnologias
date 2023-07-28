@@ -17,7 +17,16 @@ class PedidoService {
         
     }
 
-    
+    @Transactional
+    def eliminarPedido(long clienteId, long pedidoId){
+
+        def cliente = Cliente.get(clienteId)
+        def pedido = Pedido.get(pedidoId)
+        def cesta = pedido.cesta
+
+        pedido.delete(flush: true)
+
+    }
 
     @Transactional
     def eliminarPedido(long pedidoId){
