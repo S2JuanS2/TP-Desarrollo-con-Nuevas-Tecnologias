@@ -34,23 +34,27 @@
                     <th><g:link controller="administrador" action="confirmarPedido" params="[pedido: pedido.id]" >Confirmar</g:link></th>
                     <th><g:link controller="administrador" action="cancelarPedido" params="[pedido: pedido.id]" >Cancelar</g:link></th>
                 </tr>
-                <table class="sub-table" id="sub-table">
-                    <tr>
-                        <th>Pedido N°</th>
-                        <th>Cant. Art</th>
-                        <g:each var="articuloPedido" in="${pedido.cesta.articulos}">
-                            <th>Articulo</th>
-                        </g:each>
-                    <tr>
-                        <th>${pedido.id}</th>
-                        <th>${pedido.cantidadDeArticulos}</th>
-                        <g:each var="articuloPedido" in="${pedido.cesta.articulos}">
-                            <th class="celda" >${articuloPedido.nombre}</th>
-                        </g:each>
-                    </tr>
-                </table>
+            </g:each>
+
+        </table>
+        <table class="sub-table" id="sub-table">
+            <g:each var="pedido" in="${pedidos}">
+                <tr>
+                    <th>Pedido N°</th>
+                    <th>Cant. Art</th>
+                    <g:each var="articuloPedido" in="${pedido.cesta.articulos}">
+                        <th>Articulo</th>
+                    </g:each>
+                <tr>
+                    <th>${pedido.id}</th>
+                    <th>${pedido.cantidadDeArticulos}</th>
+                    <g:each var="articuloPedido" in="${pedido.cesta.articulos}">
+                        <th class="celda" >${articuloPedido.nombre}</th>
+                    </g:each>
+                </tr>
             </g:each>
         </table>
+
         <h1>Lista de articulos</h1>
         <table>
             <tr>
