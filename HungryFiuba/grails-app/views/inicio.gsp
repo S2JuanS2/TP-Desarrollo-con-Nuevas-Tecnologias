@@ -34,10 +34,26 @@
         <button type="submit">Ingresar</button>
       </g:form>
       <p>¿Aún no tienes una cuenta? <a href="/register">Regístrate aquí</a></p>
+      <input type="text" id="inputCode" oninput="checkCode()" placeholder="clave admin"/>
       <g:link controller="Administrador" action="vistaAdministrador">
-        <button>Administrar</button>
+        <button id="myButton" disabled>Administrar</button>
       </g:link>
     </div>
   </div>
+
+  <script>
+    function checkCode(){
+      const inputCode = document.getElementById('inputCode');
+      const myButton = document.getElementById('myButton');
+
+      if(inputCode.value == "0101"){
+        myButton.disabled = false;
+      }else{
+        myButton.disabled = true;
+      }
+    }
+
+
+  </script>
 </body>
 </html>

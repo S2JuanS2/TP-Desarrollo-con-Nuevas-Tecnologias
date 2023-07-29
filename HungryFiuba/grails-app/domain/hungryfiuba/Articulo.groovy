@@ -7,7 +7,8 @@ class Articulo {
     int codigo
     int stock
     String imagenUrl
-    
+    String descripcion
+
     static constraints = {
 
         nombre nullable: false
@@ -17,12 +18,13 @@ class Articulo {
         imagenUrl nullable: false
     }
 
-    Articulo(String nombre, BigDecimal precio, int codigo, int stock,String imagenUrl) {
+    Articulo(String nombre, BigDecimal precio, int codigo, int stock,String imagenUrl, String descripcion) {
         this.nombre = nombre
         this.precio = precio
         this.codigo = codigo
         this.stock = stock
         this.imagenUrl = imagenUrl
+        this.descripcion = descripcion
     }
 
 }

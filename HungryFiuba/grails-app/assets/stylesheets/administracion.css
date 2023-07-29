@@ -73,8 +73,7 @@ button:hover, a:hover{
 .agregar-articulos{
     position: fixed;
     bottom: 20px;
-    left:50%;
-    transform: translateX(-50%);
+    left:20%;
     opacity: 0.2;
 }
 

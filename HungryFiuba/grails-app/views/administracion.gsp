@@ -68,6 +68,7 @@
                 <th>Precio</th>
                 <th>stock</th>
                 <th>codigo</th>
+                <th>Descripción</th>
                 <th>Acción</th>
                 <th>Acción</th>
             </tr>
@@ -77,6 +78,7 @@
                     <th>$ ${articulo.precio}</th>
                     <th>${articulo.stock}</th>
                     <th>${articulo.codigo}</th>
+                    <th>${articulo.descripcion}</th>
                     <th><g:link controller="Articulo" action="aumentarStock" params="[articulo: articulo.id]" >Aumentar stock</g:link></th>
                     <th><g:link controller="Articulo" action="reducirStock" params="[articulo: articulo.id]" >Descontar stock</g:link></th>
                 </tr>
@@ -87,11 +89,12 @@
             <h2>Agregar Articulos</h2>
             <g:form id="hola" controller="Articulo" action="agregarArticuloAdministrador" method="POST">
 
-                <input type="text" name="nombre" pattern="[A-Za-z ]+" required minlength="1" maxlength="50" placeholder="Nombre de articulo"/>
-                <input type="number" name="stock" placeholder="Cantidad de stock"/>
-                <input type="number" name="precio" required min="1" max="200000" placeholder="Precio">
-                <input type="number" name="codigo" placeholder="Código">
-                <input type="text" name="imagenUrl" required minlength="1" maxlength="5000" placeholder="Nombre de imagen"/>
+                <input type="text" name="nombre" pattern="[A-Za-z ]+" required minlength="1" maxlength="50" placeholder="Nombre de articulo" required/>
+                <input type="number" name="stock" placeholder="Cantidad de stock" required/>
+                <input type="number" name="precio" required min="1" max="200000" placeholder="Precio" required />
+                <input type="number" name="codigo" placeholder="Código" required />
+                <input type="text" name="descripcion" placeholder="Descripción" required />
+                <input type="text" name="imagenUrl" required minlength="1" maxlength="5000" placeholder="Nombre de imagen" required/>
                     
                 <button type="submit" class="agregar">Agregar articulo</button>
             </g:form>

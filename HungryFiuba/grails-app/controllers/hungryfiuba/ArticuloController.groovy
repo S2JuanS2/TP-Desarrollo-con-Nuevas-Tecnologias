@@ -32,7 +32,8 @@ class ArticuloController {
         precio: params.precio,
         codigo: params.codigo,
         stock: params.stock,
-        imagenUrl: params.imagenUrl
+        imagenUrl: params.imagenUrl,
+        descripcion: params.descripcion
         )
 
         articulo.save()
