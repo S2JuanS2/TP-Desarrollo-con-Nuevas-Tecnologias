@@ -18,8 +18,8 @@
                 <th>Precio</th>
                 <th>Estado del pago</th>
                 <th>Estado del pedido</th>
-                <th>Confirmar</th>
-                <th>Cancelar</th>
+                <th>Acción</th>
+                <th>Acción</th>
                 <th>Calif.1</th>
                 <th>Calif.2</th>
                 <th>Calif.3</th>
@@ -32,9 +32,9 @@
                     <th>${pedido.cliente.estado}</th>
                     <th>${pedido.id}</th>
                     <th>$ ${pedido.precioTotal}</th>
-                    <th>${pedido.estado}</th>
                     <th>${pedido.estadoPago}</th>
-                    <th><g:link controller="administrador" action="confirmarPedido" params="[pedido: pedido.id]" >Confirmar</g:link></th>
+                    <th>${pedido.estado}</th>
+                    <th><g:link controller="administrador" action="confirmarPedido" params="[pedido: pedido.id]" >Estado siguiente</g:link></th>
                     <th><g:link controller="administrador" action="cancelarPedido" params="[pedido: pedido.id]" >Cancelar</g:link></th>
                     <th>${pedido.cliente.aspectoUnoSuma}</th>
                     <th>${pedido.cliente.aspectoDosSuma}</th>
@@ -83,23 +83,24 @@
             </g:each>
         </table>
 
-        <h2>Agregar Articulos</h2>
-        <g:form id="hola" controller="Articulo" action="agregarArticuloAdministrador" method="POST">
+        <div class="agregar-articulos">
+            <h2>Agregar Articulos</h2>
+            <g:form id="hola" controller="Articulo" action="agregarArticuloAdministrador" method="POST">
 
-            <input type="text" name="nombre" pattern="[A-Za-z ]+" required minlength="1" maxlength="50" placeholder="Nombre de articulo"/>
-            <input type="number" name="stock" placeholder="Cantidad de stock"/>
-            <input type="number" name="precio" required min="1" max="200000" placeholder="Precio">
-            <input type="number" name="codigo" placeholder="Código">
-            <input type="text" name="imagenUrl" required minlength="1" maxlength="5000" placeholder="Nombre de imagen"/>
-                
-            <button type="submit" class="agregar">Agregar articulo</button>
-        </g:form>
+                <input type="text" name="nombre" pattern="[A-Za-z ]+" required minlength="1" maxlength="50" placeholder="Nombre de articulo"/>
+                <input type="number" name="stock" placeholder="Cantidad de stock"/>
+                <input type="number" name="precio" required min="1" max="200000" placeholder="Precio">
+                <input type="number" name="codigo" placeholder="Código">
+                <input type="text" name="imagenUrl" required minlength="1" maxlength="5000" placeholder="Nombre de imagen"/>
+                    
+                <button type="submit" class="agregar">Agregar articulo</button>
+            </g:form>
+        </div>
 
         <h2>Estadísticas</h2>
-        <p>nombre: ${admin.nombre}</p>
-        <p>calif: ${admin.cantidadCalificaciones}</p>
+        <p>[${admin.nombre}] Cantidad de calificaciones: ${admin.cantidadCalificaciones}.</p>
 
-        <a href="/inicio" class="volver" >Volver</a>
+        <a href="/inicio" class="volver" >Volver al inicio</a>
 
         <script>
             function showTable(){

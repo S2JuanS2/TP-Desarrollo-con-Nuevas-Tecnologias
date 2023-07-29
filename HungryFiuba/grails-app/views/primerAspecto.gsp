@@ -1,29 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Usted tiene calificaciones pendientes</title>
+    <title>Calificacion</title>
     <asset:stylesheet src="registroExitoso.css"/>
 </head>
-<body>
-    <h1>Primera pregunta:</h1>
-    
+<body> 
     <h3>Rapidez del Pedido</h3>
-    <g:link controller="cliente" action="primerApectoUnaEstrella">
-        <button>1</button>
-    </g:link>
-    <g:link controller="cliente" action="primerApectoDosEstrellas">
-        <button>2</button>
-    </g:link>
-    <g:link controller="cliente" action="primerApectoTresEstrellas">
-        <button>3</button>
-    </g:link>
-    <g:link controller="cliente" action="primerApectoCuatroEstrellas">
-        <button>4</button>
-    </g:link>
-    <g:link controller="cliente" action="primerApectoCincoEstrellas">
-        <button>5</button>
-    </g:link>
-
-    <a href="/inicio">Volver a Inicio</a>
+    <g:link controller="cliente" action="primerApectoUnaEstrella">1</g:link>
+    <g:link controller="cliente" action="primerApectoDosEstrellas">2</g:link>
+    <g:link controller="cliente" action="primerApectoTresEstrellas">3</g:link>
+    <g:link controller="cliente" action="primerApectoCuatroEstrellas">4</g:link>
+    <g:link controller="cliente" action="primerApectoCincoEstrellas">5</g:link>
 </body>
 </html>

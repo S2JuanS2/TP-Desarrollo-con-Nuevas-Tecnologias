@@ -6,6 +6,7 @@ class PedidoController {
     static scaffold = Pedido
 
     def pedidoService
+    def cestaService
 
     def comenzarPedido(){
 
@@ -63,6 +64,10 @@ class PedidoController {
     def cancelarPedido(){
 
         Cliente cliente = session.cliente
+
+        for(articulo in cliente.cesta.articulos){
+            cestaService.eliminarArticuloACesta(articulo.id,cliente.id)
+        }
         Pedido pedido = Pedido.findByCliente(cliente)
         pedidoService.eliminarPedido(cliente.id, pedido.id)
     
@@ -75,6 +80,7 @@ class PedidoController {
         if(pedido.estadoPago != EstadoDelPago.PAGADO){
             pedidoService.pagarPedido(pedido.id)
             render(view: "/pedidoPago")
+            session.cliente = pedido.cliente
         }else{
             render(view:"/pedidoYaPago")
         }

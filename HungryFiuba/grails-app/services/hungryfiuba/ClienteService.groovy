@@ -17,11 +17,11 @@ class ClienteService {
     def actualizarCalificacion(long clienteId,int estrella, int aspecto){
         Cliente cliente = Cliente.get(clienteId)
         if(aspecto == 1){
-            cliente.aspectoUnoSuma += estrella  
+            cliente.aspectoUnoSuma = estrella  
         }else if(aspecto == 2){
-            cliente.aspectoDosSuma += estrella
+            cliente.aspectoDosSuma = estrella
         }else if(aspecto == 3){
-            cliente.aspectoTresSuma += estrella
+            cliente.aspectoTresSuma = estrella
         }
         else if(aspecto == 0){
             cliente.calificacionesPendientes--

@@ -3,7 +3,7 @@ body{
     background-color: rgb(19, 34, 66);
 }
 
-h1,h2{
+h1,h2, p{
     margin: 10px 0;
     color: white;
 }
@@ -17,6 +17,7 @@ table{
 
 .sub-table{
     display: none;
+    border: 0px;
 }
 
 th, td{
@@ -66,5 +67,20 @@ button, a{
 
 button:hover, a:hover{
     background-color: #347c37;
+}
+
+.agregar-articulos{
+    position: fixed;
+    bottom: 20px;
+    left:50%;
+    transform: translateX(-50%);
+    opacity: 0.2;
+}
+
+.agregar-articulos:hover{
+    opacity: 1;;
+}
+.agregar-articulos button{
+    margin-top: 8px;
 }
 
