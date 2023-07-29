@@ -65,13 +65,14 @@ class PedidoController {
 
         Cliente cliente = session.cliente
 
-        for(articulo in cliente.cesta.articulos){
-            cestaService.eliminarArticuloACesta(articulo.id,cliente.id)
-        }
         Pedido pedido = Pedido.findByCliente(cliente)
-        pedidoService.eliminarPedido(cliente.id, pedido.id)
-    
-        render(view: "/bienvenida")
+
+        if(pedido.estado == EstadoPedido.EN_CONFIRMACION){
+            pedidoService.eliminarPedido(cliente.id, pedido.id)
+            render(view: "/bienvenida")
+        }else{
+            render(view: "/pedidoEnCurso", model:[pedido: pedido])
+        }
     }
 
     def pagarPedido(){
