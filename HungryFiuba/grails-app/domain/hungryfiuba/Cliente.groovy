@@ -1,7 +1,17 @@
 package hungryfiuba
 enum EstadoCuenta{
-    BLOQUEADA,
-    NO_BLOQUEADA
+    BLOQUEADA("Bloqueada"),
+    NO_BLOQUEADA("Desbloqueada")
+
+    final String descripcion
+
+    EstadoCuenta(String descripcion){
+        this.descripcion = descripcion
+    }
+
+    String toString(){
+        return descripcion
+    }
 }
 class Cliente {
 

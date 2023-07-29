@@ -8,6 +8,7 @@ class AdministradorController {
     static scaffold = Administrador
 
     def pedidoService
+    def cestaService
 
     def vistaInicio(){
         if(session.cliente){
@@ -90,6 +91,7 @@ class AdministradorController {
                     pedido.cliente.estado = EstadoCuenta.BLOQUEADA
                 } 
             }
+        cestaService.vaciarCesta(pedido.cliente.id)
         pedidoService.eliminarPedido(pedido.id)
         }
         def pedidos = Pedido.list()

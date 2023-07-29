@@ -5,7 +5,7 @@
     <asset:stylesheet src="registroExitoso.css"/>
 </head>
 <body>   
-    <h3>condición del pedido</h3>
+    <h3>Condición del pedido</h3>
     <g:link controller="cliente" action="segundoApectoUnaEstrella">1</g:link>
     <g:link controller="cliente" action="segundoApectoDosEstrellas">2</g:link>
     <g:link controller="cliente" action="segundoApectoTresEstrellas">3</g:link>

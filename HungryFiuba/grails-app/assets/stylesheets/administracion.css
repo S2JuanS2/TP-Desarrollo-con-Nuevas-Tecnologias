@@ -1,6 +1,7 @@
 body{
     text-align: center;
-    background-color: rgb(19, 34, 66);
+    background-image: linear-gradient(to bottom, rgb(19,34,66) 60%, #000000);
+    height: 100vh;
 }
 
 h1,h2, p{

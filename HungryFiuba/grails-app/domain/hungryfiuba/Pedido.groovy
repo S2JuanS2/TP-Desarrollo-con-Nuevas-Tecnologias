@@ -4,17 +4,37 @@ import java.time.LocalDateTime
 
 enum EstadoPedido {
 
-    EN_CONFIRMACION,
-    EN_PREPARACION,
-    LISTO_PARA_ENTREGAR,
-    ENTREGADO,
-    CANCELADO
+    EN_CONFIRMACION("A confirmar"),
+    EN_PREPARACION("En preparación"),
+    LISTO_PARA_ENTREGAR("Listo para retirar"),
+    ENTREGADO("Entregado"),
+    CANCELADO("Cancelado")
+
+    final String descripcion
+
+    EstadoPedido(String descripcion){
+        this.descripcion = descripcion
+    }
+
+    String toString(){
+        return descripcion
+    }
 }
 
 enum EstadoDelPago {
 
-    PENDIENTE_DE_PAGO,
-    PAGADO
+    PENDIENTE_DE_PAGO("Pendiente de pago"),
+    PAGADO("Pagado")
+
+    final String descripcion
+
+    EstadoDelPago(String descripcion){
+        this.descripcion = descripcion
+    }
+
+    String toString(){
+        return descripcion
+    }
 }
 
 class Pedido {

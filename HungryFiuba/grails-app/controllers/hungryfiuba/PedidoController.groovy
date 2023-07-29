@@ -69,6 +69,8 @@ class PedidoController {
 
         if(pedido.estado == EstadoPedido.EN_CONFIRMACION){
             pedidoService.eliminarPedido(cliente.id, pedido.id)
+            cestaService.vaciarCesta(cliente.id)
+            session.cliente = Cliente.get(cliente.id)
             render(view: "/bienvenida")
         }else{
             render(view: "/pedidoEnCurso", model:[pedido: pedido])
@@ -80,8 +82,8 @@ class PedidoController {
         Pedido pedido = Pedido.findByCliente(cliente)
         if(pedido.estadoPago != EstadoDelPago.PAGADO){
             pedidoService.pagarPedido(pedido.id)
+            session.cliente = Cliente.get(cliente.id)
             render(view: "/pedidoPago")
-            session.cliente = pedido.cliente
         }else{
             render(view:"/pedidoYaPago")
         }

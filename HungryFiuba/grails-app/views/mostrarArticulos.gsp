@@ -15,7 +15,7 @@
                 <img class="articulo-imagen" src="${articulo.imagenUrl}" alt="Imagen del artículo"/>
                 <div class="articulo-precio">Precio: $${articulo.precio}</div>
                 <div class="articulo-stock">Stock disponible: ${articulo.stock}</div>
-                <g:link controller="cesta" action="agregarArticulo" params="[articulo: articulo.id]" > 
+                <g:link controller="cesta" action="agregarArticulo" params="[articulo: articulo.id]"> 
                     <button class="agregar-carrito-btn" data-articulo-id="${articulo.id}" data-stock="${articulo.stock}">Agregar a la cesta</button>
                     <div id="customAlert" class="custom-alert">
                         <div class="custom-alert-content">
@@ -38,10 +38,28 @@
                 if(articuloStock > 0){
                     showCustomAlert("Articulo agregado con éxito")
                 }else{
+                    boton.style.display = "none"
                     showCustomAlert("¡No hay más stock!")
                 }
             });
         });
+
+    function reloadStock(){
+
+        var botonesArticulo = document.querySelectorAll('.agregar-carrito-btn');
+        botonesArticulo.forEach(function(boton) {
+            var articuloId = boton.dataset.articuloId;
+            var articuloStock = boton.dataset.stock;
+            if(articuloStock > 0){
+                boton.style.display = "inline-block";
+            }else{
+                boton.textContent = "Agotado";
+                boton.style.backgroundColor = "red";
+
+            };
+        });
+
+    }
 
     function showCustomAlert(mensaje){
         const customAlert = document.getElementById('customAlert');
@@ -51,6 +69,8 @@
         const customAlertMessage = document.getElementById('customAlertMessage')
         customAlertMessage.innerText = message;
     }
+
+    setInterval(reloadStock, 1000);
     </script>
 
     <footer>

@@ -35,7 +35,7 @@
                     <th>${pedido.estadoPago}</th>
                     <th>${pedido.estado}</th>
                     <th><g:link controller="administrador" action="confirmarPedido" params="[pedido: pedido.id]" >Estado siguiente</g:link></th>
-                    <th><g:link controller="administrador" action="cancelarPedido" params="[pedido: pedido.id]" >Cancelar</g:link></th>
+                    <th><g:link controller="administrador" action="cancelarPedido" params="[pedido: pedido.id]" >Remover</g:link></th>
                     <th>${pedido.cliente.aspectoUnoSuma}</th>
                     <th>${pedido.cliente.aspectoDosSuma}</th>
                     <th>${pedido.cliente.aspectoTresSuma}</th>
