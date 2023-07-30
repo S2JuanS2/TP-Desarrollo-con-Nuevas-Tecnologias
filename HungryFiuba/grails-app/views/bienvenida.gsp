@@ -14,7 +14,8 @@
         <div class="estado">
             <p><u>Estado de cuenta:</u> ${session.cliente.estado}</p>
             <p><u>Penalizaciones:</u> ${session.cliente.strikes}</p>
-            <p class="deuda">Deuda: $${session.cliente.deuda} </p>
+            <g:if test="${session.cliente.deuda <= 0}"><p class="deuda-verde">Saldo: $${session.cliente.deuda} </p></g:if>
+            <g:else><p class="deuda-rojo">Saldo: $${session.cliente.deuda} </p></g:else>
             <g:link controller="Cliente" action="calificacionesPendientes">Calificaciones Pendientes</g:link>
         </div>
         <asset:image src="logo.png" class="imagen" alt="Logo de la empresa"></asset:image>

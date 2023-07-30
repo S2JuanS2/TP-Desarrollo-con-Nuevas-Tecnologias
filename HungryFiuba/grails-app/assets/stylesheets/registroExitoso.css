@@ -68,8 +68,12 @@ footer p{
     padding-top: 5px;
 }
 
-.deuda{
+.deuda-rojo{
     color: red;
+    text-decoration: underline;
+}
+.deuda-verde{
+    color: rgb(35, 155, 55);
     text-decoration: underline;
 }
 
