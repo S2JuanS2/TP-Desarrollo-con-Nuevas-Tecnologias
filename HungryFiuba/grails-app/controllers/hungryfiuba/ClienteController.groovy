@@ -13,12 +13,6 @@ class ClienteController {
         render(view: "/register")
     }
     
-    def mostrarClientes() {
-        def clientes = Cliente.list()
-
-        render(view: '/mostrarClientes', model: [clientes: clientes])
-    }
-
     def mostrarCesta() {
         if (session.cliente) {
             // Obtener la cesta del cliente - No es necesario ya esta en la sesión
@@ -50,23 +44,7 @@ class ClienteController {
         render(view: '/registroExitoso')
    
     }
-
-    //ESTO YA NO SE USA MAS?? 
-    def agregarArticulo(){
-
-        Cliente cliente = session.cliente
-
-        Articulo articulo = Articulo.findByNombre(params.nombre)
-
-        if(cliente && articulo){
-            //cliente.cesta.agregarArticulo(articulo)
-
-        }
-        cliente.save(flush: true)
-
-        render(view: "/mostrarArticulos")
-    }
-
+    
     def registrarDeuda(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)

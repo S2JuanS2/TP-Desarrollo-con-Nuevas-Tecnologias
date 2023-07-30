@@ -34,13 +34,13 @@ class PedidoController {
         if(cliente.estado != EstadoCuenta.BLOQUEADA){ 
             if(cesta.cantidadDeArticulos>0){
                 if(!clienteExisteEnPedidos ){
-                   // if(!(hora.getHour()) ){//>= 1 despues lo ponemos jode mucho
-                     //   render(view:"/comedorCerrado")
-                    //}else{
+                   if((hora.getHour() >= 22)){      //>= 1 despues lo ponemos jode mucho
+                       render(view:"/comedorCerrado")
+                    }else{
                         pedidoService.guardarPedido(cliente.id)
                         session.cliente = cliente
                         redirect(action: "pedidoCreado")
-                    //}
+                    }
                 }else{
                     def pedidoParticular = Pedido.findByCliente(cliente)
                     render(view: "/pedidoEnCurso", model:[pedido: pedidoParticular])

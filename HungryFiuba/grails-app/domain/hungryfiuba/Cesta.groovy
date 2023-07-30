@@ -19,11 +19,6 @@ class Cesta {
         cantidadDeArticulos = 0
         montoTotal = 0
     }
-    
-
-    void agregarArticulo(Articulo articulo) {
-       //cesta.addToArticulos(articulo)
-    }
 
     def incrementarCantidadDeArticulos(){
         cantidadDeArticulos++

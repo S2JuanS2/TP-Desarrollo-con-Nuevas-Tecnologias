@@ -6,29 +6,31 @@
         <asset:stylesheet src="registroExitoso.css"/>
     </head>
     <body>
-
-    <h1>LISTADO DE ARTICULOS</h1>
-    <div class="articulos-container">
-        <g:each var="articulo" in="${articulos}">
-            <div class="articulo-container">
-                <div class="articulo-nombre">${articulo.nombre}</div>
-                <div class="articulo-precio">${articulo.descripcion}</div>
-                <img class="articulo-imagen" src="${articulo.imagenUrl}" alt="Imagen del artículo"/>
-                <div class="articulo-precio">Precio: $${articulo.precio}</div>
-                <div class="articulo-stock">Stock disponible: ${articulo.stock}</div>
-                <g:link class="agregar-carrito-btn" data-articulo-id="${articulo.id}" data-stock="${articulo.stock}" 
-                    controller="cesta" action="agregarArticulo" params="[articulo: articulo.id]">Agregar a la cesta
-                </g:link>
-                    <div id="customAlert" class="custom-alert">
-                        <div class="custom-alert-content">
-                            <span id="customAlertMessage"></span>
+    <div class="conteiner">
+        <h1>Articulos en stock</h1>
+        <div class="articulos-container">
+                <g:if test="${!articulos}"><h3>No hay articulos en stock!</h3></g:if>
+            <g:each var="articulo" in="${articulos}">
+                <div class="articulo-container">
+                    <div class="articulo-nombre">${articulo.nombre}</div>
+                    <div class="articulo-precio">${articulo.descripcion}</div>
+                    <img class="articulo-imagen" src="${articulo.imagenUrl}" alt="Imagen del artículo"/>
+                    <div class="articulo-precio">Precio: $${articulo.precio}</div>
+                    <div class="articulo-stock">Stock disponible: ${articulo.stock}</div>
+                    <g:link class="agregar-carrito-btn" data-articulo-id="${articulo.id}" data-stock="${articulo.stock}" 
+                        controller="cesta" action="agregarArticulo" params="[articulo: articulo.id]">Agregar a la cesta
+                    </g:link>
+                        <div id="customAlert" class="custom-alert">
+                            <div class="custom-alert-content">
+                                <span id="customAlertMessage"></span>
+                            </div>
                         </div>
-                    </div>
-            </div>
-        </g:each>
+                </div>
+            </g:each>
+        </div>
+        <g:link controller="Administrador" action="logout">Cerrar sesión</g:link>
+        <a href="/inicio">Volver</a>
     </div>
-    <g:link controller="Administrador" action="logout">Cerrar sesión</g:link>
-    <a href="/inicio">Volver</a>
 
     <script>
         var botonesArticulo = document.querySelectorAll('.agregar-carrito-btn');

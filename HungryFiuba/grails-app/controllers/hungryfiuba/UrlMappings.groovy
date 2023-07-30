@@ -8,7 +8,6 @@ class UrlMappings {
         "/inicio"(controller: 'administrador', action: 'vistaInicio')
         "/mostrarArticulos"(controller: 'articulo', action: 'mostrarArticulos')
         "/registroExitoso"(view:'registroExitoso')
-        "/mostrarClientes"(controller: 'cliente', action: 'mostrarClientes')
         "/administrador/registroFallido"(view:'registroFallido')
         "/mostrarCesta"(controller: "cesta", action: "mostrarCesta")
         "/pedidoCreado"(controller:"articulo", action:"mostrarArticulos")
