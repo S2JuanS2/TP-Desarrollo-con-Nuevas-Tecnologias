@@ -24,7 +24,6 @@ class ArticuloController {
         }
     }
 
-    //HARDOCDEADO PARA TEST
     def agregarArticuloAdministrador(){
 
         Articulo articulo = new Articulo(

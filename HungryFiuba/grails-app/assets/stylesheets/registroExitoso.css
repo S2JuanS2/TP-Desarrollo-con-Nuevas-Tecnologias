@@ -19,12 +19,11 @@ body {
 
 .term{
     text-decoration: underline;
-    margin-top: 30px;
+    text-align: center;
 }
 
 .imagen{
-
-    width: 400px;
+    width: 300px;
 }
 
 h1, h2, h3,p{
@@ -72,4 +71,15 @@ footer p{
 .deuda{
     color: red;
     text-decoration: underline;
+}
+
+.term-cond{
+
+    border: 2px solid rgb(41, 39, 133);
+    background-color: rgb(21, 18, 51);
+    border-radius: 10px;
+    width: 50%;
+    text-align: left;
+    margin-left: 25%;
+    padding: 5px;
 }

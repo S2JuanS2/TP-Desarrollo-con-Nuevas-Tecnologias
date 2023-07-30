@@ -183,7 +183,7 @@ class ClienteController {
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
         clienteService.actualizarCalificacion(cliente.id,0, 0)
-        administradorService.calificaciones()
+        administradorService.calificaciones(cliente.id)
         render(view:"/resultados")
     }
 

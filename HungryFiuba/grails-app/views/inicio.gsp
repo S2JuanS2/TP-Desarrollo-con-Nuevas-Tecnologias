@@ -19,17 +19,16 @@
       <g:form action="autenticar" method="POST">
         <label for="identificador">Identificador:</label>
         <select id="identificador" name="identificador" required>
-          <option value="">Seleccionar</option>
           <option value="padron">Padrón</option>
           <option value="dni">DNI</option>
         </select>
         <br/>
         <br/>
         <label for="valor">Valor:</label>
-        <input type="number" id="valor" name="idValor" required>
+        <input type="number" id="valor" name="idValor" maxlength="6" required>
         
         <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" required>
+        <input type="password" id="contrasena" name="contrasena" maxlength="40" required>
         
         <button type="submit">Ingresar</button>
       </g:form>

@@ -101,7 +101,10 @@
         </div>
 
         <h2>Estadísticas</h2>
-        <p>[${admin.nombre}] Cantidad de calificaciones: ${admin.cantidadCalificaciones}.</p>
+        <p>Calif. rapidéz: ${admin.califRapidez} estrellas.</p>
+        <p>Calif. página: ${admin.califPagina} estrellas.</p>
+        <p>Calif. pedidos: ${admin.califEstado} estrellas.</p>
+        <p>Cantidad de calificaciones: ${admin.cantidadCalificaciones}.</p>
 
         <a href="/inicio" class="volver" >Volver al inicio</a>
 

@@ -44,6 +44,7 @@ class AdministradorController {
         render(view:"/inicio")
     }
 
+    //El admin es único, patrón singletón?
     def vistaAdministrador(){
 
         Administrador admin = Administrador.findByNombre("admin")
@@ -77,7 +78,6 @@ class AdministradorController {
 
         Pedido pedido = Pedido.get(params.pedido)
         LocalDateTime ahora = LocalDateTime.now()
-        //Cliente cliente = Pedido.cliente
         
         // Calcular la diferencia entre el LocalDateTime actual y el momento de creación en horas
        // long horasTranscurridas = pedido.momentoDeCreacion.until(ahora, ChronoUnit.HOURS)horasTranscurridas >= 1
