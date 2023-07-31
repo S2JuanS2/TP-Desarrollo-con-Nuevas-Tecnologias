@@ -32,6 +32,7 @@ class CestaController {
     def agregarArticulo(){
 
         Cliente cliente = session.cliente
+        Cliente clienteActual = Cliente.get(cliente.id)
 
         def articuloId = params.articulo
 
@@ -42,7 +43,7 @@ class CestaController {
         def cesta = Cesta.get(cliente.id)
         def precioArticulo= cesta.montoTotal + articulo.precio
         if(cliente && articulo ){
-            if(articulo.stock > 0 && precioArticulo <= 5000 ){
+            if(articulo.stock > 0 && precioArticulo <= 5000  && clienteActual.estado == EstadoCuenta.NO_BLOQUEADA){
                 cestaService.agregarArticuloACesta(articulo.id, cliente.id)
             }
                 redirect(controller:"articulo", action: "mostrarArticulos")

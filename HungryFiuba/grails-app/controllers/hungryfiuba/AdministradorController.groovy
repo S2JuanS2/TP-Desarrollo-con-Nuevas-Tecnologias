@@ -39,6 +39,7 @@ class AdministradorController {
             render(view: "/registroFallido")
             } 
     }
+    
     def logout(){
         session.cliente = null
         render(view:"/inicio")
@@ -80,8 +81,8 @@ class AdministradorController {
         LocalDateTime ahora = LocalDateTime.now()
         
         // Calcular la diferencia entre el LocalDateTime actual y el momento de creación en horas
-       // long horasTranscurridas = pedido.momentoDeCreacion.until(ahora, ChronoUnit.HOURS)horasTranscurridas >= 1
-// si no paso una hora el admin no peiude camcelar el pedio
+        // long horasTranscurridas = pedido.momentoDeCreacion.until(ahora, ChronoUnit.HOURS)horasTranscurridas >= 1
+        // si no paso una hora el admin no peiude camcelar el pedio
         if (pedido.estado == EstadoPedido.EN_CONFIRMACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR || pedido.estado == EstadoPedido.ENTREGADO) {
             if(pedido.estadoPago == EstadoDelPago.PENDIENTE_DE_PAGO && pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR) {
                 if(pedido.cliente.strikes < 3){
