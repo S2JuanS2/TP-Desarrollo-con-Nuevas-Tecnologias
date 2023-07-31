@@ -11,10 +11,9 @@ class AdministradorService {
         Administrador administrador = Administrador.findByNombre("admin")
         administrador.cantidadCalificaciones++
 
-        //ESTA MAL ESTO ES TEMPORAL
-        administrador.califRapidez = (cliente.aspectoUnoSuma + administrador.califRapidez)/administrador.cantidadCalificaciones
-        administrador.califEstado = (cliente.aspectoDosSuma + administrador.califEstado)/administrador.cantidadCalificaciones
-        administrador.califPagina =  (cliente.aspectoTresSuma + administrador.califPagina)/administrador.cantidadCalificaciones
+        administrador.califRapidez += cliente.aspectoUnoSuma
+        administrador.califEstado += cliente.aspectoDosSuma
+        administrador.califPagina += cliente.aspectoTresSuma
 
         administrador.save(flush: true)
     }

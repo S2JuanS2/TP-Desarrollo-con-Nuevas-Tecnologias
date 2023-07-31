@@ -43,9 +43,11 @@ class PedidoService {
         Pedido pedido = Pedido.get(pedidoId)
         if(pedido.estado == EstadoPedido.EN_PREPARACION){
             pedido.estado = EstadoPedido.LISTO_PARA_ENTREGAR
-            pedido.cliente.calificacionesPendientes ++
         }else if(pedido.estado == EstadoPedido.EN_CONFIRMACION){
             pedido.estado = EstadoPedido.EN_PREPARACION
+        }else if(pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR){
+            pedido.estado = EstadoPedido.ENTREGADO
+            pedido.cliente.calificacionesPendientes++
         }
         pedido.save(flush: true)
 

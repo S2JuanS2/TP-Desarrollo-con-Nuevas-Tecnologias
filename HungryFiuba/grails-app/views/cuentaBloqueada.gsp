@@ -7,9 +7,9 @@
 <body>
     <div class="conteiner">
         <h1>Cuenta bloqueada</h1>
-        <p>Usted tiene una deuda pendiente de: $${cliente.deuda}.00<br></p>
+        <p>Cuenta bloqueada, se le aplicará una penalización de $15000.00<br></p>
         <p>Por favor, abone su deuda para desbloquear la cuenta.</p>
-        <g:link controller="Pedido" action="pagarDeuda">PagarDeuda</g:link>
+        <g:link controller="Pedido" action="pagarDeuda">Desbloquear cuenta</g:link>
         <a href="/inicio">Volver a Inicio</a>
     </div>
     <footer>

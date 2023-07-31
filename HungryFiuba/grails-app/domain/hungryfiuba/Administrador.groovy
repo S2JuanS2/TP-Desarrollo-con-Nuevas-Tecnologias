@@ -22,4 +22,33 @@ class Administrador {
         this.califPagina = 0
         this.califEstado = 0
     }
+
+    int mostrarCalificacionEstado(){
+
+        if(cantidadCalificaciones != 0){
+            return ((califEstado/cantidadCalificaciones))
+        }else{
+            return (califEstado)
+        }
+
+    }
+
+    int mostrarCalificacionRapidez(){
+
+        if(cantidadCalificaciones != 0){
+            return ((califRapidez/cantidadCalificaciones))
+        }else{
+            return (califRapidez)
+        }
+    }
+
+
+    int mostrarCalificacionPagina(){
+        if(cantidadCalificaciones != 0){
+            return ((califPagina/cantidadCalificaciones))
+        }else{
+            return (califPagina)
+        }
+
+    }
 }

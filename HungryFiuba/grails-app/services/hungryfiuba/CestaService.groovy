@@ -60,4 +60,24 @@ class CestaService {
         cliente.cesta.save(flush: true)
 
     }
+
+    @Transactional
+    def vaciarCestaDePedidoFinalizado(long clienteId){
+
+        Cliente cliente = Cliente.get(clienteId)
+        Cesta cesta = cliente.cesta
+        Articulo articuloEnStock
+
+        cesta.articulos.each{ articulo ->
+            articuloEnStock = Articulo.get(articulo.id)
+            cesta.cantidadDeArticulos--
+            cesta.montoTotal -= articuloEnStock.precio
+        }
+
+        cliente.cesta.articulos.clear()
+
+        cliente.cesta.save(flush: true)
+
+    }
+
 }

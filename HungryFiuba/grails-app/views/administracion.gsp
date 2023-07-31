@@ -10,35 +10,29 @@
         <h1>Lista de pedidos</h1>
         <table>
             <tr>
-                <th>Cliente</th>
-                <th>Deuda</th>
-                <th>Strikes</th>
-                <th>Estado de cuenta</th>
-                <th>Pedido N°</th>
-                <th>Precio</th>
-                <th>Estado del pago</th>
-                <th>Estado del pedido</th>
-                <th>Acción</th>
-                <th>Acción</th>
-                <th>Calif.1</th>
-                <th>Calif.2</th>
-                <th>Calif.3</th>
+                <th>PEDIDO N°</th>
+                <th>CLIENTE</th>
+                <th>ESTADO DE CUENTA</th>
+                <th>STRIKES</th>
+                <th>DEUDA</th>
+                <th>PRECIO</th>
+                <th>ESTADO DEL PAGO</th>
+                <th>ESTADO DEL PEDIDO</th>
+                <th>ACCIÓN</th>
+                <th>ACCIÓN</th>
             </tr>
             <g:each var="pedido" in="${pedidos}">
                 <tr  onmouseover="showTable()" onmouseout="hideTable()">
-                    <th>${pedido.cliente.nombre} ${pedido.cliente.apellido}</th>
-                    <th>$ ${pedido.cliente.deuda}</th>
-                    <th> ${pedido.cliente.strikes}</th>
-                    <th>${pedido.cliente.estado}</th>
                     <th>${pedido.id}</th>
+                    <th>${pedido.cliente.nombre} ${pedido.cliente.apellido}</th>
+                    <th>${pedido.cliente.estado}</th>
+                    <th> ${pedido.cliente.strikes}</th>
+                    <th>$ ${pedido.cliente.deuda}</th>
                     <th>$ ${pedido.precioTotal}</th>
                     <th>${pedido.estadoPago}</th>
                     <th>${pedido.estado}</th>
                     <th><g:link controller="administrador" action="confirmarPedido" params="[pedido: pedido.id]" >Estado siguiente</g:link></th>
                     <th><g:link controller="administrador" action="cancelarPedido" params="[pedido: pedido.id]" >Remover</g:link></th>
-                    <th>${pedido.cliente.aspectoUnoSuma}</th>
-                    <th>${pedido.cliente.aspectoDosSuma}</th>
-                    <th>${pedido.cliente.aspectoTresSuma}</th>
                 </tr>
             </g:each>
 
@@ -46,7 +40,7 @@
         <table class="sub-table" id="sub-table">
             <g:each var="pedido" in="${pedidos}">
                 <tr>
-                    <th>Pedido N°</th>
+                    <th>PEDIDO N°</th>
                     <th>Cant. Art</th>
                     <g:each var="articuloPedido" in="${pedido.cesta.articulos}">
                         <th>Articulo</th>
@@ -64,23 +58,23 @@
         <h1>Lista de articulos</h1>
         <table>
             <tr>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>stock</th>
-                <th>codigo</th>
-                <th>Descripción</th>
-                <th>Acción</th>
-                <th>Acción</th>
+                <th>NOMBRE</th>
+                <th>DESCRIPCIÓN</th>
+                <th>PRECIO</th>
+                <th>CÓDIGO</th>
+                <th>STOCK</th>
+                <th>ACCIÓN</th>
+                <th>ACCIÓN</th>
             </tr>
             <g:each var="articulo" in="${articulos}">
                 <tr>
                     <th>${articulo.nombre}</th>
-                    <th>$ ${articulo.precio}</th>
-                    <th>${articulo.stock}</th>
-                    <th>${articulo.codigo}</th>
                     <th>${articulo.descripcion}</th>
-                    <th><g:link controller="Articulo" action="aumentarStock" params="[articulo: articulo.id]" >Aumentar stock</g:link></th>
-                    <th><g:link controller="Articulo" action="reducirStock" params="[articulo: articulo.id]" >Descontar stock</g:link></th>
+                    <th>$ ${articulo.precio}</th>
+                    <th>${articulo.codigo}</th>
+                    <th>${articulo.stock}</th>
+                    <th><g:link controller="Articulo" action="aumentarStock" params="[articulo: articulo.id]" >+ stock</g:link></th>
+                    <th><g:link controller="Articulo" action="reducirStock" params="[articulo: articulo.id]" >- stock</g:link></th>
                 </tr>
             </g:each>
         </table>
@@ -101,9 +95,9 @@
         </div>
 
         <h2>Estadísticas</h2>
-        <p>Calif. rapidéz: ${admin.califRapidez} estrellas.</p>
-        <p>Calif. página: ${admin.califPagina} estrellas.</p>
-        <p>Calif. pedidos: ${admin.califEstado} estrellas.</p>
+        <p>Calif. página: ${admin.mostrarCalificacionPagina()} estrellas.</p>
+        <p>Calif. rapidéz: ${admin.mostrarCalificacionRapidez()} estrellas.</p>
+        <p>Calif. pedidos: ${admin.mostrarCalificacionEstado()} estrellas.</p>
         <p>Cantidad de calificaciones: ${admin.cantidadCalificaciones}.</p>
 
         <a href="/inicio" class="volver" >Volver al inicio</a>
