@@ -10,17 +10,6 @@ class AdministradorController {
     def pedidoService
     def cestaService
 
-    def vistaInicio(){
-        if(session.cliente){
-            redirect(controller: "pedido", action: "comenzarPedido")
-        }
-        render(view: "/inicio")
-    }
-
-    def mostrarArticulos() {
-        render(view: 'mostrarArticulos')
-    }
-    
     def autenticar() {
         def identificadorTipo = params.idTipo
         def identificadorValor = params.idValor
@@ -39,11 +28,19 @@ class AdministradorController {
             render(view: "/registroFallido")
             } 
     }
-    
+
     def logout(){
         session.cliente = null
         render(view:"/inicio")
     }
+    
+    def vistaInicio(){
+        if(session.cliente){
+            redirect(controller: "pedido", action: "comenzarPedido")
+        }
+        render(view: "/inicio")
+    }
+   
 
     //El admin es único, patrón singletón?
     def vistaAdministrador(){

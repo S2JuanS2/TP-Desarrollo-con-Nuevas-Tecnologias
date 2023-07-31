@@ -35,10 +35,7 @@ class CestaController {
         Cliente clienteActual = Cliente.get(cliente.id)
 
         def articuloId = params.articulo
-
         def articulo = Articulo.get(articuloId)
-
-        
 
         def cesta = Cesta.get(cliente.id)
         def precioArticulo= cesta.montoTotal + articulo.precio
@@ -51,10 +48,9 @@ class CestaController {
         }else{
             redirect(controller:"administrador", action: "vistaInicio")
         }
-
     }
 
-        def eliminarArticulo(){
+    def eliminarArticulo(){
 
         Cliente cliente = session.cliente
         def articuloId = params.articulo //es un string
@@ -63,8 +59,6 @@ class CestaController {
         cestaService.eliminarArticuloACesta(articulo.id, cliente.id)
 
         redirect(controller: "cesta", action: "mostrarCesta")
-
-
     }
 
 }

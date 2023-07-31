@@ -19,9 +19,7 @@ class PedidoController {
         def pedido = Pedido.findByCliente(cliente)
         render(view: "/pedidoCreado", model: [pedido: pedido])
     }
-    def cestaVacia(){
-        render(view: "/cestaVacia" )
-    }
+    
     def crearPedido(){
 
         def cliente = session.cliente
@@ -54,13 +52,7 @@ class PedidoController {
            
         }
     }
-    def pagarDeuda(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        render(view: "/pagarDeuda", model:[cliente: cliente])
-        
-    }
-    
+
     def cancelarPedido(){
 
         Cliente cliente = session.cliente
@@ -88,6 +80,17 @@ class PedidoController {
             render(view:"/pedidoYaPago")
         }
         
+    }
+
+    def pagarDeuda(){
+        Cliente cliente = session.cliente
+        cliente = Cliente.get(cliente.id)
+        render(view: "/pagarDeuda", model:[cliente: cliente])
+        
+    }
+
+    def cestaVacia(){
+        render(view: "/cestaVacia" )
     }
 
 }

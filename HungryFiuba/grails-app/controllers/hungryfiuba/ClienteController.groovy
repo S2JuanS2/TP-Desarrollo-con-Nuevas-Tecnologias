@@ -8,11 +8,6 @@ class ClienteController {
 
     static scaffold = Cliente
     
-    def register(){
-
-        render(view: "/register")
-    }
-       
     def crearCliente(){
 
         Cliente cliente = new Cliente(
@@ -22,18 +17,20 @@ class ClienteController {
             identificadorValor: params.idValor,
             contrasena: params.contrasena
         )
-        
         Cesta cesta = new Cesta()
-        //aca accedo en memoria y no base de datos por eso no tira error proxy
         cliente.cesta = cesta
         cliente.estado = EstadoCuenta.NO_BLOQUEADA
 
         cliente.save(failOnError: true)
         
         render(view: '/registroExitoso')
-   
     }
-    
+
+    def register(){
+
+        render(view: "/register")
+    }
+       
     def registrarDeuda(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
