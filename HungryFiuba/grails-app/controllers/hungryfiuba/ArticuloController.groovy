@@ -4,21 +4,6 @@ class ArticuloController {
 
     static scaffold = Articulo
 
-    def agregarArticuloAdministrador(){
-
-        Articulo articulo = new Articulo(
-        nombre: params.nombre,
-        precio: params.precio,
-        codigo: params.codigo,
-        stock: params.stock,
-        imagenUrl: params.imagenUrl,
-        descripcion: params.descripcion
-        )
-
-        articulo.save()
-        redirect(controller: "administrador", action: "vistaAdministrador")
-    }   
-
     def mostrarArticulos(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
@@ -38,6 +23,21 @@ class ArticuloController {
             render(view: "/registroFallido")
         }
     }
+
+    def agregarArticuloAdministrador(){
+
+        Articulo articulo = new Articulo(
+        nombre: params.nombre,
+        precio: params.precio,
+        codigo: params.codigo,
+        stock: params.stock,
+        imagenUrl: params.imagenUrl,
+        descripcion: params.descripcion
+        )
+
+        articulo.save()
+        redirect(controller: "administrador", action: "vistaAdministrador")
+    }   
 
     def aumentarStock(){
 

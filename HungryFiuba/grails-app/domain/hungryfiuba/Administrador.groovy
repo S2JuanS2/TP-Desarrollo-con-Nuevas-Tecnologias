@@ -22,7 +22,8 @@ class Administrador {
         this.califPagina = 0
         this.califEstado = 0
     }
-
+    
+    
     int mostrarCalificacionEstado(){
 
         if(cantidadCalificaciones != 0){
@@ -50,5 +51,28 @@ class Administrador {
             return (califPagina)
         }
 
+    }
+    boolean clienteExiste(String id){
+        def cliente = Cliente.findByIdentificadorValor(id)
+        return cliente != null
+    }
+    boolean clienteCodigoCorrecto(String contrasena, String id){
+        def cliente = Cliente.findByIdentificadorValor(id)
+        return cliente.contrasena == contrasena 
+    }
+    boolean pedidoEnEstadoParaCancelar(Pedido pedido){
+        return pedido.estado == EstadoPedido.EN_CONFIRMACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR || pedido.estado == EstadoPedido.ENTREGADO
+    }
+    boolean pedidoEnEstadoNoPago(Pedido pedido){
+        return pedido.estadoPago == EstadoDelPago.PENDIENTE_DE_PAGO && pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR
+    }
+    boolean pedidoConMenosDeTresStrikes(Pedido pedido){
+       return pedido.cliente.strikes < 3
+    }
+    boolean pedidoConTresStrikes(Pedido pedido){
+        return pedido.cliente.strikes == 3
+    }
+    boolean pedidoEnEstadoParaVaciarCesta(Pedido pedido){
+        return pedido.estado == EstadoPedido.ENTREGADO
     }
 }

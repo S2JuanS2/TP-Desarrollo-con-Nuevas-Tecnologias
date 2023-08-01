@@ -32,15 +32,17 @@ class CestaController {
     def agregarArticulo(){
 
         Cliente cliente = session.cliente
-        Cliente clienteActual = Cliente.get(cliente.id)
 
         def articuloId = params.articulo
+
         def articulo = Articulo.get(articuloId)
+
+        
 
         def cesta = Cesta.get(cliente.id)
         def precioArticulo= cesta.montoTotal + articulo.precio
         if(cliente && articulo ){
-            if(articulo.stock > 0 && precioArticulo <= 5000  && clienteActual.estado == EstadoCuenta.NO_BLOQUEADA){
+            if(articulo.stock > 0 && precioArticulo <= 5000 ){
                 cestaService.agregarArticuloACesta(articulo.id, cliente.id)
             }
                 redirect(controller:"articulo", action: "mostrarArticulos")
@@ -48,9 +50,10 @@ class CestaController {
         }else{
             redirect(controller:"administrador", action: "vistaInicio")
         }
+
     }
 
-    def eliminarArticulo(){
+        def eliminarArticulo(){
 
         Cliente cliente = session.cliente
         def articuloId = params.articulo //es un string
@@ -59,6 +62,8 @@ class CestaController {
         cestaService.eliminarArticuloACesta(articulo.id, cliente.id)
 
         redirect(controller: "cesta", action: "mostrarCesta")
+
+
     }
 
 }
