@@ -8,24 +8,21 @@ class ClienteController {
 
     static scaffold = Cliente
     
+    //muestra la vista de registro
     def register(){
-
         render(view: "/register")
     }
     
+    //muestra la cesta de compras del cliente si el cliente está autenticado. Si no hay un cliente autenticado, redirige al usuario a la vista de "registro fallido" para indicar que el usuario no tiene acceso a la cesta sin autenticación. La función permite al cliente ver los artículos agregados a la cesta y la información relacionada con la compra.
     def mostrarCesta() {
         if (session.cliente) {
-            // Obtener la cesta del cliente - No es necesario ya esta en la sesión
-            // Pasar el cliente y la cesta a la vista mostrarCesta.gsp
             render(view: "/mostrarCesta")
         } else {
-            // Si no hay cliente autenticado, redirigir a la página de inicio de sesión
             render(view: "/registroFallido")
         }
     }
     
     def crearCliente(){
-
         Cliente cliente = new Cliente(
             nombre: params.nombre,
             apellido: params.apellido,
@@ -33,16 +30,12 @@ class ClienteController {
             identificadorValor: params.idValor,
             contrasena: params.contrasena
         )
-        
         Cesta cesta = new Cesta()
-        //aca accedo en memoria y no base de datos por eso no tira error proxy
         cliente.cesta = cesta
         cliente.estado = EstadoCuenta.NO_BLOQUEADA
-
         cliente.save(failOnError: true)
         
         render(view: '/registroExitoso')
-   
     }
     
     def registrarDeuda(){
