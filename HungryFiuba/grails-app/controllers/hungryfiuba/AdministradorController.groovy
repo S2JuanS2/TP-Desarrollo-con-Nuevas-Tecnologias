@@ -68,22 +68,17 @@ class AdministradorController {
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
  
- // Calcular la diferencia entre el LocalDateTime actual y el momento de creación en horas
-       // long horasTranscurridas = pedido.momentoDeCreacion.until(ahora, ChronoUnit.HOURS)horasTranscurridas >= 1
-// si no paso una hora el admin no peiude camcelar el pedio
-
     //permite cancelar un pedido específico en la aplicación de administración. Realiza acciones como actualizar el estado del cliente y vaciar la cesta, dependiendo del estado y el estado de pago del pedido. Elimina el pedido y redirige al administrador a la vista de administración.
     def cancelarPedido(){
         Administrador admin = Administrador.findByNombre("admin")
         Pedido pedido = Pedido.get(params.pedido)
-        //LocalDateTime ahora = LocalDateTime.now() no se esta usando hay q ver q hacemos 
-        
+
         if (admin.pedidoEnEstadoParaCancelar(pedido)) {
             if(admin.pedidoEnEstadoNoPago(pedido)) {
-                if(admin.pedidoConMenosDeTresStrikes(pedido)){
+                if(admin.clienteConMenosDeTresStrikes(pedido)){
                     pedido.cliente.strikes++
                 } 
-                if(admin.pedidoConTresStrikes(pedido)){
+                if(admin.clienteConTresStrikes(pedido)){
                     pedido.cliente.estado = EstadoCuenta.BLOQUEADA
                 } 
             }

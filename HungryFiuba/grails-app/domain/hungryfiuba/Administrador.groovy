@@ -22,8 +22,8 @@ class Administrador {
         this.califPagina = 0
         this.califEstado = 0
     }
-    
-    
+    /*
+    creo q no se usa
     int mostrarCalificacionEstado(){
 
         if(cantidadCalificaciones != 0){
@@ -52,26 +52,40 @@ class Administrador {
         }
 
     }
+*/
+    //devuelve true si el cliente existe
     boolean clienteExiste(String id){
         def cliente = Cliente.findByIdentificadorValor(id)
         return cliente != null
     }
+
+    //devuleve true si la contrasenia es correcta 
     boolean clienteCodigoCorrecto(String contrasena, String id){
         def cliente = Cliente.findByIdentificadorValor(id)
         return cliente.contrasena == contrasena 
     }
+
+    //devuleve true si el pedido esta en confirmacion o listo para entregar o entregado
     boolean pedidoEnEstadoParaCancelar(Pedido pedido){
         return pedido.estado == EstadoPedido.EN_CONFIRMACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR || pedido.estado == EstadoPedido.ENTREGADO
     }
+
+    //devuleve true si el pedido no se encunetra pago y si listo para entregar
     boolean pedidoEnEstadoNoPago(Pedido pedido){
         return pedido.estadoPago == EstadoDelPago.PENDIENTE_DE_PAGO && pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR
     }
-    boolean pedidoConMenosDeTresStrikes(Pedido pedido){
+
+    //devuleve true si la cantidad de strikes del cliente es menor a 3 
+    boolean clienteConMenosDeTresStrikes(Pedido pedido){
        return pedido.cliente.strikes < 3
     }
-    boolean pedidoConTresStrikes(Pedido pedido){
+
+    //devuleve true si la cantidad de strikes del cliente es igual a 3 
+    boolean clienteConTresStrikes(Pedido pedido){
         return pedido.cliente.strikes == 3
     }
+
+    //devuleve true si el pedido se encuentra entregado
     boolean pedidoEnEstadoParaVaciarCesta(Pedido pedido){
         return pedido.estado == EstadoPedido.ENTREGADO
     }
