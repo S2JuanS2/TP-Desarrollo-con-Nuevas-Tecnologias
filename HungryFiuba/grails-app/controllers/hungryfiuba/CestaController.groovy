@@ -6,13 +6,10 @@ class CestaController {
 
     def cestaService
 
+    //muestra la cesta de compras del cliente. Si el cliente está autenticado y no tiene ningún pedido en curso, muestra el contenido de la cesta. Si el cliente tiene un pedido en curso, muestra la información de ese pedido. Si no hay cliente autenticado, redirige al usuario a la vista de "registro fallido" para indicar que el usuario no tiene acceso sin autenticación.
     def mostrarCesta() {
-
         if (session.cliente) {
-            //Si hay autenticación
-            
             Cliente cliente = session.cliente
-            
             def cesta = Cesta.get(cliente.id)
             cliente = Cliente.get(cliente.id)
             def listaPedidos = Pedido.list()
@@ -29,15 +26,11 @@ class CestaController {
         }
     }
 
+    //permite al cliente agregar un artículo a su cesta de compras. Verifica si el cliente y el artículo existen, si el artículo está disponible en el stock y si el precio total actualizado de la cesta no excede los 5000. Si se cumplen todas las condiciones, el artículo se agrega a la cesta y el usuario es redirigido a la lista de artículos disponibles. Si alguno de los requisitos no se cumple, el usuario es redirigido a la página de inicio de administración.
     def agregarArticulo(){
-
         Cliente cliente = session.cliente
-
         def articuloId = params.articulo
-
         def articulo = Articulo.get(articuloId)
-
-        
 
         def cesta = Cesta.get(cliente.id)
         def precioArticulo= cesta.montoTotal + articulo.precio
@@ -50,11 +43,10 @@ class CestaController {
         }else{
             redirect(controller:"administrador", action: "vistaInicio")
         }
-
     }
 
-        def eliminarArticulo(){
-
+    //permite al cliente eliminar un artículo específico de su cesta de compras. Verifica si el cliente existe, obtiene el artículo correspondiente al identificador proporcionado y luego llama al servicio cestaService para eliminar el artículo de la cesta. Redirige al usuario a la vista de la cesta actualizada para que pueda ver los cambios realizados.
+    def eliminarArticulo(){
         Cliente cliente = session.cliente
         def articuloId = params.articulo //es un string
         def articulo = Articulo.get(articuloId)
@@ -62,8 +54,5 @@ class CestaController {
         cestaService.eliminarArticuloACesta(articulo.id, cliente.id)
 
         redirect(controller: "cesta", action: "mostrarCesta")
-
-
     }
-
 }

@@ -45,7 +45,6 @@ class Pedido {
     EstadoDelPago estadoPago
 
     LocalDateTime momentoDeCreacion
-    //LocalDateTime momentoDeEntrega
 
     Cliente cliente
     Cesta cesta

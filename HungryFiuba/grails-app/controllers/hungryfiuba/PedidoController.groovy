@@ -8,22 +8,25 @@ class PedidoController {
     def pedidoService
     def cestaService
 
+    //muestra la vista de bienvenida 
     def comenzarPedido(){
-
         render(view: "/bienvenida")
     }
 
+    //muestra la vista /pedidoCreado que contiene información sobre un pedido recién creado por el cliente. Después de realizar un pedido, el cliente es redirigido a esta vista para mostrar los detalles del pedido y proporcionar información sobre el estado del pedido.
     def pedidoCreado(){
-
         Cliente cliente = session.cliente
         def pedido = Pedido.findByCliente(cliente)
         render(view: "/pedidoCreado", model: [pedido: pedido])
     }
+
+    //muestra la vista de cesta vacia
     def cestaVacia(){
         render(view: "/cestaVacia" )
     }
-    def crearPedido(){
 
+    //
+    def crearPedido(){
         def cliente = session.cliente
         cliente = Cliente.get(cliente.id)
         Cesta cesta = cliente.cesta
