@@ -25,7 +25,7 @@ class PedidoController {
         render(view: "/cestaVacia" )
     }
 
-    //
+    //permite a un cliente crear un nuevo pedido, siempre que el cliente no tenga la cuenta bloqueada, la cesta no esté vacía y no tenga ningún pedido en curso. Se realizan verificaciones adicionales de la hora actual para garantizar que los pedidos se realicen dentro del horario permitido. La función muestra vistas específicas en función de las condiciones y acciones realizadas.
     def crearPedido(){
         def cliente = session.cliente
         cliente = Cliente.get(cliente.id)
@@ -51,23 +51,21 @@ class PedidoController {
             }else{
                 render(view:"/cestaVacia")
             }
-        
         }else{
             render(view: "/cuentaBloqueada", model:[cliente: cliente])
-           
         }
     }
+
+    //muestra una vista que permite al cliente visualizar y pagar su deuda. Al obtener el cliente actualizado de la base de datos, se asegura de que cualquier cambio en el saldo del cliente se refleje adecuadamente en la vista /pagarDeuda. 
     def pagarDeuda(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
-        render(view: "/pagarDeuda", model:[cliente: cliente])
-        
+        render(view: "/pagarDeuda", model:[cliente: cliente]) 
     }
     
+    //permite al cliente cancelar un pedido pendiente de confirmación . Si el pedido está en estado de confirmación, se cancela el pedido y se vacía la cesta de compras del cliente. Después de cancelar el pedido, el cliente es redirigido a la vista /bienvenida . Si el pedido no se puede cancelar, se muestra la vista /pedidoEnCurso con información sobre el pedido en curso.
     def cancelarPedido(){
-
         Cliente cliente = session.cliente
-
         Pedido pedido = Pedido.findByCliente(cliente)
 
         if(pedido.estado == EstadoPedido.EN_CONFIRMACION){
@@ -80,6 +78,7 @@ class PedidoController {
         }
     }
 
+    //permite al cliente pagar un pedido pendiente de pago. Si el pedido no ha sido pagado, se marca como pagado y se actualiza el estado de pago del pedido. Después de realizar el pago, el cliente es redirigido a la vista /pedidoPago. Si el pedido ya ha sido pagado, se muestra la vista /pedidoYaPago para indicar que no es posible realizar otro pago para este pedido.
     def pagarPedido(){
         def cliente = session.cliente
         Pedido pedido = Pedido.findByCliente(cliente)
@@ -90,7 +89,5 @@ class PedidoController {
         }else{
             render(view:"/pedidoYaPago")
         }
-        
     }
-
 }
