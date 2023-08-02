@@ -22,8 +22,7 @@ class Administrador {
         this.califPagina = 0
         this.califEstado = 0
     }
-    /*
-    creo q no se usa
+    
     int mostrarCalificacionEstado(){
 
         if(cantidadCalificaciones != 0){
@@ -52,7 +51,7 @@ class Administrador {
         }
 
     }
-*/
+
     //devuelve true si el cliente existe
     boolean clienteExiste(String id){
         def cliente = Cliente.findByIdentificadorValor(id)
