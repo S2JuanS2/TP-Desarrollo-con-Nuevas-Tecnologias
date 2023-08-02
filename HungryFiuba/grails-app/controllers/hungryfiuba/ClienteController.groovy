@@ -22,6 +22,7 @@ class ClienteController {
         }
     }
     
+    //permite la creación de un nuevo cliente. Al completar el registro, se crea un nuevo objeto Cliente, se le asigna una nueva cesta y se establece su estado de cuenta. Luego, se guarda el cliente en la base de datos y se muestra la vista /registroExitoso para indicar que el registro se ha realizado con éxito.
     def crearCliente(){
         Cliente cliente = new Cliente(
             nombre: params.nombre,
@@ -38,6 +39,7 @@ class ClienteController {
         render(view: '/registroExitoso')
     }
     
+    //permite registrar una deuda para el cliente . El cliente debe estar autenticado para realizar esta acción. Después de registrar la deuda, se actualiza el objeto Cliente en la base de datos y se muestra la vista /deudaPaga para mostrar un mensaje de confirmación o información relevante relacionada con la deuda registrada.
     def registrarDeuda(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
@@ -45,14 +47,13 @@ class ClienteController {
         render(view: "/deudaPaga", model: [cliente: cliente])
     }
 
+    // penaliza a un cliente en función del tiempo transcurrido desde la creación de un pedido y su estado actual. Si un pedido ha estado en estado de preparación o listo para entregar durante al menos una hora, se cancela el pedido y se penaliza al cliente si su estado de pago es PENDIENTE_DE_PAGO. La penalización se realiza mediante el aumento del contador de strikes del cliente, y si el cliente alcanza los 3 strikes, su cuenta se bloquea cambiando el estado de la cuenta a BLOQUEADA. 
     def penalizarCliente() {
         def cliente = session.cliente
         Pedido pedido = Pedido.getByCliente(cliente)
         LocalDateTime ahora = LocalDateTime.now()
-
-        // Calcular la diferencia entre el LocalDateTime actual y el momento de creación en horas
         long horasTranscurridas = pedido.momentoDeCreacion.until(ahora, ChronoUnit.HOURS)
-// si no paso una hora el admin no peiude camcelar el pedio
+
         if (horasTranscurridas >= 1 && (pedido.estado == EstadoPedido.EN_PREPARACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR)) {
             pedido.estado = EstadoPedido.CANCELADO
             if(pedido.estadoPago == EstadoDelPago.PENDIENTE_DE_PAGO) {
@@ -62,11 +63,14 @@ class ClienteController {
         }
     }
 
+    //muestra al cliente una vista que contiene una lista de calificaciones pendientes. La vista /calificacionPendiente muestra información sobre estas calificaciones pendientes. 
     def calificacionesPendientes(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
         render(view:"/calificacionPendiente", model: [cliente: cliente])
     }
+
+    //muestra al cliente una vista que le permite realizar calificaciones, siempre que tenga calificaciones pendientes por realizar. Si el cliente tiene calificaciones pendientes, se muestra la vista /calificar para que pueda realizar las calificaciones correspondientes. Si no hay calificaciones pendientes, se muestra la vista /ceroCalificacionesPendientes para informar al cliente que no hay calificaciones por realizar en ese momento. 
     def calificar(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
@@ -76,9 +80,12 @@ class ClienteController {
             render(view:"/ceroCalificacionesPendientes")
         }
     }
+
+    //muestra la vista del primer aspecto a calificar
     def comenzarACalificar(){
         render(view:"/primerAspecto")
     }
+    
     //primer aspecto
     def primerApectoUnaEstrella(){
         Cliente cliente = session.cliente
