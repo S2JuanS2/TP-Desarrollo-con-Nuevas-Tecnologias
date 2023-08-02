@@ -44,18 +44,9 @@ class AdministradorController {
         render(view:"/inicio")
     }
 
-    //El admin es único, patrón singletón?
     //muestra la vista de administración. Si no existe un administrador con el nombre "admin" en la base de datos, crea uno nuevo y lo almacena. Obtiene listas de pedidos y artículos y muestra la vista  con estos datos y el objeto admin para la administración de la aplicación.
     def vistaAdministrador(){
-        Administrador admin = Administrador.findByNombre("admin")
-        if(!admin){
-            Administrador administrador = new Administrador(
-                nombre: "admin",
-                cantidadCalificaciones: 0
-            )
-            administrador.save()
-            admin = administrador
-        }
+        Administrador admin = Administrador.obtenerAdministrador()
         def pedidos = Pedido.list()
         def articulos = Articulo.list()
         render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos, admin: admin])

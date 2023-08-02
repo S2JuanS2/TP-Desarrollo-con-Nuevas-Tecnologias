@@ -2,6 +2,8 @@ package hungryfiuba
 
 class Administrador {
 
+    private static Administrador administrador
+
     String nombre
 
     int califRapidez
@@ -15,12 +17,19 @@ class Administrador {
         
     }
 
-    Administrador(String nombre, int cantidadCalificaciones) {
+    private Administrador(String nombre, int cantidadCalificaciones) {
         this.nombre = nombre
         this.cantidadCalificaciones = 0
         this.califRapidez = 0
         this.califPagina = 0
         this.califEstado = 0
+    }
+
+    static Administrador obtenerAdministrador(){
+        if(!administrador){
+            administrador = new Administrador("admin", 0);
+        }
+        return administrador
     }
     
     int mostrarCalificacionEstado(){

@@ -52,7 +52,7 @@ class Cliente {
         this.contrasena = contrasena
         this.deuda = 0
         this.strikes = 0
-        this.estadoCuenta = EstadoCuenta.NO_BLOQUEADA
+        this.estado = EstadoCuenta.NO_BLOQUEADA
     }
     
 }
