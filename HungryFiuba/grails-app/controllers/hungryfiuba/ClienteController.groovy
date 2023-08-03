@@ -69,7 +69,8 @@ class ClienteController {
         render(view:"/primerAspecto")
     }
 
-    //primer aspecto
+    //actualiza la calificación del cliente en el primer aspecto y luego redirige al cliente a la siguiente etapa de
+    // calificación
     def primerApecto(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
@@ -77,7 +78,8 @@ class ClienteController {
         render(view:"/segundoAspecto")
     }
 
-    //segundo aspecto
+    //actualiza la calificación del cliente en el segundo aspecto y luego redirige al cliente a la siguiente etapa de
+    // calificación
     def segundoApecto(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
@@ -85,7 +87,8 @@ class ClienteController {
         render(view:"/tercerAspecto")
     }
 
-    //tercer aspecto
+    //actualiza la calificación del cliente en el tercer aspecto y luego redirige al cliente a la siguiente etapa de
+    // calificación
     def tercerApecto(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
@@ -93,6 +96,8 @@ class ClienteController {
         redirect(controller: "cliente", action: "finCalificacion")
     }
 
+    //finaliza el proceso de calificación de un cliente, realiza acciones adicionales basadas en las 
+    //calificaciones proporcionadas y muestra los resultados finales y un mensaje de finalización del proceso de calificación.
     def finCalificacion(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)

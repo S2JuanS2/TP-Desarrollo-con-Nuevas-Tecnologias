@@ -27,6 +27,7 @@ class PedidoController {
         render(view: "/cestaVacia" )
     }
 
+    //
     boolean comedorAbierto(){
         LocalDateTime hora = LocalDateTime.now()
         return (hora.getHour() <= 24)
