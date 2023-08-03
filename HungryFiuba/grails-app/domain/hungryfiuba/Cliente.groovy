@@ -60,7 +60,11 @@ class Cliente {
         return this.contrasena == contrasena 
     }
 
-    //
+    //verificar si un cliente tiene al menos un pedido en una lista de pedidos dada.
+    // Si el cliente tiene al menos un pedido en la lista, la función retorna true, 
+    //lo que indica que el cliente tiene al menos un pedido. Si el cliente no tiene 
+    //ningún pedido en la lista, la función retorna false, lo que indica que el cliente 
+    //no tiene ningún pedido registrado en la lista.
     boolean tieneUnPedido(List<Pedido> listaPedidos){
         return listaPedidos.any { pedido -> pedido.cliente.equals(this) }
     }
@@ -75,36 +79,43 @@ class Cliente {
         return this.strikes == 3
     }
 
+    // incrementa la cantidad de strikes
     void sumarStrike(){
         strikes++
     }
 
+    //aumenta el numero de calificaciones pendientes
     void agregarCalificacion(){
         calificacionesPendientes++
     }
 
+    //aumenta el valor de la deuda
     void aumentarDeuda(int montoTotal){
         deuda += montoTotal
     }
 
+    //disminuye el valor de una deuda
     void disminuirDeuda(int montoTotal){
         deuda -= montoTotal
     }
 
-    //
+    //devuelve true si el numero de calificaciones pendientes es mayor a 0
     boolean tieneCalifacionesPendientes(){
         return this.calificacionesPendientes>0
     }
 
-    //
+    //devuelve true si el estado de la cuenta esta en bloqueada
     boolean tieneCuentaBloqueada(){
         return this.estado == EstadoCuenta.BLOQUEADA
     }
 
+    //bloquea la cuenta 
     void bloquearCuenta(){
         estado = EstadoCuenta.BLOQUEADA
     }
 
+    //penaliza al cliente. En el caso de que el clinete tenga menos de 3 strikes se le aumneta en uno la cantida
+    // del mismo. Caso contrario se le bloquea la cuenta 
     void penalizar(){
         if(cliente.tieneMenosDeTresStrikes()){
             cliente.sumarStrike()
