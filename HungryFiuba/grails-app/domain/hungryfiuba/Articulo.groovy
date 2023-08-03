@@ -27,4 +27,15 @@ class Articulo {
         this.descripcion = descripcion
     }
 
+    //
+    boolean hayStock(Articulo articulo){
+        return articulo.stock > 0
+    }
+
+    //
+    boolean noSuperaElLimiteDeCompra(Cesta cesta, Articulo articulo){
+        def precioArticulo= cesta.montoTotal + articulo.precio
+        return precioArticulo <= 5000
+    }
+
 }

@@ -54,5 +54,20 @@ class Cliente {
         this.strikes = 0
         this.estado = EstadoCuenta.NO_BLOQUEADA
     }
-    
+
+    //devuelve true si el cliente existe
+    boolean clienteExiste(Cliente cliente){
+        return cliente != null
+    }
+
+    //devuleve true si la contrasenia es correcta 
+    boolean clienteCodigoCorrecto(String contrasena, Cliente cliente){
+        return cliente.contrasena == contrasena 
+    }
+
+    //
+    boolean clienteExisteEnPedidos(List<Pedido> lista, Cliente cliente ){
+        def listaPedidos = lista
+        return listaPedidos.any { pedido -> pedido.cliente == cliente }
+    }
 }

@@ -75,7 +75,11 @@ class Pedido {
         }
 
         this.precioTotal = suma
+    }
 
+    //devuleve true si el pedido esta en confirmacion o listo para entregar o entregado
+    boolean pedidoEnEstadoParaCancelar(Pedido pedido){
+        return pedido.estado == EstadoPedido.EN_CONFIRMACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR || pedido.estado == EstadoPedido.ENTREGADO
     }
     
 }

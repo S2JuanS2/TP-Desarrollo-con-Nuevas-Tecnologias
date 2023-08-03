@@ -25,9 +25,9 @@ class AdministradorController {
     //proceso de autenticación de usuarios, si el cliente no existe se muestra la vista de registro fallido sino se procede a verificar si la contraseña proporcionada coincide con la contraseña almacenada para el cliente en caso de que no sea asi se muestra la vista de regristo fallido sino se almacena en la sesión del usuario el cliente, se muestra la vista /bienvenida, página de inicio o bienvenida para el cliente autenticado.
     def autenticar() {        
         Administrador admin = Administrador.findByNombre("admin")
-        if(admin.clienteExiste(params.idValor)){
-            if (admin.clienteCodigoCorrecto(params.contrasena, params.idValor)) {    
-                def cliente = Cliente.findByIdentificadorValor(params.idValor)
+        Cliente cliente = Cliente.findByIdentificadorValor(params.idValor)
+        if(cliente.clienteExiste(cliente)){
+            if (cliente.clienteCodigoCorrecto(params.contrasena,cliente)) {    
                 session.cliente = cliente
                 render(view: "/bienvenida")
             } else {
@@ -44,9 +44,18 @@ class AdministradorController {
         render(view:"/inicio")
     }
 
+    //El admin es único, patrón singletón?
     //muestra la vista de administración. Si no existe un administrador con el nombre "admin" en la base de datos, crea uno nuevo y lo almacena. Obtiene listas de pedidos y artículos y muestra la vista  con estos datos y el objeto admin para la administración de la aplicación.
     def vistaAdministrador(){
-        Administrador admin = Administrador.obtenerAdministrador()
+        Administrador admin = Administrador.findByNombre("admin")
+        if(!admin){
+            Administrador administrador = new Administrador(
+                nombre: "admin",
+                cantidadCalificaciones: 0
+            )
+            administrador.save()
+            admin = administrador
+        }
         def pedidos = Pedido.list()
         def articulos = Articulo.list()
         render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos, admin: admin])
@@ -63,8 +72,7 @@ class AdministradorController {
     def cancelarPedido(){
         Administrador admin = Administrador.findByNombre("admin")
         Pedido pedido = Pedido.get(params.pedido)
-
-        if (admin.pedidoEnEstadoParaCancelar(pedido)) {
+        if (pedido.estado == EstadoPedido.EN_CONFIRMACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR || pedido.estado == EstadoPedido.ENTREGADO) {
             if(admin.pedidoEnEstadoNoPago(pedido)) {
                 if(admin.clienteConMenosDeTresStrikes(pedido)){
                     pedido.cliente.strikes++

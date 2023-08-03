@@ -9,17 +9,15 @@ class ArticuloController {
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
         def listaPedidos = Pedido.list()
-        boolean clienteExisteEnPedidos = listaPedidos.any { pedido -> pedido.cliente == cliente }
 
         if (session.cliente) {
-            if(clienteExisteEnPedidos){
+            if(cliente.clienteExisteEnPedidos(listaPedidos, cliente)){
                 def pedido = Pedido.findByCliente(cliente)
                 render(view: "/pedidoEnCurso", model: [pedido: pedido])
             }else{
                 def articulos = Articulo.list()
                 render(view: '/mostrarArticulos', model: [articulos: articulos])
-            }
-            
+            } 
         } else {
             render(view: "/registroFallido")
         }
@@ -44,10 +42,8 @@ class ArticuloController {
     //permite al administrador aumentar el stock de un artículo específico en la base de datos. Redirige al administrador de vuelta a la vista de administración para que pueda seguir gestionando otros aspectos de la aplicación. La función garantiza que la operación de aumento del stock se realice de manera segura dentro de una transacción para mantener la integridad de los datos en la base de datos.
     def aumentarStock(){
 
-        Articulo.withTransaction{
-            
+        Articulo.withTransaction{ 
             Articulo articulo = Articulo.get(params.articulo)
-
             articulo.stock++
             articulo.save(flush: true)
         }

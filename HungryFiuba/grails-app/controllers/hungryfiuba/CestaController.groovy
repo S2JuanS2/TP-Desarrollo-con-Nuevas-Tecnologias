@@ -13,15 +13,14 @@ class CestaController {
             def cesta = Cesta.get(cliente.id)
             cliente = Cliente.get(cliente.id)
             def listaPedidos = Pedido.list()
-            boolean clienteExisteEnPedidos = listaPedidos.any { pedido -> pedido.cliente == cliente }
-            if(!clienteExisteEnPedidos){
+            
+            if(!cliente.clienteExisteEnPedidos(listaPedidos, cliente)){
                 render(view: '/mostrarCesta', model: [cesta: cesta])
             }else{
                 def pedido = Pedido.findByCliente(cliente)
                 render(view: "/pedidoEnCurso", model: [pedido: pedido])
             }
         } else {
-            // Si no hay cliente autenticado, redirigir a la página de inicio de sesión
             render(view: "/registroFallido")
         }
     }
@@ -31,15 +30,13 @@ class CestaController {
         Cliente cliente = session.cliente
         def articuloId = params.articulo
         def articulo = Articulo.get(articuloId)
-
         def cesta = Cesta.get(cliente.id)
-        def precioArticulo= cesta.montoTotal + articulo.precio
+
         if(cliente && articulo ){
-            if(articulo.stock > 0 && precioArticulo <= 5000 ){
+            if(articulo.hayStock(articulo) && articulo.noSuperaElLimiteDeCompra(cesta, articulo) ){
                 cestaService.agregarArticuloACesta(articulo.id, cliente.id)
             }
-                redirect(controller:"articulo", action: "mostrarArticulos")
-            
+            redirect(controller:"articulo", action: "mostrarArticulos")
         }else{
             redirect(controller:"administrador", action: "vistaInicio")
         }
