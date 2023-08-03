@@ -37,11 +37,11 @@ class PedidoService {
     @Transactional
     def confirmarPedido(long pedidoId){
         Pedido pedido = Pedido.get(pedidoId)
-        if(pedido.estado == EstadoPedido.EN_PREPARACION){
+        if(pedido.enPreparacion(pedido)){
             pedido.estado = EstadoPedido.LISTO_PARA_ENTREGAR
-        }else if(pedido.estado == EstadoPedido.EN_CONFIRMACION){
+        }else if(pedido.enConfirmacion(pedido)){
             pedido.estado = EstadoPedido.EN_PREPARACION
-        }else if(pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR){
+        }else if(pedido.listoParaEntregar(pedido)){
             pedido.estado = EstadoPedido.ENTREGADO
             pedido.cliente.calificacionesPendientes++
         }

@@ -82,4 +82,35 @@ class Pedido {
         return pedido.estado == EstadoPedido.EN_CONFIRMACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR || pedido.estado == EstadoPedido.ENTREGADO
     }
     
+    //
+    boolean debeSerCancelado(Pedido pedido){
+        LocalDateTime ahora = LocalDateTime.now()
+        long horasTranscurridas = pedido.momentoDeCreacion.until(ahora, ChronoUnit.HOURS)
+        return horasTranscurridas >= 1 && (pedido.estado == EstadoPedido.EN_PREPARACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR)
+    }
+
+    //
+    boolean noFueAbonado(Pedido pedido){
+       return pedido.estadoPago == EstadoDelPago.PENDIENTE_DE_PAGO
+    }
+
+    //
+    boolean enConfirmacion(Pedido pedido){
+        return pedido.estado == EstadoPedido.EN_CONFIRMACION
+    }
+
+    //
+    boolean enPreparacion(Pedido pedido){
+        return pedido.estado == EstadoPedido.EN_PREPARACION
+    }
+    
+    //
+    boolean listoParaEntregar(Pedido pedido){
+        return pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR
+    }
+
+    //
+    boolean estaPago(Pedido pedido){
+        return pedido.estadoPago != EstadoDelPago.PAGADO
+    }
 }

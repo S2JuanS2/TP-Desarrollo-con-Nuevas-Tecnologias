@@ -70,4 +70,24 @@ class Cliente {
         def listaPedidos = lista
         return listaPedidos.any { pedido -> pedido.cliente == cliente }
     }
+
+    //devuleve true si la cantidad de strikes del cliente es menor a 3 
+    boolean clienteConMenosDeTresStrikes(Cliente cliente){
+       return cliente.strikes < 3
+    }
+
+    //devuleve true si la cantidad de strikes del cliente es igual a 3 
+    boolean clienteConTresStrikes(Cliente cliente){
+        return cliente.strikes == 3
+    }
+
+    //
+    boolean califacionesPendientes(Cliente cliente){
+        return cliente.calificacionesPendientes>0
+    }
+
+    //
+    boolean cuentaBloqueada(Cliente cliente){
+        return cliente.estado != EstadoCuenta.BLOQUEADA
+    }
 }

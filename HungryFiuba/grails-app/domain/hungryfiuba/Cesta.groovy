@@ -24,5 +24,9 @@ class Cesta {
         cantidadDeArticulos++
     }
 
+    //
+    boolean tieneArticulos(Cesta cesta){
+        return cesta.cantidadDeArticulos>0
+    }
 
 }

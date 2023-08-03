@@ -62,14 +62,12 @@ class ClienteController {
     def penalizarCliente() {
         def cliente = session.cliente
         Pedido pedido = Pedido.getByCliente(cliente)
-        LocalDateTime ahora = LocalDateTime.now()
-        long horasTranscurridas = pedido.momentoDeCreacion.until(ahora, ChronoUnit.HOURS)
-
-        if (horasTranscurridas >= 1 && (pedido.estado == EstadoPedido.EN_PREPARACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR)) {
+       
+        if (pedido.debeSerCancelado(cliente)) {
             pedido.estado = EstadoPedido.CANCELADO
-            if(pedido.estadoPago == EstadoDelPago.PENDIENTE_DE_PAGO) {
-                if(cliente.strikes < 3) cliente.strikes++
-                if(clientes.strikes == 3) cliente.estadoCuenta = EstadoCuenta.BLOQUEADA
+            if(pedido.noFueAbonado(cliente)) {
+                if(cliente.clienteConMenosDeTresStrikes(cliente)) cliente.strikes++
+                if(cliente.clienteConTresStrikes(cliente)) cliente.estadoCuenta = EstadoCuenta.BLOQUEADA
             }
         }
     }
@@ -89,7 +87,7 @@ class ClienteController {
     def calificar(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
-        if(cliente.calificacionesPendientes>0){
+        if(cliente.califacionesPendientes(cliente)){
             render(view:"/calificar")
         }else{
             render(view:"/ceroCalificacionesPendientes")
