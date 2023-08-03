@@ -38,4 +38,6 @@ class Articulo {
         return precioArticulo <= 5000
     }
 
+   
+
 }

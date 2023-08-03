@@ -68,7 +68,7 @@ class ArticuloController {
 
             Articulo articulo = Articulo.get(params.articulo)
 
-            if(articulo.stock > 0){
+            if(articulo.hayStock(articulo)){
                 articulo.stock--
                 articulo.save()
             }
