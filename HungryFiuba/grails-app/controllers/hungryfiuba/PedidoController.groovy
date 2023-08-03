@@ -27,6 +27,21 @@ class PedidoController {
         render(view: "/cestaVacia" )
     }
 
+    boolean comedorAbierto(){
+        LocalDateTime hora = LocalDateTime.now()
+        return (hora.getHour() <= 24)
+    }
+
+    def consultarEstadoDelComedor(Cliente cliente){
+        if((!comedorAbierto())){
+            render(view:"/comedorCerrado")
+        }else{
+            pedidoService.guardarPedido(cliente.id)
+            session.cliente = cliente
+            redirect(action: "pedidoCreado")
+        }
+    }
+
     //permite a un cliente crear un nuevo pedido, siempre que el cliente no tenga la cuenta bloqueada, la cesta 
     //no esté vacía y no tenga ningún pedido en curso. Se realizan verificaciones adicionales de la hora actual 
     //para garantizar que los pedidos se realicen dentro del horario permitido. La función muestra vistas específicas 
@@ -37,18 +52,10 @@ class PedidoController {
         Cesta cesta = cliente.cesta
 
         def listaPedidos = Pedido.list()
-        LocalDateTime hora = LocalDateTime.now()
-
         if(!cliente.tieneCuentaBloqueada()){ 
             if(cesta.tieneArticulos()){
                 if(!cliente.tieneUnPedido(listaPedidos) ){
-                   if((hora.getHour() >= 24)){      //>= 1 despues lo ponemos jode mucho
-                       render(view:"/comedorCerrado")
-                    }else{
-                        pedidoService.guardarPedido(cliente.id)
-                        session.cliente = cliente
-                        redirect(action: "pedidoCreado")
-                    }
+                    consultarEstadoDelComedor(cliente)
                 }else{
                     def pedidoParticular = Pedido.findByCliente(cliente)
                     render(view: "/pedidoEnCurso", model:[pedido: pedidoParticular])

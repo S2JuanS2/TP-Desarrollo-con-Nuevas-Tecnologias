@@ -16,18 +16,39 @@ class ClienteService {
     //permite actualizar las calificaciones de un cliente en diferentes aspectos. También permite marcar una 
     //calificación como completada mediante la reducción del contador de calificaciones pendientes. 
     @Transactional
-    def actualizarCalificacion(long clienteId,int estrella, int aspecto){
+    def actualizarCalificacion(long clienteId,String estrella, int aspecto){
         Cliente cliente = Cliente.get(clienteId)
-        if(aspecto == 1){
-            cliente.aspectoUnoSuma = estrella  
-        }else if(aspecto == 2){
-            cliente.aspectoDosSuma = estrella
-        }else if(aspecto == 3){
-            cliente.aspectoTresSuma = estrella
+        int numero
+
+        //Casteador manual de string a entero de ultima generación.
+        switch(estrella) {
+            case "1":
+                numero = 1
+                break
+            case "2":
+                numero = 2
+                break
+            case "3":
+                numero = 3
+                break
+            case "4":
+                numero = 4
+                break
+            case "5":
+                numero = 5
+                break
         }
-        else if(aspecto == 0){
+
+        if(aspecto == 1){
+            cliente.aspectoUnoSuma = numero
+        }else if(aspecto == 2){
+            cliente.aspectoDosSuma = numero
+        }else if(aspecto == 3){
+            cliente.aspectoTresSuma = numero
+        }else if(aspecto == 0){
             cliente.calificacionesPendientes--
         }
+
     cliente.save(flush: true) 
     }
 }

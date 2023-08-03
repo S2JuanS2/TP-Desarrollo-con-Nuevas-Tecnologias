@@ -19,6 +19,8 @@ class Articulo {
     }
 
     Articulo(String nombre, BigDecimal precio, int codigo, int stock,String imagenUrl, String descripcion) {
+        //assets nombre != null
+
         this.nombre = nombre
         this.precio = precio
         this.codigo = codigo
@@ -30,16 +32,6 @@ class Articulo {
     //
     boolean hayStock(){
         return stock > 0
-    }
-
-    void aumentarStock(){
-        stock++
-    }
-
-    void reducirStock(){
-        if(hayStock()){
-            stock--
-        }
     }
 
     //

@@ -17,16 +17,6 @@ class AdministradorController {
         render(view: "/inicio")
     }
     
-    //
-    def autenticarConstrasena(Cliente cliente){
-        if (cliente.clienteCodigoCorrecto(params.contrasena)) {    
-                session.cliente = cliente
-                render(view: "/bienvenida")
-            } else {
-                render(view: "/registroFallido")
-            }
-    }
-
     //proceso de autenticación de usuarios, si el cliente no existe se muestra la vista de registro fallido 
     //sino se procede a verificar si la contraseña proporcionada coincide con la contraseña almacenada para 
     //el cliente en caso de que no sea asi se muestra la vista de regristo fallido sino se almacena en la 
@@ -35,8 +25,9 @@ class AdministradorController {
     def autenticar() {        
         Cliente cliente = Cliente.findByIdentificadorValor(params.idValor)
         
-        if(cliente){
-            autenticarConstrasena(cliente)
+        if(cliente && cliente.clienteCodigoCorrecto(params.contrasena)){
+            session.cliente = cliente
+            render(view: "/bienvenida")
         }else {
             render(view: "/registroFallido")
         } 
@@ -84,12 +75,7 @@ class AdministradorController {
 
         if (pedido.puedeSerCancelado()) {
             if(!pedido.estaPago() && pedido.listoParaEntregar()) {
-                if(cliente.tieneMenosDeTresStrikes()){
-                    cliente.sumarStrike()
-                } 
-                if(cliente.tieneTresStrikes()){
-                    cliente.bloquearCuenta()
-                } 
+                cliente.penalizar()
             }
             if(pedido.fueEntregado()){
                 cestaService.vaciarCestaDePedidoFinalizado(cliente.id)

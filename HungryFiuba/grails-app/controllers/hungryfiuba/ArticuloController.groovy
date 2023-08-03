@@ -52,11 +52,9 @@ class ArticuloController {
 
         Articulo.withTransaction{ 
             Articulo articulo = Articulo.get(params.articulo)
-            //articulo.aumentarStock() POR ALGUNA RAZÓN AL USAR ESTE METODO NO PERSISTE EN LA BASE DE DATOS
             articulo.stock++
             articulo.save(flush: true)
         }
-
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
 
@@ -67,11 +65,11 @@ class ArticuloController {
     def reducirStock(){
 
         Articulo.withTransaction{
-
             Articulo articulo = Articulo.get(params.articulo)
-            //articulo.reducirStock() POR ALGUNA RAZÓN AL USAR ESTE METODO NO PERSISTE EN LA BASE DE DATOS
-            articulo.stock--
-            articulo.save(flush: true)
+            if(articulo.hayStock()){
+                articulo.stock--
+                articulo.save(flush: true)
+            }
         }
         redirect(controller: "administrador", action: "vistaAdministrador")
     }

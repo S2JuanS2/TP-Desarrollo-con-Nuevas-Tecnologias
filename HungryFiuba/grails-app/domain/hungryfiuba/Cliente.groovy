@@ -61,8 +61,7 @@ class Cliente {
     }
 
     //
-    boolean tieneUnPedido(List<Pedido> lista ){
-        def listaPedidos = lista
+    boolean tieneUnPedido(List<Pedido> listaPedidos){
         return listaPedidos.any { pedido -> pedido.cliente.equals(this) }
     }
 
@@ -104,5 +103,14 @@ class Cliente {
 
     void bloquearCuenta(){
         estado = EstadoCuenta.BLOQUEADA
+    }
+
+    void penalizar(){
+        if(cliente.tieneMenosDeTresStrikes()){
+            cliente.sumarStrike()
+        } 
+        if(cliente.tieneTresStrikes()){
+            cliente.bloquearCuenta()
+        } 
     }
 }

@@ -70,102 +70,33 @@ class ClienteController {
     }
 
     //primer aspecto
-    def primerApectoUnaEstrella(){
+    def primerApecto(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,1, 1)
+        clienteService.actualizarCalificacion(cliente.id,params.calif, 1)
         render(view:"/segundoAspecto")
     }
-    def primerApectoDosEstrellas(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,2, 1)
-        render(view:"/segundoAspecto")
-    }
-    def primerApectoTresEstrellas(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,3, 1)
-        render(view:"/segundoAspecto")
-    }
-    def primerApectoCuatroEstrellas(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,4, 1)
-        render(view:"/segundoAspecto")
-    }
-    def primerApectoCincoEstrellas(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,5, 1)
-        render(view:"/segundoAspecto")
-    }
+
     //segundo aspecto
-    def segundoApectoUnaEstrella(){
+    def segundoApecto(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,1, 2)
+        clienteService.actualizarCalificacion(cliente.id,params.calif, 2)
         render(view:"/tercerAspecto")
     }
-    def segundoApectoDosEstrellas(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,2, 2)
-        render(view:"/tercerAspecto")
-    }
-    def segundoApectoTresEstrellas(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,3, 2)
-        render(view:"/tercerAspecto")
-    }
-    def segundoApectoCuatroEstrellas(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,4, 2)
-        render(view:"/tercerAspecto")
-    }
-    def segundoApectoCincoEstrellas(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,5, 2)
-        render(view:"/tercerAspecto")
-    }
+
     //tercer aspecto
-    def tercerApectoUnaEstrella(){
+    def tercerApecto(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,1, 3)
+        clienteService.actualizarCalificacion(cliente.id,params.calif, 3)
         redirect(controller: "cliente", action: "finCalificacion")
     }
-    def tercerApectoDosEstrellas(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,2, 3)
-        redirect(controller: "cliente", action: "finCalificacion")
-    }
-    def tercerApectoTresEstrellas(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,3, 3)
-        redirect(controller: "cliente", action: "finCalificacion")
-    }
-    def tercerApectoCuatroEstrellas(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,4, 3)
-        redirect(controller: "cliente", action: "finCalificacion")
-    }
-    def tercerApectoCincoEstrellas(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,5, 3)
-        redirect(controller: "cliente", action: "finCalificacion")
-    }
+
     def finCalificacion(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
-        clienteService.actualizarCalificacion(cliente.id,0, 0)
+        clienteService.actualizarCalificacion(cliente.id,null, 0)
         administradorService.calificaciones(cliente.id)
         render(view:"/resultados")
     }
