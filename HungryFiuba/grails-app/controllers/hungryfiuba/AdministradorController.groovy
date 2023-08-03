@@ -3,9 +3,7 @@ package hungryfiuba
 import java.time.LocalDateTime
 
 class AdministradorController {
-
     static scaffold = Administrador
-
     def pedidoService
     def cestaService
     
@@ -24,6 +22,15 @@ class AdministradorController {
         render(view: 'mostrarArticulos')
     }
 
+    //
+    def autenticarConstrasena(Cliente cliente){
+        if (cliente.clienteCodigoCorrecto(params.contrasena)) {    
+                session.cliente = cliente
+                render(view: "/bienvenida")
+            } else {
+                render(view: "/registroFallido")
+            }
+    }
     //proceso de autenticación de usuarios, si el cliente no existe se muestra la vista de registro fallido 
     //sino se procede a verificar si la contraseña proporcionada coincide con la contraseña almacenada para 
     //el cliente en caso de que no sea asi se muestra la vista de regristo fallido sino se almacena en la 
@@ -32,16 +39,12 @@ class AdministradorController {
     def autenticar() {        
         Administrador admin = Administrador.findByNombre("admin")
         Cliente cliente = Cliente.findByIdentificadorValor(params.idValor)
-        if(cliente.clienteExiste(cliente)){
-            if (cliente.clienteCodigoCorrecto(params.contrasena,cliente)) {    
-                session.cliente = cliente
-                render(view: "/bienvenida")
-            } else {
-                render(view: "/registroFallido")
-            }
-        } else {
+        
+        if(cliente){
+            autenticarConstrasena(cliente)
+        }else {
             render(view: "/registroFallido")
-            } 
+        } 
     }
 
     //cierra la sesión del cliente y lo redirije a la página de inicio de sesión, el estado de la sesión se elimina.
@@ -50,19 +53,23 @@ class AdministradorController {
         render(view:"/inicio")
     }
 
-    //El admin es único, patrón singletón?
+    // 
+    def crearAdmin(Administrador admin){
+        Administrador administrador = new Administrador(
+            nombre: "admin",
+            cantidadCalificaciones: 0
+        )
+        administrador.save()
+        admin = administrador
+    }
+
     //muestra la vista de administración. Si no existe un administrador con el nombre "admin" en la base de datos,
     // crea uno nuevo y lo almacena. Obtiene listas de pedidos y artículos y muestra la vista  con estos datos y 
     //el objeto admin para la administración de la aplicación.
     def vistaAdministrador(){
         Administrador admin = Administrador.findByNombre("admin")
         if(!admin){
-            Administrador administrador = new Administrador(
-                nombre: "admin",
-                cantidadCalificaciones: 0
-            )
-            administrador.save()
-            admin = administrador
+            crearAdmin(admin)
         }
         def pedidos = Pedido.list()
         def articulos = Articulo.list()

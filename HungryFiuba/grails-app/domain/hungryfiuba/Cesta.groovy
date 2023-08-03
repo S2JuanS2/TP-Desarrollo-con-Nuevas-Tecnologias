@@ -25,8 +25,8 @@ class Cesta {
     }
 
     //
-    boolean tieneArticulos(Cesta cesta){
-        return cesta.cantidadDeArticulos>0
+    boolean tieneArticulos( ){
+        return this.cantidadDeArticulos>0
     }
 
 }

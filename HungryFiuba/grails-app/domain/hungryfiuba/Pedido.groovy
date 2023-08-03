@@ -95,22 +95,22 @@ class Pedido {
     }
 
     //
-    boolean enConfirmacion(Pedido pedido){
-        return pedido.estado == EstadoPedido.EN_CONFIRMACION
+    boolean enConfirmacion(){
+        return this.estado == EstadoPedido.EN_CONFIRMACION
     }
 
     //
-    boolean enPreparacion(Pedido pedido){
-        return pedido.estado == EstadoPedido.EN_PREPARACION
+    boolean enPreparacion(){
+        return this.estado == EstadoPedido.EN_PREPARACION
     }
     
     //
-    boolean listoParaEntregar(Pedido pedido){
-        return pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR
+    boolean listoParaEntregar(){
+        return this.estado == EstadoPedido.LISTO_PARA_ENTREGAR
     }
 
     //
-    boolean estaPago(Pedido pedido){
-        return pedido.estadoPago != EstadoDelPago.PAGADO
+    boolean estaPago(){
+        return this.estadoPago != EstadoDelPago.PAGADO
     }
 }

@@ -55,39 +55,34 @@ class Cliente {
         this.estado = EstadoCuenta.NO_BLOQUEADA
     }
 
-    //devuelve true si el cliente existe
-    boolean clienteExiste(Cliente cliente){
-        return cliente != null
-    }
-
     //devuleve true si la contrasenia es correcta 
-    boolean clienteCodigoCorrecto(String contrasena, Cliente cliente){
-        return cliente.contrasena == contrasena 
+    boolean clienteCodigoCorrecto(String contrasena){
+        return this.contrasena == contrasena 
     }
 
     //
-    boolean clienteExisteEnPedidos(List<Pedido> lista, Cliente cliente ){
+    boolean clienteExisteEnPedidos(List<Pedido> lista ){
         def listaPedidos = lista
-        return listaPedidos.any { pedido -> pedido.cliente == cliente }
+        return listaPedidos.any { pedido -> pedido.cliente.equals(this) }
     }
 
     //devuleve true si la cantidad de strikes del cliente es menor a 3 
-    boolean clienteConMenosDeTresStrikes(Cliente cliente){
-       return cliente.strikes < 3
+    boolean clienteConMenosDeTresStrikes(){
+       return this.strikes < 3
     }
 
-    //devuleve true si la cantidad de strikes del cliente es igual a 3 
-    boolean clienteConTresStrikes(Cliente cliente){
-        return cliente.strikes == 3
-    }
-
-    //
-    boolean califacionesPendientes(Cliente cliente){
-        return cliente.calificacionesPendientes>0
+    //devuleve true si la cantidad de strikes del this es igual a 3 
+    boolean clienteConTresStrikes(){
+        return this.strikes == 3
     }
 
     //
-    boolean cuentaBloqueada(Cliente cliente){
-        return cliente.estado != EstadoCuenta.BLOQUEADA
+    boolean califacionesPendientes(){
+        return this.calificacionesPendientes>0
+    }
+
+    //
+    boolean cuentaBloqueada(){
+        return this.estado != EstadoCuenta.BLOQUEADA
     }
 }

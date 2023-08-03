@@ -39,9 +39,9 @@ class PedidoController {
         boolean clienteExisteEnPedidos = listaPedidos.any { pedido -> pedido.cliente == cliente }
         LocalDateTime hora = LocalDateTime.now()
 
-        if(cliente.cuentaBloqueada(cliente)){ 
-            if(cesta.tieneArticulos(cesta)){
-                if(!cliente.clienteExisteEnPedidos(listaPedidos, cliente) ){
+        if(cliente.cuentaBloqueada()){ 
+            if(cesta.tieneArticulos()){
+                if(!cliente.clienteExisteEnPedidos(listaPedidos) ){
                    if((hora.getHour() >= 24)){      //>= 1 despues lo ponemos jode mucho
                        render(view:"/comedorCerrado")
                     }else{
@@ -77,7 +77,7 @@ class PedidoController {
         Cliente cliente = session.cliente
         Pedido pedido = Pedido.findByCliente(cliente)
 
-        if(pedido.enConfirmacion(pedido)){
+        if(pedido.enConfirmacion()){
             pedidoService.eliminarPedido(cliente.id, pedido.id)
             cestaService.vaciarCesta(cliente.id)
             session.cliente = Cliente.get(cliente.id)
@@ -94,7 +94,7 @@ class PedidoController {
     def pagarPedido(){
         def cliente = session.cliente
         Pedido pedido = Pedido.findByCliente(cliente)
-        if(pedido.estaPago(pedido)){
+        if(pedido.estaPago()){
             pedidoService.pagarPedido(pedido.id)
             session.cliente = Cliente.get(cliente.id)
             render(view: "/pedidoPago")

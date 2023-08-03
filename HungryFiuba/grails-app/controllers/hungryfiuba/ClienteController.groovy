@@ -66,8 +66,8 @@ class ClienteController {
         if (pedido.debeSerCancelado(cliente)) {
             pedido.estado = EstadoPedido.CANCELADO
             if(pedido.noFueAbonado(cliente)) {
-                if(cliente.clienteConMenosDeTresStrikes(cliente)) cliente.strikes++
-                if(cliente.clienteConTresStrikes(cliente)) cliente.estadoCuenta = EstadoCuenta.BLOQUEADA
+                if(cliente.clienteConMenosDeTresStrikes()) cliente.strikes++
+                if(cliente.clienteConTresStrikes()) cliente.estadoCuenta = EstadoCuenta.BLOQUEADA
             }
         }
     }
@@ -87,7 +87,7 @@ class ClienteController {
     def calificar(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
-        if(cliente.califacionesPendientes(cliente)){
+        if(cliente.califacionesPendientes()){
             render(view:"/calificar")
         }else{
             render(view:"/ceroCalificacionesPendientes")

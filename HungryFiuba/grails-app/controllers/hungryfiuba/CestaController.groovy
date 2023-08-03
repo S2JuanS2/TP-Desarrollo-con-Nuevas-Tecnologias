@@ -17,7 +17,7 @@ class CestaController {
             cliente = Cliente.get(cliente.id)
             def listaPedidos = Pedido.list()
 
-            if(!cliente.clienteExisteEnPedidos(listaPedidos, cliente)){
+            if(!cliente.clienteExisteEnPedidos(listaPedidos)){
                 render(view: '/mostrarCesta', model: [cesta: cesta])
             }else{
                 def pedido = Pedido.findByCliente(cliente)
@@ -40,7 +40,7 @@ class CestaController {
         def cesta = Cesta.get(cliente.id)
 
         if(cliente && articulo ){
-            if(articulo.hayStock(articulo) && articulo.noSuperaElLimiteDeCompra(cesta, articulo) ){
+            if(articulo.hayStock() && articulo.noSuperaElLimiteDeCompra(cesta) ){
                 cestaService.agregarArticuloACesta(articulo.id, cliente.id)
             }
             redirect(controller:"articulo", action: "mostrarArticulos")
