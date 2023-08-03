@@ -4,7 +4,8 @@ import grails.gorm.transactions.Transactional
 
 class PedidoService {
 
-    //guarda el pedido realizado por un cliente en la base de datos. Al realizar esta acción, se actualiza la deuda del cliente con el costo del pedido y se crea un registro del pedido en la base de datos. 
+    //guarda el pedido realizado por un cliente en la base de datos. Al realizar esta acción, se actualiza
+    // la deuda del cliente con el costo del pedido y se crea un registro del pedido en la base de datos. 
     @Transactional 
     def guardarPedido(long clienteId) {
         Cliente cliente = Cliente.get(clienteId)
@@ -30,7 +31,9 @@ class PedidoService {
         pedido.delete(flush: true)
     }
 
-    //actualiza el estado de un pedido en la base de datos, lo que refleja la confirmación y el progreso del pedido desde la preparación hasta la entrega. Además, se incrementa el contador de calificaciones pendientes del cliente cuando el pedido alcanza el estado de "ENTREGADO".
+    //actualiza el estado de un pedido en la base de datos, lo que refleja la confirmación y el progreso del
+    // pedido desde la preparación hasta la entrega. Además, se incrementa el contador de calificaciones 
+    //pendientes del cliente cuando el pedido alcanza el estado de "ENTREGADO".
     @Transactional
     def confirmarPedido(long pedidoId){
         Pedido pedido = Pedido.get(pedidoId)
@@ -45,7 +48,8 @@ class PedidoService {
         pedido.save(flush: true)
     }
 
-    //ealiza el pago de un pedido en la base de datos. Actualiza el saldo de la deuda del cliente y marca el estado de pago del pedido como "PAGADO". 
+    //ealiza el pago de un pedido en la base de datos. Actualiza el saldo de la deuda del cliente y marca el 
+    //estado de pago del pedido como "PAGADO". 
     @Transactional
     def pagarPedido(long pedidoId){
         Pedido pedido = Pedido.get(pedidoId)

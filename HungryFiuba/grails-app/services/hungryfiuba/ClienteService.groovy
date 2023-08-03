@@ -13,7 +13,8 @@ class ClienteService {
         cliente.save(flush: true)
     }
 
-    //permite actualizar las calificaciones de un cliente en diferentes aspectos. También permite marcar una calificación como completada mediante la reducción del contador de calificaciones pendientes. 
+    //permite actualizar las calificaciones de un cliente en diferentes aspectos. También permite marcar una 
+    //calificación como completada mediante la reducción del contador de calificaciones pendientes. 
     @Transactional
     def actualizarCalificacion(long clienteId,int estrella, int aspecto){
         Cliente cliente = Cliente.get(clienteId)

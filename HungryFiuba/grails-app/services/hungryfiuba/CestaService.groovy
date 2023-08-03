@@ -48,7 +48,9 @@ class CestaService {
         cliente.cesta.save(flush: true)
     }
 
-    //permite al cliente vaciar completamente su cesta de compras después de que se haya finalizado un pedido. Al realizar esta acción, se actualiza la cantidad de artículos y el monto total de la cesta del cliente en la base de datos. 
+    //permite al cliente vaciar completamente su cesta de compras después de que se haya finalizado un pedido.
+    // Al realizar esta acción, se actualiza la cantidad de artículos y el monto total de la cesta del cliente 
+    //en la base de datos. 
     @Transactional
     def vaciarCestaDePedidoFinalizado(long clienteId){
         Cliente cliente = Cliente.get(clienteId)
