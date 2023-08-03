@@ -77,30 +77,35 @@ class Pedido {
         this.precioTotal = suma
     }
 
-    //
+    //devuelve true si el estado esta en confirmacion 
     boolean enConfirmacion(){
         return this.estado == EstadoPedido.EN_CONFIRMACION
     }
 
-    //
+    //devuelve true si el estado esta en preparacion
     boolean enPreparacion(){
         return this.estado == EstadoPedido.EN_PREPARACION
     }
-    
-    //
+
+    //devuelve true si el estado esta en listo para entregar
     boolean listoParaEntregar(){
         return this.estado == EstadoPedido.LISTO_PARA_ENTREGAR
     }
 
+    //devuelve true si el estado esta en entregado
     boolean fueEntregado(){
         return estado == EstadoPedido.ENTREGADO
     }
 
-    //
+    //devuelve true si el estado esta en pagado
     boolean estaPago(){
        return estadoPago == EstadoDelPago.PAGADO
     }
     
+    //actualiza el estado de un pedido en función de su estado actual.
+    // Si el pedido está "En Confirmación", lo cambia a "En Preparación". 
+    //Si el pedido está "En Preparación", lo cambia a "Listo para Entregar". 
+    //Y si el pedido está "Listo para Entregar", lo cambia a "Entregado".
     void confirmar(){
         if(enConfirmacion()){
             estado = EstadoPedido.EN_PREPARACION
@@ -116,7 +121,11 @@ class Pedido {
         return (enConfirmacion() || listoParaEntregar() || fueEntregado())
     }
     
-    //
+    // verifica si ha transcurrido al menos una hora desde la creación del pedido 
+    //y si el pedido está en los estados de "En Preparación" o "Listo para Entregar".
+    // Si ambas condiciones se cumplen, la función retorna true, lo que indica que el 
+    //pedido debe ser cancelado. Si alguna de las condiciones no se cumple, la función 
+    //retorna false, lo que indica que el pedido no necesita ser cancelado en este momento.
     boolean debeSerCancelado(){
         LocalDateTime ahora = LocalDateTime.now()
         long horasTranscurridas = momentoDeCreacion.until(ahora, ChronoUnit.HOURS)
