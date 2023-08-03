@@ -27,12 +27,15 @@ class PedidoController {
         render(view: "/cestaVacia" )
     }
 
-    //
+    //determina el horario de apertura del comedor
     boolean comedorAbierto(){
         LocalDateTime hora = LocalDateTime.now()
         return (hora.getHour() <= 24)
     }
 
+    //consulta si el comedor está abierto o cerrado. Si el comedor está cerrado, se muestra un mensaje de comedor cerrado. 
+    //Si el comedor está abierto, se crea un nuevo pedido para el cliente y se establece el cliente como sesión del usuario,
+    // y luego se redirige al cliente a la acción pedidoCreado.
     def consultarEstadoDelComedor(Cliente cliente){
         if((!comedorAbierto())){
             render(view:"/comedorCerrado")
