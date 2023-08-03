@@ -12,19 +12,7 @@ class ClienteController {
     def register(){
         render(view: "/register")
     }
-    
-    //muestra la cesta de compras del cliente si el cliente está autenticado. 
-    //Si no hay un cliente autenticado, redirige al usuario a la vista de "registro fallido"
-    //para indicar que el usuario no tiene acceso a la cesta sin autenticación. 
-    //La función permite al cliente ver los artículos agregados a la cesta y la información relacionada con la compra.
-    def mostrarCesta() {
-        if (session.cliente) {
-            render(view: "/mostrarCesta")
-        } else {
-            render(view: "/registroFallido")
-        }
-    }
-    
+       
     //permite la creación de un nuevo cliente. Al completar el registro, se crea un nuevo objeto Cliente,
     // se le asigna una nueva cesta y se establece su estado de cuenta. Luego, se guarda el cliente en la
     // base de datos y se muestra la vista /registroExitoso para indicar que el registro se ha realizado con éxito.
@@ -54,24 +42,6 @@ class ClienteController {
         render(view: "/deudaPaga", model: [cliente: cliente])
     }
 
-    // penaliza a un cliente en función del tiempo transcurrido desde la creación de un pedido y su estado actual. 
-    //Si un pedido ha estado en estado de preparación o listo para entregar durante al menos una hora, se cancela 
-    //el pedido y se penaliza al cliente si su estado de pago es PENDIENTE_DE_PAGO. La penalización se realiza mediante 
-    //el aumento del contador de strikes del cliente, y si el cliente alcanza los 3 strikes, su cuenta se bloquea cambiando 
-    //el estado de la cuenta a BLOQUEADA. 
-    def penalizarCliente() {
-        def cliente = session.cliente
-        Pedido pedido = Pedido.getByCliente(cliente)
-       
-        if (pedido.debeSerCancelado(cliente)) {
-            pedido.estado = EstadoPedido.CANCELADO
-            if(pedido.noFueAbonado(cliente)) {
-                if(cliente.clienteConMenosDeTresStrikes()) cliente.strikes++
-                if(cliente.clienteConTresStrikes()) cliente.estadoCuenta = EstadoCuenta.BLOQUEADA
-            }
-        }
-    }
-
     //muestra al cliente una vista que contiene una lista de calificaciones pendientes. La vista /calificacionPendiente
     // muestra información sobre estas calificaciones pendientes. 
     def calificacionesPendientes(){
@@ -87,7 +57,7 @@ class ClienteController {
     def calificar(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
-        if(cliente.califacionesPendientes()){
+        if(cliente.tieneCalifacionesPendientes()){
             render(view:"/calificar")
         }else{
             render(view:"/ceroCalificacionesPendientes")

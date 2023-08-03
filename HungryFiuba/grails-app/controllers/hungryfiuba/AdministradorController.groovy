@@ -16,12 +16,7 @@ class AdministradorController {
         }
         render(view: "/inicio")
     }
-
-    //muestra la vista con los articulos que maneja el administrador
-    def mostrarArticulos() {
-        render(view: 'mostrarArticulos')
-    }
-
+    
     //
     def autenticarConstrasena(Cliente cliente){
         if (cliente.clienteCodigoCorrecto(params.contrasena)) {    
@@ -31,13 +26,13 @@ class AdministradorController {
                 render(view: "/registroFallido")
             }
     }
+
     //proceso de autenticación de usuarios, si el cliente no existe se muestra la vista de registro fallido 
     //sino se procede a verificar si la contraseña proporcionada coincide con la contraseña almacenada para 
     //el cliente en caso de que no sea asi se muestra la vista de regristo fallido sino se almacena en la 
     //sesión del usuario el cliente, se muestra la vista /bienvenida, página de inicio o bienvenida para el
     // cliente autenticado.
     def autenticar() {        
-        Administrador admin = Administrador.findByNombre("admin")
         Cliente cliente = Cliente.findByIdentificadorValor(params.idValor)
         
         if(cliente){
@@ -53,27 +48,18 @@ class AdministradorController {
         render(view:"/inicio")
     }
 
-    // 
-    def crearAdmin(Administrador admin){
-        Administrador administrador = new Administrador(
-            nombre: "admin",
-            cantidadCalificaciones: 0
-        )
-        administrador.save()
-        admin = administrador
-    }
-
     //muestra la vista de administración. Si no existe un administrador con el nombre "admin" en la base de datos,
     // crea uno nuevo y lo almacena. Obtiene listas de pedidos y artículos y muestra la vista  con estos datos y 
     //el objeto admin para la administración de la aplicación.
     def vistaAdministrador(){
-        Administrador admin = Administrador.findByNombre("admin")
-        if(!admin){
-            crearAdmin(admin)
+        Administrador admin = Administrador.obtenerAdministrador()
+        if(admin){
+            def pedidos = Pedido.list()
+            def articulos = Articulo.list()
+            render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos, admin: admin])
+        }else{
+            //exception
         }
-        def pedidos = Pedido.list()
-        def articulos = Articulo.list()
-        render(view: "/administracion", model: [pedidos: pedidos, articulos: articulos, admin: admin])
     }
 
     //confirmar un pedido específico en la aplicación de administración. Encuentra el objeto Administrador,
@@ -81,29 +67,34 @@ class AdministradorController {
     //administrador a la vista de administración para que pueda seguir gestionando otros aspectos de la aplicación.
     def confirmarPedido(){
         Pedido pedido = Pedido.get(params.pedido)
-        pedidoService.confirmarPedido(pedido.id)
-        redirect(controller: "administrador", action: "vistaAdministrador")
+        if(pedido){
+            pedidoService.confirmarPedido(pedido.id)
+            redirect(controller: "administrador", action: "vistaAdministrador")
+        }else{
+            //exception
+        }
     }
  
     //permite cancelar un pedido específico en la aplicación de administración. Realiza acciones como actualizar
     // el estado del cliente y vaciar la cesta, dependiendo del estado y el estado de pago del pedido. Elimina el
     // pedido y redirige al administrador a la vista de administración.
     def cancelarPedido(){
-        Administrador admin = Administrador.findByNombre("admin")
         Pedido pedido = Pedido.get(params.pedido)
-        if (pedido.estado == EstadoPedido.EN_CONFIRMACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR || pedido.estado == EstadoPedido.ENTREGADO) {
-            if(admin.pedidoEnEstadoNoPago(pedido)) {
-                if(admin.clienteConMenosDeTresStrikes(pedido)){
-                    pedido.cliente.strikes++
+        Cliente cliente = pedido.cliente
+
+        if (pedido.puedeSerCancelado()) {
+            if(!pedido.estaPago() && pedido.listoParaEntregar()) {
+                if(cliente.tieneMenosDeTresStrikes()){
+                    cliente.sumarStrike()
                 } 
-                if(admin.clienteConTresStrikes(pedido)){
-                    pedido.cliente.estado = EstadoCuenta.BLOQUEADA
+                if(cliente.tieneTresStrikes()){
+                    cliente.bloquearCuenta()
                 } 
             }
-            if(admin.pedidoEnEstadoParaVaciarCesta(pedido)){
-                cestaService.vaciarCestaDePedidoFinalizado(pedido.cliente.id)
+            if(pedido.fueEntregado()){
+                cestaService.vaciarCestaDePedidoFinalizado(cliente.id)
             }else{
-                cestaService.vaciarCesta(pedido.cliente.id)
+                cestaService.vaciarCesta(cliente.id)
             }
             pedidoService.eliminarPedido(pedido.id)
         }

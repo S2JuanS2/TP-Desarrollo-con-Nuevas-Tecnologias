@@ -61,23 +61,8 @@ class Administrador {
 
     }
 
-    //devuleve true si el pedido no se encunetra pago y si listo para entregar
-    boolean pedidoEnEstadoNoPago(Pedido pedido){
-        return pedido.estadoPago == EstadoDelPago.PENDIENTE_DE_PAGO && pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR
+    void aumentarCantidadCalificaciones(){
+        cantidadCalificaciones++
     }
-
-    //devuleve true si la cantidad de strikes del cliente es menor a 3 
-    boolean clienteConMenosDeTresStrikes(Pedido pedido){
-       return pedido.cliente.strikes < 3
-    }
-
-    //devuleve true si la cantidad de strikes del cliente es igual a 3 
-    boolean clienteConTresStrikes(Pedido pedido){
-        return pedido.cliente.strikes == 3
-    }
-
-    //devuleve true si el pedido se encuentra entregado
-    boolean pedidoEnEstadoParaVaciarCesta(Pedido pedido){
-        return pedido.estado == EstadoPedido.ENTREGADO
-    }
+    
 }

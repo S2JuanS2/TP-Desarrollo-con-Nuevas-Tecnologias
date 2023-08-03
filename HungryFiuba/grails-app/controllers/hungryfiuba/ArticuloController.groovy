@@ -11,15 +11,16 @@ class ArticuloController {
     def mostrarArticulos(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
+        Cesta cesta = cliente.cesta
         def listaPedidos = Pedido.list()
 
         if (session.cliente) {
-            if(cliente.clienteExisteEnPedidos(listaPedidos)){
+            if(cliente.tieneUnPedido(listaPedidos)){
                 def pedido = Pedido.findByCliente(cliente)
                 render(view: "/pedidoEnCurso", model: [pedido: pedido])
             }else{
                 def articulos = Articulo.list()
-                render(view: '/mostrarArticulos', model: [articulos: articulos])
+                render(view: '/mostrarArticulos', model: [articulos: articulos, cesta: cesta])
             } 
         } else {
             render(view: "/registroFallido")
@@ -51,6 +52,7 @@ class ArticuloController {
 
         Articulo.withTransaction{ 
             Articulo articulo = Articulo.get(params.articulo)
+            //articulo.aumentarStock() POR ALGUNA RAZÓN AL USAR ESTE METODO NO PERSISTE EN LA BASE DE DATOS
             articulo.stock++
             articulo.save(flush: true)
         }
@@ -67,11 +69,9 @@ class ArticuloController {
         Articulo.withTransaction{
 
             Articulo articulo = Articulo.get(params.articulo)
-
-            if(articulo.hayStock(articulo)){
-                articulo.stock--
-                articulo.save()
-            }
+            //articulo.reducirStock() POR ALGUNA RAZÓN AL USAR ESTE METODO NO PERSISTE EN LA BASE DE DATOS
+            articulo.stock--
+            articulo.save(flush: true)
         }
         redirect(controller: "administrador", action: "vistaAdministrador")
     }

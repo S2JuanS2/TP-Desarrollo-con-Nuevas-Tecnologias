@@ -29,13 +29,23 @@ class Articulo {
 
     //
     boolean hayStock(){
-        return this.stock > 0
+        return stock > 0
+    }
+
+    void aumentarStock(){
+        stock++
+    }
+
+    void reducirStock(){
+        if(hayStock()){
+            stock--
+        }
     }
 
     //
-    boolean noSuperaElLimiteDeCompra(Cesta cesta){
-        def precioArticulo= cesta.montoTotal + this.precio
-        return precioArticulo <= 5000
+    boolean superaElLimiteDeCompra(Cesta cesta){
+        def precioTotal = cesta.montoTotal + this.precio
+        return (precioTotal > 5000)
     }
 
    

@@ -61,28 +61,48 @@ class Cliente {
     }
 
     //
-    boolean clienteExisteEnPedidos(List<Pedido> lista ){
+    boolean tieneUnPedido(List<Pedido> lista ){
         def listaPedidos = lista
         return listaPedidos.any { pedido -> pedido.cliente.equals(this) }
     }
 
     //devuleve true si la cantidad de strikes del cliente es menor a 3 
-    boolean clienteConMenosDeTresStrikes(){
+    boolean tieneMenosDeTresStrikes(){
        return this.strikes < 3
     }
 
     //devuleve true si la cantidad de strikes del this es igual a 3 
-    boolean clienteConTresStrikes(){
+    boolean tieneTresStrikes(){
         return this.strikes == 3
     }
 
+    void sumarStrike(){
+        strikes++
+    }
+
+    void agregarCalificacion(){
+        calificacionesPendientes++
+    }
+
+    void aumentarDeuda(int montoTotal){
+        deuda += montoTotal
+    }
+
+    void disminuirDeuda(int montoTotal){
+        deuda -= montoTotal
+    }
+
     //
-    boolean califacionesPendientes(){
+    boolean tieneCalifacionesPendientes(){
         return this.calificacionesPendientes>0
     }
 
     //
-    boolean cuentaBloqueada(){
-        return this.estado != EstadoCuenta.BLOQUEADA
+    boolean tieneCuentaBloqueada(){
+        return this.estado == EstadoCuenta.BLOQUEADA
+    }
+
+    void bloquearCuenta(){
+        estado = EstadoCuenta.BLOQUEADA
     }
 }

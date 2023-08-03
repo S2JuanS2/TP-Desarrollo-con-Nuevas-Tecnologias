@@ -11,17 +11,18 @@ class CestaController {
     //Si no hay cliente autenticado, redirige al usuario a la vista de "registro fallido" para indicar que el usuario 
     //no tiene acceso sin autenticación.
     def mostrarCesta() {
+
         if (session.cliente) {
             Cliente cliente = session.cliente
-            def cesta = Cesta.get(cliente.id)
             cliente = Cliente.get(cliente.id)
+            def cesta = Cesta.get(cliente.id)
             def listaPedidos = Pedido.list()
 
-            if(!cliente.clienteExisteEnPedidos(listaPedidos)){
-                render(view: '/mostrarCesta', model: [cesta: cesta])
-            }else{
+            if(cliente.tieneUnPedido(listaPedidos)){
                 def pedido = Pedido.findByCliente(cliente)
                 render(view: "/pedidoEnCurso", model: [pedido: pedido])
+            }else{
+                render(view: '/mostrarCesta', model: [cesta: cesta])
             }
         } else {
             render(view: "/registroFallido")
@@ -39,8 +40,8 @@ class CestaController {
         def articulo = Articulo.get(articuloId)
         def cesta = Cesta.get(cliente.id)
 
-        if(cliente && articulo ){
-            if(articulo.hayStock() && articulo.noSuperaElLimiteDeCompra(cesta) ){
+        if(cliente && articulo){
+            if(articulo.hayStock() && !articulo.superaElLimiteDeCompra(cesta) ){
                 cestaService.agregarArticuloACesta(articulo.id, cliente.id)
             }
             redirect(controller:"articulo", action: "mostrarArticulos")
@@ -55,7 +56,7 @@ class CestaController {
     //ver los cambios realizados.
     def eliminarArticulo(){
         Cliente cliente = session.cliente
-        def articuloId = params.articulo //es un string
+        def articuloId = params.articulo
         def articulo = Articulo.get(articuloId)
 
         cestaService.eliminarArticuloACesta(articulo.id, cliente.id)

@@ -77,23 +77,6 @@ class Pedido {
         this.precioTotal = suma
     }
 
-    //devuleve true si el pedido esta en confirmacion o listo para entregar o entregado
-    boolean pedidoEnEstadoParaCancelar(Pedido pedido){
-        return pedido.estado == EstadoPedido.EN_CONFIRMACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR || pedido.estado == EstadoPedido.ENTREGADO
-    }
-    
-    //
-    boolean debeSerCancelado(Pedido pedido){
-        LocalDateTime ahora = LocalDateTime.now()
-        long horasTranscurridas = pedido.momentoDeCreacion.until(ahora, ChronoUnit.HOURS)
-        return horasTranscurridas >= 1 && (pedido.estado == EstadoPedido.EN_PREPARACION || pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR)
-    }
-
-    //
-    boolean noFueAbonado(Pedido pedido){
-       return pedido.estadoPago == EstadoDelPago.PENDIENTE_DE_PAGO
-    }
-
     //
     boolean enConfirmacion(){
         return this.estado == EstadoPedido.EN_CONFIRMACION
@@ -109,8 +92,37 @@ class Pedido {
         return this.estado == EstadoPedido.LISTO_PARA_ENTREGAR
     }
 
+    boolean fueEntregado(){
+        return estado == EstadoPedido.ENTREGADO
+    }
+
     //
     boolean estaPago(){
-        return this.estadoPago != EstadoDelPago.PAGADO
+       return estadoPago == EstadoDelPago.PAGADO
     }
+    
+    void confirmar(){
+        if(enConfirmacion()){
+            estado = EstadoPedido.EN_PREPARACION
+        }else if(enPreparacion()){
+            estado = EstadoPedido.LISTO_PARA_ENTREGAR
+        }else if(listoParaEntregar()){
+            estado = EstadoPedido.ENTREGADO
+        }
+    } 
+
+    //devuleve true si el pedido esta en confirmacion o listo para entregar o entregado
+    boolean puedeSerCancelado(){
+        return (enConfirmacion() || listoParaEntregar() || fueEntregado())
+    }
+    
+    //
+    boolean debeSerCancelado(){
+        LocalDateTime ahora = LocalDateTime.now()
+        long horasTranscurridas = momentoDeCreacion.until(ahora, ChronoUnit.HOURS)
+        return (horasTranscurridas >= 1 && (enPreparacion() || listoParaEntregar()))
+    }
+
+
+    
 }

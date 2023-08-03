@@ -20,13 +20,21 @@ class Cesta {
         montoTotal = 0
     }
 
-    def incrementarCantidadDeArticulos(){
+    void incrementarCantidadDeArticulos(){
         cantidadDeArticulos++
+    }
+
+    void disminuirCantidadDeArticulos(){
+        cantidadDeArticulos--
     }
 
     //
     boolean tieneArticulos( ){
         return this.cantidadDeArticulos>0
+    }
+
+    void actualizarMontoTotal(BigDecimal precio){
+        montoTotal += precio
     }
 
 }

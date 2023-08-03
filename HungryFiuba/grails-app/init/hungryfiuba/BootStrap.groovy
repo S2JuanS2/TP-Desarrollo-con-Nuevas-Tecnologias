@@ -25,9 +25,7 @@ class BootStrap {
         articulo.save()
         articulo = new Articulo("Chaleco antibalas", 300000, 54, 2,"https://www.police.com.ec/wp-content/uploads/2020/04/mopc_002f_2020_1.jpg", "Por si acaso")
         articulo.save()
-        articulo = new Articulo("Avión", 2500000, 103, 0,"https://www.pngmart.com/files/21/Aeroplane-Flying-PNG-Photo.png", "Vuela alto")
-        articulo.save()
-
+        
     }
     def destroy = {
     }
