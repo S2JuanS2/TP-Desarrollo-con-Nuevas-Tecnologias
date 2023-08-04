@@ -12,14 +12,13 @@ class CestaController {
     //no tiene acceso sin autenticación.
     def mostrarCesta() {
         Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        
-        def listaPedidos = Pedido.list()
-
         if (!cliente) {
             render(view: "/registroFallido")
             return
         }
+        cliente = Cliente.get(cliente.id)
+        
+        def listaPedidos = Pedido.list()
 
         if(cliente.tieneUnPedido(listaPedidos)){
             def pedido = Pedido.findByCliente(cliente)
@@ -39,11 +38,12 @@ class CestaController {
         Cliente cliente = session.cliente
         def articuloId = params.articulo
         def articulo = Articulo.get(articuloId)
-        def cesta = Cesta.get(cliente.id)
         
         if(!cliente || !articulo){
             throw new ObjetoNoExisteException("El cliente/articulo no existe")
         }
+        def cesta = Cesta.get(cliente.id)
+        
         if(articulo.hayStock() && !articulo.superaElLimiteDeCompra(cesta)){
             cestaService.agregarArticuloACesta(articulo.id, cliente.id)
         }

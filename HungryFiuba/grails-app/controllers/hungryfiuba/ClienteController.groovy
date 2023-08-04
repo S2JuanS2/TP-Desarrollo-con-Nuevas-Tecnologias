@@ -32,10 +32,10 @@ class ClienteController {
     // /deudaPaga para mostrar un mensaje de confirmación o información relevante relacionada con la deuda registrada.
     def registrarDeuda(){
         Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
+        cliente = Cliente.get(cliente.id)
         clienteService.actualizarDeuda(cliente.id)
         render(view: "/deudaPaga", model: [cliente: cliente])
     }
@@ -44,6 +44,9 @@ class ClienteController {
     //base de datos, se asegura de que cualquier cambio en el saldo del cliente se refleje adecuadamente en la vista /pagarDeuda
     def pagarDeuda(){
         Cliente cliente = session.cliente
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
         cliente = Cliente.get(cliente.id)
         render(view: "/pagarDeuda", model:[cliente: cliente])
     }
@@ -52,11 +55,11 @@ class ClienteController {
     // muestra información sobre estas calificaciones pendientes. 
     def calificacionesPendientes(){
         Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
+        cliente = Cliente.get(cliente.id)
+
         render(view:"/calificacionPendiente", model: [cliente: cliente])
     }
 
@@ -66,11 +69,11 @@ class ClienteController {
     // para informar al cliente que no hay calificaciones por realizar en ese momento. 
     def calificar(){
         Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
+        cliente = Cliente.get(cliente.id)
+
         if(cliente.tieneCalifacionesPendientes()){
             render(view:"/calificar")
         }else{
@@ -87,11 +90,11 @@ class ClienteController {
     // calificación
     def primerApecto(){
         Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
+        cliente = Cliente.get(cliente.id)
+
         clienteService.actualizarCalificacion(cliente.id,params.calif, 1)
         render(view:"/segundoAspecto")
     }
@@ -100,11 +103,11 @@ class ClienteController {
     // calificación
     def segundoApecto(){
         Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
+        cliente = Cliente.get(cliente.id)
+
         clienteService.actualizarCalificacion(cliente.id,params.calif, 2)
         render(view:"/tercerAspecto")
     }
@@ -113,11 +116,11 @@ class ClienteController {
     // calificación
     def tercerApecto(){
         Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
+        cliente = Cliente.get(cliente.id)
+
         clienteService.actualizarCalificacion(cliente.id,params.calif, 3)
         redirect(controller: "cliente", action: "finCalificacion")
     }
@@ -126,11 +129,11 @@ class ClienteController {
     //calificaciones proporcionadas y muestra los resultados finales y un mensaje de finalización del proceso de calificación.
     def finCalificacion(){
         Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
+        cliente = Cliente.get(cliente.id)
+        
         clienteService.actualizarCalificacion(cliente.id,null, 0)
         administradorService.calificaciones(cliente.id)
         render(view:"/resultados")

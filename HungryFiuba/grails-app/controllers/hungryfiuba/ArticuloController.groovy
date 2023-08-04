@@ -26,14 +26,14 @@ class ArticuloController {
     //autenticado en la sesión, muestra una vista de "registro fallido" para indicar que el usuario no tiene acceso sin autenticación.
     def mostrarArticulos(){
         Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        
-        def listaPedidos = Pedido.list()
-        
         if(!cliente){
             render(view: "/registroFallido")
             return
         }
+        cliente = Cliente.get(cliente.id)
+        
+        def listaPedidos = Pedido.list()
+        
         if(cliente.tieneCuentaBloqueada()){
             render(view: "/cuentaBloqueada", model:[cliente: cliente])
             return
