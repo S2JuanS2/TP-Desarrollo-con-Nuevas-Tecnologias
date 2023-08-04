@@ -71,6 +71,7 @@ class Cliente {
         this.aspectoTresSuma = 0
         this.calificacionesPendientes = 0
         this.estado = EstadoCuenta.NO_BLOQUEADA
+        this.cesta = new Cesta()
     }
 
     //devuleve true si la contrasenia es correcta 
