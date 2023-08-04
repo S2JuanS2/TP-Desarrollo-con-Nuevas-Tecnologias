@@ -18,32 +18,17 @@ class PedidoController {
     //y proporcionar información sobre el estado del pedido.
     def pedidoCreado(){
         Cliente cliente = session.cliente
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
         def pedido = Pedido.findByCliente(cliente)
         render(view: "/pedidoCreado", model: [pedido: pedido])
-    }
-
-    //muestra la vista de cesta vacia
-    def cestaVacia(){
-        render(view: "/cestaVacia" )
     }
 
     //determina el horario de apertura del comedor
     boolean comedorAbierto(){
         LocalDateTime hora = LocalDateTime.now()
-        return (hora.getHour() <= 24)
-    }
-
-    //consulta si el comedor está abierto o cerrado. Si el comedor está cerrado, se muestra un mensaje de comedor cerrado. 
-    //Si el comedor está abierto, se crea un nuevo pedido para el cliente y se establece el cliente como sesión del usuario,
-    // y luego se redirige al cliente a la acción pedidoCreado.
-    def consultarEstadoDelComedor(Cliente cliente){
-        if((!comedorAbierto())){
-            render(view:"/comedorCerrado")
-        }else{
-            pedidoService.guardarPedido(cliente.id)
-            session.cliente = cliente
-            redirect(action: "pedidoCreado")
-        }
+        return (hora.getHour() >= Administrador.HORA_APERTURA_COMEDOR && hora.getHour() < Administrador.HORA_CLAUSURA_COMEDOR)
     }
 
     //permite a un cliente crear un nuevo pedido, siempre que el cliente no tenga la cuenta bloqueada, la cesta 
@@ -52,46 +37,49 @@ class PedidoController {
     //en función de las condiciones y acciones realizadas.
     def crearPedido(){
         def cliente = session.cliente
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
+
         cliente = Cliente.get(cliente.id)
         Cesta cesta = cliente.cesta
-
         def listaPedidos = Pedido.list()
-        if(!cliente.tieneCuentaBloqueada()){ 
-            if(cesta.tieneArticulos()){
-                if(!cliente.tieneUnPedido(listaPedidos) ){
-                    consultarEstadoDelComedor(cliente)
-                }else{
-                    def pedidoParticular = Pedido.findByCliente(cliente)
-                    render(view: "/pedidoEnCurso", model:[pedido: pedidoParticular])
-                }
-            }else{
-                render(view:"/cestaVacia")
-            }
-        }else{
+
+        if(cliente.tieneCuentaBloqueada()){
             render(view: "/cuentaBloqueada", model:[cliente: cliente])
+            return
+        }
+        if(!comedorAbierto()){
+            render(view:"/comedorCerrado")
+            return
+        }
+        if(!cesta.tieneArticulos()){
+            render(view:"/cestaVacia")
+            return
+        }
+        if(!cliente.tieneUnPedido(listaPedidos) ){
+            pedidoService.guardarPedido(cliente.id)
+            redirect(action: "pedidoCreado")
+        }else{
+            def pedidoParticular = Pedido.findByCliente(cliente)
+            render(view: "/pedidoEnCurso", model:[pedido: pedidoParticular])
         }
     }
-
-    //muestra una vista que permite al cliente visualizar y pagar su deuda. Al obtener el cliente actualizado de la base 
-    //de datos, se asegura de que cualquier cambio en el saldo del cliente se refleje adecuadamente en la vista /pagarDeuda. 
-    def pagarDeuda(){
-        Cliente cliente = session.cliente
-        cliente = Cliente.get(cliente.id)
-        render(view: "/pagarDeuda", model:[cliente: cliente]) 
-    }
     
-    //permite al cliente cancelar un pedido pendiente de confirmación . Si el pedido está en estado de confirmación,
+    //permite al cliente cancelar un pedido pendiente de confirmación. Si el pedido está en estado de confirmación,
     // se cancela el pedido y se vacía la cesta de compras del cliente. Después de cancelar el pedido, el cliente es
     // redirigido a la vista /bienvenida . Si el pedido no se puede cancelar, se muestra la vista /pedidoEnCurso con
     // información sobre el pedido en curso.
     def cancelarPedido(){
         Cliente cliente = session.cliente
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
         Pedido pedido = Pedido.findByCliente(cliente)
 
         if(pedido.enConfirmacion()){
             pedidoService.eliminarPedido(cliente.id, pedido.id)
             cestaService.vaciarCesta(cliente.id)
-            session.cliente = Cliente.get(cliente.id)
             render(view: "/bienvenida")
         }else{
             render(view: "/pedidoEnCurso", model:[pedido: pedido])
@@ -104,10 +92,13 @@ class PedidoController {
     //realizar otro pago para este pedido.
     def pagarPedido(){
         def cliente = session.cliente
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
         Pedido pedido = Pedido.findByCliente(cliente)
+
         if(!pedido.estaPago()){
             pedidoService.pagarPedido(pedido.id)
-            session.cliente = Cliente.get(cliente.id)
             render(view: "/pedidoPago")
         }else{
             render(view:"/pedidoYaPago")

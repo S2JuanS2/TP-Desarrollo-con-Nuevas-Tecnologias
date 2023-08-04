@@ -4,8 +4,10 @@ class Administrador {
 
     private static Administrador administrador
 
-    String nombre
+    static final int HORA_APERTURA_COMEDOR = 8
+    static final int HORA_CLAUSURA_COMEDOR = 22
 
+    String nombre
     int califRapidez
     int califEstado
     int califPagina
@@ -14,10 +16,20 @@ class Administrador {
     static constraints = {
 
         nombre nullable: false
+        califEstado nullable: false, min: 0
+        califRapidez nullable: false, min: 0
+        califPagina nullable: false, min: 0
+        cantidadCalificaciones nullable: false, min: 0
         
     }
 
     private Administrador(String nombre, int cantidadCalificaciones) {
+        if(cantidadCalificaciones < 0){
+            throw new IllegalArgumentException("La cantidad de calificaciones no puede ser menor a cero")
+        }
+        if(nombre == null){
+            throw new NullPointerException("El nombre no puede estar vacío")
+        }
         this.nombre = nombre
         this.cantidadCalificaciones = 0
         this.califRapidez = 0
@@ -37,6 +49,9 @@ class Administrador {
     //calcula y retorna la calificación promedio para el estado si hay calificaciones
     // registradas. Si no hay calificaciones, simplemente retorna la calificación del estado existente.
     int mostrarCalificacionEstado(){
+        if(cantidadCalificaciones < 0){
+            throw new ArithmeticException("cantidad de calificaciones no puede ser menor a cero")
+        }
         if(cantidadCalificaciones != 0){
             return ((califEstado/cantidadCalificaciones))
         }else{
@@ -47,6 +62,9 @@ class Administrador {
     //calcula y retorna la calificación promedio para la rapidez si hay calificaciones
     // registradas. Si no hay calificaciones, simplemente retorna la calificación de rapidez existente.
     int mostrarCalificacionRapidez(){
+        if(cantidadCalificaciones < 0){
+            throw new ArithmeticException("cantidad de calificaciones no puede ser menor a cero")
+        }
         if(cantidadCalificaciones != 0){
             return ((califRapidez/cantidadCalificaciones))
         }else{
@@ -57,6 +75,9 @@ class Administrador {
     //calcula y retorna la calificación promedio para la página si hay calificaciones
     // registradas. Si no hay calificaciones, simplemente retorna la calificación de la página existente.
     int mostrarCalificacionPagina(){
+        if(cantidadCalificaciones < 0){
+            throw new ArithmeticException("cantidad de calificaciones no puede ser menor a cero")
+        }
         if(cantidadCalificaciones != 0){
             return ((califPagina/cantidadCalificaciones))
         }else{

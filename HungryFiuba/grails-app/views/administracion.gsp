@@ -81,7 +81,7 @@
 
         <div class="agregar-articulos">
             <h2>Agregar Articulos</h2>
-            <g:form id="hola" controller="Articulo" action="agregarArticuloAdministrador" method="POST">
+            <g:form id="hola" controller="Articulo" action="crearArticulo" method="POST">
 
                 <input type="text" name="nombre" pattern="[A-Za-z ]+" required minlength="1" maxlength="50" placeholder="Nombre de articulo" required/>
                 <input type="number" name="stock" placeholder="Cantidad de stock" required/>

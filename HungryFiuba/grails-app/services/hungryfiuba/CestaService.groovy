@@ -5,7 +5,9 @@ import grails.gorm.transactions.Transactional
 
 class CestaService {
 
-    // permite al cliente agregar un artículo a su cesta de compras. Al realizar esta acción, se actualiza la cantidad de artículos, el monto total y el stock disponible en la base de datos. 
+    // permite al cliente agregar un artículo a su cesta de compras. 
+    //Al realizar esta acción, se actualiza la cantidad de artículos, 
+    //el monto total y el stock disponible en la base de datos. 
     @Transactional
     def agregarArticuloACesta(long articuloId, long clienteId) {
         Cliente cliente = Cliente.get(clienteId)
@@ -18,7 +20,9 @@ class CestaService {
         cliente.cesta.save(flush: true)
     }
 
-    //permite al cliente eliminar un artículo de su cesta de compras. Al realizar esta acción, se actualiza la cantidad de artículos, el monto total y el stock disponible en la base de datos.
+    //permite al cliente eliminar un artículo de su cesta de compras. 
+    //Al realizar esta acción, se actualiza la cantidad de artículos, 
+    //el monto total y el stock disponible en la base de datos.
     @Transactional
     def eliminarArticuloACesta(long articuloId, long clienteId) {
         Cliente cliente = Cliente.get(clienteId)
@@ -31,7 +35,9 @@ class CestaService {
         cliente.cesta.save(flush: true)
     }
 
-    //permite al cliente vaciar completamente su cesta de compras. Al realizar esta acción, se actualiza la cantidad de artículos, el monto total, el stock disponible y la deuda del cliente en la base de datos. 
+    //permite al cliente vaciar completamente su cesta de compras. 
+    //Al realizar esta acción, se actualiza la cantidad de artículos, 
+    //el monto total, el stock disponible y la deuda del cliente en la base de datos. 
     @Transactional
     def vaciarCesta(long clienteId){
         Cliente cliente = Cliente.get(clienteId)

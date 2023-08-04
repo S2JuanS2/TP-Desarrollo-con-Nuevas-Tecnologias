@@ -4,18 +4,18 @@ class UrlMappings {
 
     static mappings = {
 
-        "/register"(controller: 'cliente', action: 'register')
-        "/inicio"(controller: 'administrador', action: 'vistaInicio')
+        "/register"(controller: 'session', action: 'register')
+        "/inicio"(controller: 'session', action: 'vistaInicio')
         "/mostrarArticulos"(controller: 'articulo', action: 'mostrarArticulos')
         "/registroExitoso"(view:'registroExitoso')
-        "/administrador/registroFallido"(view:'registroFallido')
+        "/session/registroFallido"(view:'registroFallido')
         "/mostrarCesta"(controller: "cesta", action: "mostrarCesta")
         "/pedidoCreado"(controller:"articulo", action:"mostrarArticulos")
         "/pedido/cestaVacia"(view:"cestaVacia")
         "/pedido/pedidoEnCurso"(view:"pedidoEnCurso")
         "/pedido/comedorCerrado"(view:"comedorCerrado")
         "/pedido/cuentaBloqueada"(view:"cuentaBloqueada")
-        "/pagarDeuda"(controller:"pedido",action:"pagarDeuda")
+        "/pagarDeuda"(controller:"cliente",action:"pagarDeuda")
 
         "/$controller/$action?/$id?(.$format)?"{
             constraints {

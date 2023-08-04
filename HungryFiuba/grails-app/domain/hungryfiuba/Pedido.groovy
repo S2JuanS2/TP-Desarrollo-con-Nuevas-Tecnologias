@@ -55,12 +55,18 @@ class Pedido {
 
         cliente nullable: false
         cesta nullable: false
-        precioTotal nullable: false
+        precioTotal nullable: false, min: 0.00
         momentoDeCreacion nullable: false
         estadoPago nullable: false
     }
 
     Pedido(Cliente cliente,Cesta cesta) {
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
+        if(!cesta){
+            throw new ObjetoNoExisteException("La cesta no existe")
+        }
         this.cliente = cliente
         this.cesta = cesta
         this.estado = EstadoPedido.EN_CONFIRMACION
@@ -131,7 +137,4 @@ class Pedido {
         long horasTranscurridas = momentoDeCreacion.until(ahora, ChronoUnit.HOURS)
         return (horasTranscurridas >= 1 && (enPreparacion() || listoParaEntregar()))
     }
-
-
-    
 }

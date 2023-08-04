@@ -1,4 +1,5 @@
 package hungryfiuba
+
 enum EstadoCuenta{
     BLOQUEADA("Bloqueada"),
     NO_BLOQUEADA("Desbloqueada")
@@ -13,6 +14,7 @@ enum EstadoCuenta{
         return descripcion
     }
 }
+
 class Cliente {
 
     String nombre
@@ -40,11 +42,23 @@ class Cliente {
         identificadorValor nullable: false, blank: false
         contrasena nullable: false, blank: false
         estado nullable: false
-        deuda nullable: true
+        deuda nullable: false
+        strikes nullable: false, min: 0
+        aspectoUnoSuma nullable: false
+        aspectoDosSuma nullable: false
+        aspectoTresSuma nullable: false
+        calificacionesPendientes nullable: false
     }
 
 
     Cliente(String nombre,String apellido,String identificadorTipo,String identificadorValor,String contrasena) {
+
+        assert nombre != null
+        assert apellido != null
+        assert identificadorTipo != null
+        assert identificadorValor != null
+        assert contrasena != null
+
         this.nombre = nombre
         this.apellido = apellido
         this.identificadorTipo = identificadorTipo
@@ -52,11 +66,15 @@ class Cliente {
         this.contrasena = contrasena
         this.deuda = 0
         this.strikes = 0
+        this.aspectoUnoSuma = 0
+        this.aspectoDosSuma = 0
+        this.aspectoTresSuma = 0
+        this.calificacionesPendientes = 0
         this.estado = EstadoCuenta.NO_BLOQUEADA
     }
 
     //devuleve true si la contrasenia es correcta 
-    boolean clienteCodigoCorrecto(String contrasena){
+    boolean contrasenaCorrecta(String contrasena){
         return this.contrasena == contrasena 
     }
 
@@ -101,12 +119,12 @@ class Cliente {
 
     //devuelve true si el numero de calificaciones pendientes es mayor a 0
     boolean tieneCalifacionesPendientes(){
-        return this.calificacionesPendientes>0
+        return calificacionesPendientes>0
     }
 
     //devuelve true si el estado de la cuenta esta en bloqueada
     boolean tieneCuentaBloqueada(){
-        return this.estado == EstadoCuenta.BLOQUEADA
+        return estado == EstadoCuenta.BLOQUEADA
     }
 
     //bloquea la cuenta 
@@ -117,11 +135,11 @@ class Cliente {
     //penaliza al cliente. En el caso de que el clinete tenga menos de 3 strikes se le aumneta en uno la cantida
     // del mismo. Caso contrario se le bloquea la cuenta 
     void penalizar(){
-        if(cliente.tieneMenosDeTresStrikes()){
-            cliente.sumarStrike()
+        if(tieneMenosDeTresStrikes()){
+            sumarStrike()
         } 
-        if(cliente.tieneTresStrikes()){
-            cliente.bloquearCuenta()
+        if(tieneTresStrikes()){
+            bloquearCuenta()
         } 
     }
 }

@@ -11,21 +11,22 @@ class CestaController {
     //Si no hay cliente autenticado, redirige al usuario a la vista de "registro fallido" para indicar que el usuario 
     //no tiene acceso sin autenticación.
     def mostrarCesta() {
+        Cliente cliente = session.cliente
+        cliente = Cliente.get(cliente.id)
+        
+        def listaPedidos = Pedido.list()
 
-        if (session.cliente) {
-            Cliente cliente = session.cliente
-            cliente = Cliente.get(cliente.id)
-            def cesta = Cesta.get(cliente.id)
-            def listaPedidos = Pedido.list()
-
-            if(cliente.tieneUnPedido(listaPedidos)){
-                def pedido = Pedido.findByCliente(cliente)
-                render(view: "/pedidoEnCurso", model: [pedido: pedido])
-            }else{
-                render(view: '/mostrarCesta', model: [cesta: cesta])
-            }
-        } else {
+        if (!cliente) {
             render(view: "/registroFallido")
+            return
+        }
+
+        if(cliente.tieneUnPedido(listaPedidos)){
+            def pedido = Pedido.findByCliente(cliente)
+            render(view: "/pedidoEnCurso", model: [pedido: pedido])
+        }else{
+            def cesta = Cesta.get(cliente.id)
+            render(view: '/mostrarCesta', model: [cesta: cesta])
         }
     }
 
@@ -40,14 +41,13 @@ class CestaController {
         def articulo = Articulo.get(articuloId)
         def cesta = Cesta.get(cliente.id)
         
-        if(cliente && articulo){
-            if(articulo.hayStock() && !articulo.superaElLimiteDeCompra(cesta)){
-                cestaService.agregarArticuloACesta(articulo.id, cliente.id)
-            }
-            redirect(controller:"articulo", action: "mostrarArticulos")
-        }else{
-            redirect(controller:"administrador", action: "vistaInicio")
+        if(!cliente || !articulo){
+            throw new ObjetoNoExisteException("El cliente/articulo no existe")
         }
+        if(articulo.hayStock() && !articulo.superaElLimiteDeCompra(cesta)){
+            cestaService.agregarArticuloACesta(articulo.id, cliente.id)
+        }
+        redirect(controller:"articulo", action: "mostrarArticulos")
     }
 
     //permite al cliente eliminar un artículo específico de su cesta de compras. Verifica si el cliente existe,
@@ -58,6 +58,12 @@ class CestaController {
         Cliente cliente = session.cliente
         def articuloId = params.articulo
         def articulo = Articulo.get(articuloId)
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
+        if(!articulo){
+            throw new ObjetoNoExisteException("El articulo no existe")
+        }
 
         cestaService.eliminarArticuloACesta(articulo.id, cliente.id)
 

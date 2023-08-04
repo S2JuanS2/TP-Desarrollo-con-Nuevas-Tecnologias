@@ -29,7 +29,7 @@
                 </div>
             </g:each>
         </div>
-        <g:link controller="Administrador" action="logout">Cerrar sesión</g:link>
+        <g:link controller="Session" action="logout">Cerrar sesión</g:link>
         <a href="/inicio">Volver</a>
     </div>
 

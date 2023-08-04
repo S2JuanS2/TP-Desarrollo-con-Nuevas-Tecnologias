@@ -7,12 +7,7 @@ class ClienteController {
     def administradorService
 
     static scaffold = Cliente
-    
-    //muestra la vista de registro
-    def register(){
-        render(view: "/register")
-    }
-       
+          
     //permite la creación de un nuevo cliente. Al completar el registro, se crea un nuevo objeto Cliente,
     // se le asigna una nueva cesta y se establece su estado de cuenta. Luego, se guarda el cliente en la
     // base de datos y se muestra la vista /registroExitoso para indicar que el registro se ha realizado con éxito.
@@ -38,8 +33,19 @@ class ClienteController {
     def registrarDeuda(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
         clienteService.actualizarDeuda(cliente.id)
         render(view: "/deudaPaga", model: [cliente: cliente])
+    }
+
+    //muestra una vista que permite al cliente visualizar y pagar su deuda. Al obtener el cliente actualizado de la
+    //base de datos, se asegura de que cualquier cambio en el saldo del cliente se refleje adecuadamente en la vista /pagarDeuda
+    def pagarDeuda(){
+        Cliente cliente = session.cliente
+        cliente = Cliente.get(cliente.id)
+        render(view: "/pagarDeuda", model:[cliente: cliente])
     }
 
     //muestra al cliente una vista que contiene una lista de calificaciones pendientes. La vista /calificacionPendiente
@@ -47,6 +53,10 @@ class ClienteController {
     def calificacionesPendientes(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
+
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
         render(view:"/calificacionPendiente", model: [cliente: cliente])
     }
 
@@ -57,6 +67,10 @@ class ClienteController {
     def calificar(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
+
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
         if(cliente.tieneCalifacionesPendientes()){
             render(view:"/calificar")
         }else{
@@ -74,6 +88,10 @@ class ClienteController {
     def primerApecto(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
+
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
         clienteService.actualizarCalificacion(cliente.id,params.calif, 1)
         render(view:"/segundoAspecto")
     }
@@ -83,6 +101,10 @@ class ClienteController {
     def segundoApecto(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
+
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
         clienteService.actualizarCalificacion(cliente.id,params.calif, 2)
         render(view:"/tercerAspecto")
     }
@@ -92,6 +114,10 @@ class ClienteController {
     def tercerApecto(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
+
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
         clienteService.actualizarCalificacion(cliente.id,params.calif, 3)
         redirect(controller: "cliente", action: "finCalificacion")
     }
@@ -101,6 +127,10 @@ class ClienteController {
     def finCalificacion(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
+        
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
         clienteService.actualizarCalificacion(cliente.id,null, 0)
         administradorService.calificaciones(cliente.id)
         render(view:"/resultados")

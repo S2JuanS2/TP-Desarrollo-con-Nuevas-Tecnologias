@@ -17,13 +17,9 @@ class BootStrap {
         articulo.save()
         articulo = new Articulo("Dientes Mogul", 720, 9, 5,"https://statics.dinoonline.com.ar/imagenes/large_460x460/2182476_l.jpg", "150g")
         articulo.save()
-        articulo = new Articulo("Blue Label", 95000, 72, 1,"https://www.whiskyloversmendoza.com/60-large_default/johnnie-walker-blue-label.jpg", "De Johnnie Walker")
-        articulo.save()
         articulo = new Articulo("Tostado", 430, 8, 30,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVgIooDqHXtnnGiMyZ5K0Yz_zyU-BN5EklbA&usqp=CAU", "J&Q")
         articulo.save()
         articulo = new Articulo("Café", 80, 6, 500,"https://img.freepik.com/vector-gratis/taza-realista-cafe-negro-elaborado-ilustracion-vector-platillo_1284-66002.jpg?w=2000", "J&Q")
-        articulo.save()
-        articulo = new Articulo("Chaleco antibalas", 300000, 54, 2,"https://www.police.com.ec/wp-content/uploads/2020/04/mopc_002f_2020_1.jpg", "Por si acaso")
         articulo.save()
         
     }

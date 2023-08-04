@@ -18,7 +18,7 @@
             </div>
             <div class="login-form">
             <h2>Registro</h2>
-            <g:form id="formulario" action="crearCliente" method="POST">
+            <g:form controller="cliente" action="crearCliente" method="POST">
 
                 <label>Nombre:</label>
                 <input type="text" name="nombre" id="nombre" pattern="[A-Za-z ]+" required minlength="2" maxlength="40" /> <br/>

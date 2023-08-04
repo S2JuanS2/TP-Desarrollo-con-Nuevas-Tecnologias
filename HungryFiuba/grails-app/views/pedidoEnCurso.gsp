@@ -20,7 +20,7 @@
         <g:link class="cancelarPedido" controller="pedido" action="cancelarPedido" href="#" onclick="return confirmarOperacion(this)" data-pedido="${pedido.estado}">Cancelar pedido</g:link>
         <g:link controller="pedido" action="pagarPedido">Pagar pedido</g:link>
         <a href="/inicio">Volver a Inicio</a>
-        <g:link controller="Administrador" action="logout">Cerrar sesión</g:link>
+        <g:link controller="Session" action="logout">Cerrar sesión</g:link>
     </div>
     <footer>
         <p>HungryFIUBA</p>

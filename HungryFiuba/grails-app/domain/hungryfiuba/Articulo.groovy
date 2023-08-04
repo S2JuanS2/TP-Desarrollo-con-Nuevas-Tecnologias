@@ -13,13 +13,20 @@ class Articulo {
 
         nombre nullable: false
         precio nullable: false, min: 0.0
-        codigo nullable: false
-        stock nullable: false
+        codigo nullable: false, min: 0
+        stock nullable: false, min: 0
         imagenUrl nullable: false
+        descripcion nullable: false
     }
 
     Articulo(String nombre, BigDecimal precio, int codigo, int stock,String imagenUrl, String descripcion) {
-        //assets nombre != null
+        
+        assert precio > 0
+        assert codigo > 0
+        assert stock >= 0
+        assert nombre != null
+        assert imagenUrl != null
+        assert descripcion != null
 
         this.nombre = nombre
         this.precio = precio
@@ -41,7 +48,7 @@ class Articulo {
     //límite de compra y, por lo tanto, es posible agregar el artículo a la cesta sin exceder el límite.
     boolean superaElLimiteDeCompra(Cesta cesta){
         def precioTotal = cesta.montoTotal + this.precio
-        return (precioTotal > 5000)
+        return (precioTotal > Cesta.MAXIMO_COMPRA)
     }
 
    

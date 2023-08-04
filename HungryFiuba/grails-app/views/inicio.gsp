@@ -16,7 +16,7 @@
     </div>
     <div class="login-form">
       <h2>Iniciar Sesión</h2>
-      <g:form action="autenticar" method="POST">
+      <g:form controller="session" action="autenticar" method="POST">
         <label for="identificador">Identificador:</label>
         <select id="identificador" name="identificador" required>
           <option value="padron">Padrón</option>

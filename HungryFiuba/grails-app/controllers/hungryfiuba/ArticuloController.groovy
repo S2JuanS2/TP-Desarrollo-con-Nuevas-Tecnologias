@@ -4,6 +4,22 @@ class ArticuloController {
 
     static scaffold = Articulo
 
+    //permite al administrador agregar un nuevo artículo a la base de datos. Redirige al administrador de
+    // vuelta a la vista de administración para que pueda seguir gestionando otros aspectos de la aplicación.
+    def crearArticulo(){
+
+        Articulo articulo = new Articulo(
+            nombre: params.nombre,
+            precio: params.precio,
+            codigo: params.codigo,
+            stock: params.stock,
+            imagenUrl: params.imagenUrl,
+            descripcion: params.descripcion
+        ).save()
+
+        redirect(controller: "administrador", action: "vistaAdministrador")
+    }   
+
     //muestra la lista de artículos disponibles. Si un cliente está autenticado en la sesión y tiene un 
     //pedido en curso, muestra la información del pedido actual. Si no hay ningún pedido en curso para el 
     //cliente autenticado, muestra la lista de artículos disponibles para su compra. Si no hay ningún cliente
@@ -11,38 +27,26 @@ class ArticuloController {
     def mostrarArticulos(){
         Cliente cliente = session.cliente
         cliente = Cliente.get(cliente.id)
-        Cesta cesta = cliente.cesta
+        
         def listaPedidos = Pedido.list()
-
-        if (session.cliente) {
-            if(cliente.tieneUnPedido(listaPedidos)){
-                def pedido = Pedido.findByCliente(cliente)
-                render(view: "/pedidoEnCurso", model: [pedido: pedido])
-            }else{
-                def articulos = Articulo.list()
-                render(view: '/mostrarArticulos', model: [articulos: articulos, cesta: cesta])
-            } 
-        } else {
+        
+        if(!cliente){
             render(view: "/registroFallido")
+            return
         }
+        if(cliente.tieneCuentaBloqueada()){
+            render(view: "/cuentaBloqueada", model:[cliente: cliente])
+            return
+        }
+        if(cliente.tieneUnPedido(listaPedidos)){
+            def pedido = Pedido.findByCliente(cliente)
+            render(view: "/pedidoEnCurso", model: [pedido: pedido])
+        }else{
+            Cesta cesta = cliente.cesta
+            def articulos = Articulo.list()
+            render(view: '/mostrarArticulos', model: [articulos: articulos, cesta: cesta])
+        } 
     }
-
-    //permite al administrador agregar un nuevo artículo a la base de datos. Redirige al administrador de
-    // vuelta a la vista de administración para que pueda seguir gestionando otros aspectos de la aplicación.
-    def agregarArticuloAdministrador(){
-
-        Articulo articulo = new Articulo(
-        nombre: params.nombre,
-        precio: params.precio,
-        codigo: params.codigo,
-        stock: params.stock,
-        imagenUrl: params.imagenUrl,
-        descripcion: params.descripcion
-        )
-
-        articulo.save()
-        redirect(controller: "administrador", action: "vistaAdministrador")
-    }   
 
     //permite al administrador aumentar el stock de un artículo específico en la base de datos. 
     //Redirige al administrador de vuelta a la vista de administración para que pueda seguir gestionando 
@@ -52,6 +56,9 @@ class ArticuloController {
 
         Articulo.withTransaction{ 
             Articulo articulo = Articulo.get(params.articulo)
+            if(!articulo){
+                throw new ObjetoNoExisteException("El articulo no existe")
+            }
             articulo.stock++
             articulo.save(flush: true)
         }
@@ -66,6 +73,9 @@ class ArticuloController {
 
         Articulo.withTransaction{
             Articulo articulo = Articulo.get(params.articulo)
+            if(!articulo){
+                throw new ObjetoNoExisteException("El articulo no existe")
+            }
             if(articulo.hayStock()){
                 articulo.stock--
                 articulo.save(flush: true)

@@ -10,7 +10,7 @@
         <g:link controller="Pedido" action="crearPedido">Crear o ver pedido</g:link>
         <g:link controller="Articulo" action="mostrarArticulos">Comprar</g:link>
         <g:link controller="Cesta" action="mostrarCesta">Ver cesta</g:link>
-        <g:link controller="Administrador" action="logout">Cerrar sesión</g:link>
+        <g:link controller="Session" action="logout">Cerrar sesión</g:link>
         <div class="estado">
             <p><u>Estado de cuenta:</u> ${session.cliente.estado}</p>
             <p><u>Penalizaciones:</u> ${session.cliente.strikes}</p>
