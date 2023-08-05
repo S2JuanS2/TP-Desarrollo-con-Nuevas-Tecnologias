@@ -11,8 +11,4 @@ class CestaServiceSpec extends Specification implements ServiceUnitTest<CestaSer
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
 }

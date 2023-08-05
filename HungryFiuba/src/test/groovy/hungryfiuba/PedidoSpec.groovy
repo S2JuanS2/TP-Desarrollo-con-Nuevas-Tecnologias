@@ -4,28 +4,28 @@ import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
 class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
-
+   
     def setup() {
-        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
     }
 
     def cleanup() {
     }
 
     void "test probar que un pedido en estado de confirmación esta en confirmación"() {
-        given:"Dado un pedido en estado de confirmación"
+        given: "Dado un pedido en estado de confirmación"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.EN_CONFIRMACION
 
-        when:"Cuando consulto si esta en estado de confirmación"
+        when: "Cuando consulto si está en estado de confirmación"
         boolean resultado = pedido.enConfirmacion()
 
-        then:"El pedido esta en confirmación"
-        resultado == true
+        then: "El pedido está en confirmación"
+        assert resultado == true
     }
-
     void "test probar que un pedido en estado de preparación, no esta en confirmación"() {
         given:"Dado un pedido en estado de preparación"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.EN_PREPARACION
 
@@ -38,6 +38,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que un pedido en estado de preparación esta en preparación"() {
         given:"Dado un pedido en estado de preparación"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.EN_PREPARACION
 
@@ -50,6 +51,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que un pedido en estado de confirmación no esta en preparación"() {
         given:"Dado un pedido en estado de preparación"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.EN_CONFIRMACION
 
@@ -62,6 +64,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que un pedido en estado de listo para entregar esta en listo para entregar"() {
         given:"Dado un pedido en estado de listo para entregar"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.LISTO_PARA_ENTREGAR
 
@@ -74,6 +77,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que un pedido en estado de confirmación, no esta en listo para entregar"() {
         given:"Dado un pedido en estado de confirmación"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.EN_CONFIRMACION
 
@@ -84,8 +88,9 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
         resultado == false
     }
     
-        void "test probar que un pedido en estado de entregado esta entregado"() {
+    void "test probar que un pedido en estado de entregado esta entregado"() {
         given:"Dado un pedido en estado entregado"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.ENTREGADO
 
@@ -98,6 +103,8 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que un pedido en estado de confirmación, no esta entregado"() {
         given:"Dado un pedido en estado de confirmación"
+        
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.EN_CONFIRMACION
 
@@ -110,6 +117,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que un pedido en estado pagado, esta pagado"() {
         given:"Dado un pedido pagado"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estadoPago = EstadoDelPago.PAGADO
 
@@ -122,6 +130,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que un pedido en estado pendiente de pago, no esta pagado"() {
         given:"Dado un pedido no pagado"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estadoPago = EstadoDelPago.PENDIENTE_DE_PAGO
 
@@ -134,6 +143,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que si se confirma un pedido en estado de confirmación pasa a preparación"() {
         given:"Dado un pedido en estado de confirmación"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.EN_CONFIRMACION
 
@@ -146,6 +156,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que si se confirma un pedido en estado de preparación pasa a listo para entregar"() {
         given:"Dado un pedido en estado de preparación"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.EN_PREPARACION
 
@@ -158,6 +169,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que si se confirma un pedido en estado de listo para entregar pasa a entregado"() {
         given:"Dado un pedido en estado de listo para entregar"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.LISTO_PARA_ENTREGAR
 
@@ -170,6 +182,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que un pedido en estado de confirmación puede ser cancelado"() {
         given:"Dado un pedido en estado de confirmación"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.EN_CONFIRMACION
 
@@ -182,6 +195,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que un pedido en estado de listo para entregar puede ser cancelado"() {
         given:"Dado un pedido en estado listo para entregar"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.LISTO_PARA_ENTREGAR
 
@@ -194,6 +208,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que un pedido en estado entregado puede ser cancelado"() {
         given:"Dado un pedido en estado entregado"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.ENTREGADO
 
@@ -206,6 +221,7 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
 
     void "test probar que un pedido en estado de preparación, no puede ser cancelado"() {
         given:"Dado un pedido en estado de preparación"
+        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         Pedido pedido = new Pedido(cliente, cliente.cesta)
         pedido.estado = EstadoPedido.EN_PREPARACION
 

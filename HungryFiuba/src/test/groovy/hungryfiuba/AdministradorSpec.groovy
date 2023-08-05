@@ -6,7 +6,7 @@ import spock.lang.Specification
 class AdministradorSpec extends Specification implements DomainUnitTest<Administrador> {
 
     def setup() {
-        Administrador admin = Administrador.obtenerAdministrador()
+        
     }
 
     def cleanup() {
@@ -14,6 +14,7 @@ class AdministradorSpec extends Specification implements DomainUnitTest<Administ
 
     void "test calcular el promedio de la calificacion de estado"() {
         given:"Dado una calificacion total de estado de 15 y una cantidad de calificaciones de 3"
+        Administrador admin = Administrador.obtenerAdministrador()
         admin.califEstado = 15
         admin.cantidadCalificaciones = 3
 
@@ -22,10 +23,12 @@ class AdministradorSpec extends Specification implements DomainUnitTest<Administ
 
         then:"Se muestra en promedio"
         calificacionEstado == 5
+       
     }
 
     void "test calcular el promedio de la calificacion de rapidez"() {
         given:"Dado una calificacion de rapidez total de 20 y una cantidad de calificaciones de 4"
+        Administrador admin = Administrador.obtenerAdministrador()
         admin.califRapidez = 20
         admin.cantidadCalificaciones = 4
 
@@ -38,6 +41,7 @@ class AdministradorSpec extends Specification implements DomainUnitTest<Administ
 
     void "test calcular el promedio de la calificacion de pagina"() {
         given:"Dado una calificacion de pagina total de 25 y una cantidad de calificaciones de 5"
+        Administrador admin = Administrador.obtenerAdministrador()
         admin.califPagina = 25
         admin.cantidadCalificaciones = 5
 
@@ -50,6 +54,7 @@ class AdministradorSpec extends Specification implements DomainUnitTest<Administ
 
     void "test aumentar la cantidad de calificaciones"() {
         given:"Dada una cantidad inicial de calificaciones"
+        Administrador admin = Administrador.obtenerAdministrador()
         int cantidadInicial = admin.cantidadCalificaciones
 
         when:"Cuando se aumenta en 1"

@@ -11,8 +11,5 @@ class PedidoServiceSpec extends Specification implements ServiceUnitTest<PedidoS
     def cleanup() {
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
-    }
+   
 }
