@@ -3,7 +3,7 @@ package hungryfiuba
 import grails.gorm.transactions.Transactional
 
 class PedidoService {
-
+    def cestaService
     //guarda el pedido realizado por un cliente en la base de datos. Al realizar esta acción, se actualiza
     // la deuda del cliente con el costo del pedido y se crea un registro del pedido en la base de datos. 
     @Transactional 
@@ -57,4 +57,18 @@ class PedidoService {
         pedido.estadoPago = EstadoDelPago.PAGADO
         pedido.save(flush: true)
     }
+    @Transactional
+    def cancelarYActualizarPedido(Pedido pedido, Cliente cliente){
+        if (pedido.puedeSerCancelado()) {
+            if(!pedido.estaPago() && pedido.listoParaEntregar()) {
+                cliente.penalizar()
+            }
+            if(pedido.fueEntregado()){
+                cestaService.vaciarCestaDePedidoFinalizado(cliente.id)
+            }else{
+                cestaService.vaciarCesta(cliente.id)
+            }
+            eliminarPedido(pedido.id)
+        }
+    }    
 }

@@ -33,6 +33,7 @@ class AdministradorController {
         pedidoService.confirmarPedido(pedido.id)
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
+    
  
     //permite cancelar un pedido específico en la aplicación de administración. Realiza acciones como actualizar
     // el estado del cliente y vaciar la cesta, dependiendo del estado y el estado de pago del pedido. Elimina el
@@ -44,17 +45,7 @@ class AdministradorController {
         if(!pedido || !cliente){
             throw new ObjetoNoExisteException("El pedido/cliente no existe")
         }
-        if (pedido.puedeSerCancelado()) {
-            if(!pedido.estaPago() && pedido.listoParaEntregar()) {
-                cliente.penalizar()
-            }
-            if(pedido.fueEntregado()){
-                cestaService.vaciarCestaDePedidoFinalizado(cliente.id)
-            }else{
-                cestaService.vaciarCesta(cliente.id)
-            }
-            pedidoService.eliminarPedido(pedido.id)
-        }
+        pedidoService.cancelarYActualizarPedido(pedido, cliente)
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
 }
