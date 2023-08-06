@@ -57,6 +57,10 @@ class PedidoService {
         pedido.estadoPago = EstadoDelPago.PAGADO
         pedido.save(flush: true)
     }
+
+    //cancela un pedido si se cumplen ciertas condiciones y realiza acciones adicionales como penalizar al cliente 
+    //(si el pedido no ha sido pagado y está listo para entregar) y vaciar la cesta asociada al cliente 
+    //(dependiendo del estado del pedido).
     @Transactional
     def cancelarYActualizarPedido(Pedido pedido, Cliente cliente){
         if (pedido.puedeSerCancelado()) {

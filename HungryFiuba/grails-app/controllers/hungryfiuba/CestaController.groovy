@@ -44,9 +44,7 @@ class CestaController {
         }
         def cesta = Cesta.get(cliente.id)
         
-        if(articulo.hayStock() && !articulo.superaElLimiteDeCompra(cesta)){
-            cestaService.agregarArticuloACesta(articulo.id, cliente.id)
-        }
+        cestaService.agregarACesta(articulo,cesta, cliente.id)
         redirect(controller:"articulo", action: "mostrarArticulos")
     }
 
