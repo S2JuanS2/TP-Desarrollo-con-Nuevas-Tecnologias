@@ -8,8 +8,9 @@ class ClienteService {
     @Transactional 
     def actualizarDeuda(long clienteId) {
         Cliente cliente = Cliente.get(clienteId)
-        cliente.deuda = 0
-        cliente.estado = EstadoCuenta.NO_BLOQUEADA
+        cliente.desbloquearCuenta()
+        //cliente.deuda = 0
+        //cliente.estado = EstadoCuenta.NO_BLOQUEADA
         cliente.save(flush: true)
     }
 

@@ -13,10 +13,11 @@ class CestaService {
         Cliente cliente = Cliente.get(clienteId)
         Articulo articulo = Articulo.get(articuloId)
 
-        cliente.cesta.cantidadDeArticulos++
+        //cliente.cesta.cantidadDeArticulos++
         articulo.stock--
-        cliente.cesta.montoTotal += articulo.precio
-        cliente.cesta.articulos.add(articulo)
+        //cliente.cesta.montoTotal += articulo.precio
+        //cliente.cesta.articulos.add(articulo)
+        cliente.cesta.agregarArticulo(articulo)
         cliente.cesta.save(flush: true)
     }
 
@@ -27,11 +28,9 @@ class CestaService {
     def eliminarArticuloACesta(long articuloId, long clienteId) {
         Cliente cliente = Cliente.get(clienteId)
         Articulo articulo = Articulo.get(articuloId)
-
-        cliente.cesta.cantidadDeArticulos--
+        
         articulo.stock++
-        cliente.cesta.montoTotal -= articulo.precio
-        cliente.cesta.articulos.remove(articulo)
+        cliente.cesta.eliminarArticulo(articulo)
         cliente.cesta.save(flush: true)
     }
 
@@ -45,12 +44,14 @@ class CestaService {
         Articulo articuloEnStock
         cesta.articulos.each{ articulo ->
             articuloEnStock = Articulo.get(articulo.id)
-            cesta.cantidadDeArticulos--
+            //cesta.cantidadDeArticulos--
             articuloEnStock.stock++
-            cliente.deuda -= articuloEnStock.precio
-            cesta.montoTotal -= articuloEnStock.precio
+            cliente.disminuirDeuda(articuloEnStock.precio)
+            //cliente.deuda -= articuloEnStock.precio
+            //cesta.montoTotal -= articuloEnStock.precio
+            cesta.actualizarCesta(articuloEnStock.precio)
         }
-        cliente.cesta.articulos.clear()
+        cliente.cesta.vaciarCesta()
         cliente.cesta.save(flush: true)
     }
 
@@ -64,10 +65,12 @@ class CestaService {
         Articulo articuloEnStock
         cesta.articulos.each{ articulo ->
             articuloEnStock = Articulo.get(articulo.id)
-            cesta.cantidadDeArticulos--
-            cesta.montoTotal -= articuloEnStock.precio
+            //cesta.cantidadDeArticulos--
+            //cesta.montoTotal -= articuloEnStock.precio
+            cesta.actualizarCesta(articuloEnStock.precio)
         }
-        cliente.cesta.articulos.clear()
+        cliente.cesta.vaciarCesta()
+        //cliente.cesta.articulos.clear()
         cliente.cesta.save(flush: true)
     }
 }

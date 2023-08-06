@@ -109,13 +109,13 @@ class Cliente {
     }
 
     //aumenta el valor de la deuda
-    void aumentarDeuda(int montoTotal){
-        deuda += montoTotal
+    void aumentarDeuda(BigDecimal montoTotal){
+        setDeuda(deuda + montoTotal)
     }
 
     //disminuye el valor de una deuda
-    void disminuirDeuda(int montoTotal){
-        deuda -= montoTotal
+    void disminuirDeuda(BigDecimal montoTotal){
+        setDeuda(deuda - montoTotal)
     }
 
     //devuelve true si el numero de calificaciones pendientes es mayor a 0
@@ -144,5 +144,10 @@ class Cliente {
         if(estaEnCondicionesDeSerBloqueado()){
             bloquearCuenta()
         } 
+    }
+
+    def desbloquearCuenta() {
+        setDeuda(0)
+        setEstado(EstadoCuenta.NO_BLOQUEADA)
     }
 }

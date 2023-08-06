@@ -6,7 +6,7 @@ class Cesta {
 
     List<Articulo> articulos
     int cantidadDeArticulos
-    BigDecimal montoTotal
+    int montoTotal
 
     static hasMany = [articulos: Articulo]
 
@@ -28,13 +28,13 @@ class Cesta {
 
     //incrementa la cantidad de articulos
     void incrementarCantidadDeArticulos(){
-        cantidadDeArticulos++
+        setCantidadDeArticulos(cantidadDeArticulos+1)
     }
 
     // disminuye la cantidad de articulos
     void disminuirCantidadDeArticulos(){
         if(tieneArticulos()){
-            cantidadDeArticulos--
+            setCantidadDeArticulos(cantidadDeArticulos-1)
         }
     }
 
@@ -46,6 +46,29 @@ class Cesta {
     //actualiza el monto total de la cesta
     void actualizarMontoTotal(BigDecimal precio){
         montoTotal += precio
+    }
+
+    void eliminarArticulo(Articulo articulo) {
+        setCantidadDeArticulos(cantidadDeArticulos-1)
+        setMontoTotal((int) (montoTotal - articulo.precio))
+        articulos.remove(articulo)
+    }
+
+    void vaciarCesta() {
+        setCantidadDeArticulos(0)
+        articulos.clear()
+        setMontoTotal(0)
+    }
+
+    void actualizarCesta(BigDecimal precio) {
+        disminuirCantidadDeArticulos()
+        setMontoTotal((int)(montoTotal - precio))
+    }
+
+    void agregarArticulo(Articulo articulo) {
+        incrementarCantidadDeArticulos()
+        setMontoTotal((int)(montoTotal + articulo.precio))
+        articulos.add(articulo)
     }
 
 }
