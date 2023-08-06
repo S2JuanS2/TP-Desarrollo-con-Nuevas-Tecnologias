@@ -19,7 +19,7 @@ class ClienteController {
             identificadorValor: params.idValor,
             contrasena: params.contrasena
         )
-        cliente.deuda = BigDecimal.ZERO
+        cliente.deuda = 0
         Cesta cesta = new Cesta()
         cliente.cesta = cesta
         cliente.estado = EstadoCuenta.NO_BLOQUEADA

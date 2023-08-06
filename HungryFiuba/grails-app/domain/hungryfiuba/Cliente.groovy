@@ -24,7 +24,7 @@ class Cliente {
     String contrasena
     Cesta cesta
     EstadoCuenta estado
-    BigDecimal deuda
+    int deuda
     int strikes
     int aspectoUnoSuma
     int aspectoDosSuma
@@ -64,7 +64,7 @@ class Cliente {
         this.identificadorTipo = identificadorTipo
         this.identificadorValor = identificadorValor
         this.contrasena = contrasena
-        this.deuda = BigDecimal.ZERO
+        this.deuda = 0
         this.strikes = 0
         this.aspectoUnoSuma = 0
         this.aspectoDosSuma = 0
@@ -109,12 +109,12 @@ class Cliente {
     }
 
     //aumenta el valor de la deuda
-    void aumentarDeuda(BigDecimal montoTotal){
+    void aumentarDeuda(int montoTotal){
         setDeuda(deuda + montoTotal)
     }
 
     //disminuye el valor de una deuda
-    void disminuirDeuda(BigDecimal montoTotal){
+    void disminuirDeuda(int montoTotal){
         setDeuda(deuda - montoTotal)
     }
 
