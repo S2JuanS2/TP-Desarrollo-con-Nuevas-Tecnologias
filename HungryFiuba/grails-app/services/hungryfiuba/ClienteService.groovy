@@ -20,24 +20,9 @@ class ClienteService {
     def actualizarCalificacion(long clienteId,String estrella, int aspecto){
         Cliente cliente = Cliente.get(clienteId)
         int numero
-
-        //Casteador manual de string a entero de ultima generación.
-        switch(estrella) {
-            case "1":
-                numero = 1
-                break
-            case "2":
-                numero = 2
-                break
-            case "3":
-                numero = 3
-                break
-            case "4":
-                numero = 4
-                break
-            case "5":
-                numero = 5
-                break
+        
+        if(estrella){
+            numero = estrella.toInteger()
         }
 
         if(aspecto == 1){
