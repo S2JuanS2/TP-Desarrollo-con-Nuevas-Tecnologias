@@ -49,21 +49,10 @@ class Administrador {
     // Calcula y retorna la calificación promedio del estado si hay calificaciones registradas.
     // Si no hay calificaciones, simplemente retorna la calificación del estado existente.
     // Retorna -1 si la cantidad de calificaciones es negativa.
-    int mostrarCalificacionEstado(){
-        if(cantidadCalificaciones < 0){
-            throw new ArithmeticException("cantidad de calificaciones no puede ser menor a cero")
-        }
-        if(cantidadCalificaciones != 0){
-            return ((califEstado/cantidadCalificaciones))
-        }else{
-            return (califEstado)
-        }
-    }
     int calcularCalificacionPromedioEstado() {
         if (cantidadCalificaciones < 0) {
             throw new ArithmeticException("La cantidad de calificaciones no puede ser menor a cero");
         }
-        
         if (cantidadCalificaciones != 0) {
             return califEstado / cantidadCalificaciones;
         } else {
@@ -74,7 +63,7 @@ class Administrador {
 
     //calcula y retorna la calificación promedio para la rapidez si hay calificaciones
     // registradas. Si no hay calificaciones, simplemente retorna la calificación de rapidez existente.
-    int mostrarCalificacionRapidez(){
+    int calcularCalificacionPromedioRapidez(){
         if(cantidadCalificaciones < 0){
             throw new ArithmeticException("cantidad de calificaciones no puede ser menor a cero")
         }
@@ -87,7 +76,7 @@ class Administrador {
 
     //calcula y retorna la calificación promedio para la página si hay calificaciones
     // registradas. Si no hay calificaciones, simplemente retorna la calificación de la página existente.
-    int mostrarCalificacionPagina(){
+    int calcularCalificacionPromedioPagina(){
         if(cantidadCalificaciones < 0){
             throw new ArithmeticException("cantidad de calificaciones no puede ser menor a cero")
         }

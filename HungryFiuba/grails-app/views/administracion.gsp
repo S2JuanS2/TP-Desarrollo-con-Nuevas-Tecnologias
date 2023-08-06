@@ -95,9 +95,9 @@
         </div>
 
         <h2>Estadísticas</h2>
-        <p>Calif. página: ${admin.mostrarCalificacionPagina()} estrellas.</p>
-        <p>Calif. rapidéz: ${admin.mostrarCalificacionRapidez()} estrellas.</p>
-        <p>Calif. pedidos: ${admin.mostrarCalificacionEstado()} estrellas.</p>
+        <p>Calif. página: ${admin.calcularCalificacionPromedioPagina()} estrellas.</p>
+        <p>Calif. rapidéz: ${admin.calcularCalificacionPromedioRapidez()} estrellas.</p>
+        <p>Calif. pedidos: ${admin.calcularCalificacionPromedioEstado()} estrellas.</p>
         <p>Cantidad de calificaciones: ${admin.cantidadCalificaciones}.</p>
 
         <a href="/inicio" class="volver" >Volver al inicio</a>

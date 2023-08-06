@@ -55,11 +55,8 @@ class CestaService {
         Articulo articuloEnStock
         cesta.articulos.each{ articulo ->
             articuloEnStock = Articulo.get(articulo.id)
-            //cesta.cantidadDeArticulos--
             articuloEnStock.stock++
             cliente.disminuirDeuda(articuloEnStock.precio)
-            //cliente.deuda -= articuloEnStock.precio
-            //cesta.montoTotal -= articuloEnStock.precio
             cesta.actualizarCesta(articuloEnStock.precio)
         }
         cliente.cesta.vaciarCesta()
@@ -76,8 +73,6 @@ class CestaService {
         Articulo articuloEnStock
         cesta.articulos.each{ articulo ->
             articuloEnStock = Articulo.get(articulo.id)
-            //cesta.cantidadDeArticulos--
-            //cesta.montoTotal -= articuloEnStock.precio
             cesta.actualizarCesta(articuloEnStock.precio)
         }
         cliente.cesta.vaciarCesta()
