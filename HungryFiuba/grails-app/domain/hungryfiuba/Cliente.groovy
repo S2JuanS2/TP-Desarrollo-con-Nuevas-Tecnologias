@@ -24,7 +24,7 @@ class Cliente {
     String contrasena
     Cesta cesta
     EstadoCuenta estado
-    int deuda
+    BigDecimal deuda
     int strikes
     int aspectoUnoSuma
     int aspectoDosSuma
@@ -64,7 +64,7 @@ class Cliente {
         this.identificadorTipo = identificadorTipo
         this.identificadorValor = identificadorValor
         this.contrasena = contrasena
-        this.deuda = 0
+        this.deuda = BigDecimal.ZERO
         this.strikes = 0
         this.aspectoUnoSuma = 0
         this.aspectoDosSuma = 0
@@ -89,12 +89,12 @@ class Cliente {
     }
 
     //devuleve true si la cantidad de strikes del cliente es menor a 3 
-    boolean tieneMenosDeTresStrikes(){
+    boolean estaEnCondicionesDeSeguirUsandoLaApp(){
        return this.strikes < 3
     }
 
     //devuleve true si la cantidad de strikes del this es igual a 3 
-    boolean tieneTresStrikes(){
+    boolean estaEnCondicionesDeSerBloqueado(){
         return this.strikes == 3
     }
 
@@ -130,16 +130,18 @@ class Cliente {
 
     //bloquea la cuenta 
     void bloquearCuenta(){
-        estado = EstadoCuenta.BLOQUEADA
+        if(estado != EstadoCuenta.BLOQUEADA) {
+            estado = EstadoCuenta.BLOQUEADA
+        }
     }
 
     //penaliza al cliente. En el caso de que el clinete tenga menos de 3 strikes se le aumneta en uno la cantida
     // del mismo. Caso contrario se le bloquea la cuenta 
     void penalizar(){
-        if(tieneMenosDeTresStrikes()){
+        if(estaEnCondicionesDeSeguirUsandoLaApp()){
             sumarStrike()
         } 
-        if(tieneTresStrikes()){
+        if(estaEnCondicionesDeSerBloqueado()){
             bloquearCuenta()
         } 
     }

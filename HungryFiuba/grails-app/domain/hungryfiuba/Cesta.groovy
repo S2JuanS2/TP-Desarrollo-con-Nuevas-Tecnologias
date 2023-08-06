@@ -6,16 +6,18 @@ class Cesta {
 
     List<Articulo> articulos
     int cantidadDeArticulos
-    int montoTotal
+    BigDecimal montoTotal
 
     static hasMany = [articulos: Articulo]
 
     static constraints = {
-
-       articulos nullable: true
-       cantidadDeArticulos nullable: false, min: 0
-       montoTotal nullable: false, min: 0
-
+        articulos nullable: true
+        cantidadDeArticulos nullable: false, min: 0
+        montoTotal nullable: false, validator: { BigDecimal value, obj ->
+            if (value < BigDecimal.ZERO) {
+                return ['montoTotal.negative']
+            }
+        }
     }
 
     Cesta() {
