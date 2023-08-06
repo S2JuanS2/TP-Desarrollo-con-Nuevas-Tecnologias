@@ -3,7 +3,7 @@ package hungryfiuba
 class Articulo {
 
     String nombre
-    BigDecimal precio
+    int precio
     int codigo
     int stock
     String imagenUrl
@@ -12,14 +12,14 @@ class Articulo {
     static constraints = {
 
         nombre nullable: false
-        precio nullable: false, min: 0.0
         codigo nullable: false, min: 0
         stock nullable: false, min: 0
+        precio min: 1 
         imagenUrl nullable: false
         descripcion nullable: false
     }
 
-    Articulo(String nombre, BigDecimal precio, int codigo, int stock,String imagenUrl, String descripcion) {
+    Articulo(String nombre, int precio, int codigo, int stock,String imagenUrl, String descripcion) {
         
         assert precio > 0
         assert codigo > 0

@@ -78,8 +78,7 @@ class PedidoController {
         Pedido pedido = Pedido.findByCliente(cliente)
 
         if(pedido.enConfirmacion()){
-            pedidoService.eliminarPedido(cliente.id, pedido.id)
-            cestaService.vaciarCesta(cliente.id)
+            pedidoService.cancelacionPedido(cliente.id, pedido.id)
             render(view: "/bienvenida")
         }else{
             render(view: "/pedidoEnCurso", model:[pedido: pedido])

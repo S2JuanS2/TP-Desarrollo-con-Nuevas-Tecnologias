@@ -74,5 +74,12 @@ class PedidoService {
             }
             eliminarPedido(pedido.id)
         }
-    }    
+    }   
+
+    //
+    @Transactional
+    def cancelacionPedido(long clienteId, long pedidoId){
+        eliminarPedido(clienteId, pedidoId)
+        cestaService.vaciarCesta(clienteId)
+    } 
 }
