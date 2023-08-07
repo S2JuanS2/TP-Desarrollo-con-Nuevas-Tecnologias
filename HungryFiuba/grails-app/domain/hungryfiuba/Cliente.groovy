@@ -100,7 +100,7 @@ class Cliente {
 
     // incrementa la cantidad de strikes
     void sumarStrike(){
-        strikes++
+        setStrikes(strikes +1)
     }
 
     //aumenta el numero de calificaciones pendientes
