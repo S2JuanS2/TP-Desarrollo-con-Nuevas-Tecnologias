@@ -93,7 +93,7 @@ class Administrador {
     }
 
     void actualizarCalificaciones(int aspectoUnoSuma, int aspectoDosSuma, int aspectoTresSuma) {
-        administrador.setCantidadCalificaciones(cantidadDeCalificaciones + 1)
+        administrador.setCantidadCalificaciones(cantidadCalificaciones + 1)
         setCalifRapidez(califRapidez + aspectoUnoSuma)
         setCalifEstado(califEstado + aspectoDosSuma)
         setCalifPagina(califPagina + aspectoTresSuma)

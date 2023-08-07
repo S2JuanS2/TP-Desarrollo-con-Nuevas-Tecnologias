@@ -3,7 +3,7 @@ package hungryfiuba
 import grails.gorm.transactions.Transactional
 
 class ClienteService {
-
+    def administradorService
     //actualiza la deuda de un cliente y establecer su estado de cuenta como no bloqueado. Al realizar esta acción, se actualiza la información del cliente en la base de datos. 
     @Transactional 
     def actualizarDeuda(long clienteId) {
@@ -34,5 +34,12 @@ class ClienteService {
         }
 
     cliente.save(flush: true) 
+    }
+
+    //
+    @Transactional
+    def mostrarCalificacion(long clienteId){
+        actualizarCalificacion(clienteId,null, 0)
+        administradorService.calificaciones(clienteId)
     }
 }
