@@ -8,7 +8,7 @@
     <div class="conteiner">
         <h1>Pedido en curso</h1>
         <h3>Detalles del pedido</h3>
-        <p>Cliente: ${session.cliente.nombre} ${session.cliente.apellido}</p>
+        <p>Cliente: ${session.nombre} ${session.apellido}</p>
         <p>Hora de realizacion: ${pedido.momentoDeCreacion.getHour()}:${pedido.momentoDeCreacion.getMinute()} </p>
         <p><strong>Estado del pedido:</strong> <em>${pedido.estado}</em> </p>
         <p><strong>Estado del pago:</strong> <em>${pedido.estadoPago}</em></p>

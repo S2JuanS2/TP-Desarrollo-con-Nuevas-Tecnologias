@@ -11,7 +11,8 @@ class CestaController {
     //Si no hay cliente autenticado, redirige al usuario a la vista de "registro fallido" para indicar que el usuario 
     //no tiene acceso sin autenticación.
     def mostrarCesta() {
-        Cliente cliente = session.cliente
+        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
+        //def cliente = session.cliente
         if (!cliente) {
             render(view: "/registroFallido")
             return
@@ -35,7 +36,8 @@ class CestaController {
     //de artículos disponibles. Si alguno de los requisitos no se cumple, el usuario es redirigido a la página de 
     //inicio de administración.
     def agregarArticulo(){
-        Cliente cliente = session.cliente
+        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
+        //def cliente = session.cliente
         def articuloId = params.articulo
         def articulo = Articulo.get(articuloId)
         
@@ -53,7 +55,8 @@ class CestaController {
     //para eliminar el artículo de la cesta. Redirige al usuario a la vista de la cesta actualizada para que pueda 
     //ver los cambios realizados.
     def eliminarArticulo(){
-        Cliente cliente = session.cliente
+        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
+        //def cliente = session.cliente
         def articuloId = params.articulo
         def articulo = Articulo.get(articuloId)
         if(!cliente){

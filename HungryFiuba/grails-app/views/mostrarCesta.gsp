@@ -9,7 +9,7 @@
     <body>
 
     <div class="conteiner">
-        <h1>Cesta de compras de ${session.cliente.nombre} ${session.cliente.apellido}</h1>
+        <h1>Cesta de compras de ${session.nombre} ${session.apellido}</h1>
         <g:if test="${cesta.cantidadDeArticulos == 0}">
             <h3>Cesta vacía!</h3>
             </g:if>

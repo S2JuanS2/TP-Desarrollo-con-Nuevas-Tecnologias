@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>calificacion</title>
+    <title>Calificacion</title>
     <asset:stylesheet src="registroExitoso.css"/>
 </head>
 <body>   

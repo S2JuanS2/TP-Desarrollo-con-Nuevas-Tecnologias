@@ -17,7 +17,8 @@ class PedidoController {
     //Después de realizar un pedido, el cliente es redirigido a esta vista para mostrar los detalles del pedido 
     //y proporcionar información sobre el estado del pedido.
     def pedidoCreado(){
-        Cliente cliente = session.cliente
+        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
+        //def cliente = session.cliente
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -36,7 +37,8 @@ class PedidoController {
     //para garantizar que los pedidos se realicen dentro del horario permitido. La función muestra vistas específicas 
     //en función de las condiciones y acciones realizadas.
     def crearPedido(){
-        def cliente = session.cliente
+        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
+        //def cliente = session.cliente
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -71,7 +73,8 @@ class PedidoController {
     // redirigido a la vista /bienvenida . Si el pedido no se puede cancelar, se muestra la vista /pedidoEnCurso con
     // información sobre el pedido en curso.
     def cancelarPedido(){
-        Cliente cliente = session.cliente
+        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
+        //def cliente = session.cliente
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -90,7 +93,8 @@ class PedidoController {
     // /pedidoPago. Si el pedido ya ha sido pagado, se muestra la vista /pedidoYaPago para indicar que no es posible
     //realizar otro pago para este pedido.
     def pagarPedido(){
-        def cliente = session.cliente
+        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
+        //def cliente = session.cliente
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
