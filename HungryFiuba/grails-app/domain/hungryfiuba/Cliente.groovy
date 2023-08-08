@@ -98,7 +98,7 @@ class Cliente {
         return this.strikes == 3
     }
 
-    // incrementa la cantidad de strikes
+    //incrementa la cantidad de strikes
     void sumarStrike(){
         setStrikes(strikes +1)
     }
@@ -149,5 +149,6 @@ class Cliente {
     def desbloquearCuenta() {
         setDeuda(0)
         setEstado(EstadoCuenta.NO_BLOQUEADA)
+        setStrikes(0)
     }
 }

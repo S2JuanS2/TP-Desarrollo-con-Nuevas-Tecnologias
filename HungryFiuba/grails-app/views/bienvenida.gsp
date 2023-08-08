@@ -12,10 +12,9 @@
         <g:link controller="Cesta" action="mostrarCesta">Ver cesta</g:link>
         <g:link controller="Session" action="logout">Cerrar sesión</g:link>
         <div class="estado">
-            <p><u>Estado de cuenta:</u> ${session.estado}</p>
-            <p><u>Penalizaciones:</u> ${session.strikes}</p>
-            <g:if test="${session.deuda <= 0}"><p class="deuda-verde">Saldo: $${session.deuda} </p></g:if>
-            <g:else><p class="deuda-rojo">Saldo: $${session.deuda} </p></g:else>
+         
+            <p><u></p>
+            
             <g:link controller="Cliente" action="calificacionesPendientes">Calificaciones Pendientes</g:link>
         </div>
         <asset:image src="logo.png" class="imagen" alt="Logo de la empresa"></asset:image>
