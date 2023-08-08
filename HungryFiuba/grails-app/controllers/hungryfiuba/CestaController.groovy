@@ -11,8 +11,7 @@ class CestaController {
     //Si no hay cliente autenticado, redirige al usuario a la vista de "registro fallido" para indicar que el usuario 
     //no tiene acceso sin autenticación.
     def mostrarCesta() {
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
         if (!cliente) {
             render(view: "/registroFallido")
             return
@@ -23,10 +22,10 @@ class CestaController {
 
         if(cliente.tieneUnPedido(listaPedidos)){
             def pedido = Pedido.findByCliente(cliente)
-            render(view: "/pedidoEnCurso", model: [pedido: pedido])
+            render(view: "/pedidoEnCurso", model: [pedido: pedido, cliente: cliente])
         }else{
             def cesta = Cesta.get(cliente.id)
-            render(view: '/mostrarCesta', model: [cesta: cesta])
+            render(view: '/mostrarCesta', model: [cesta: cesta, cliente: cliente])
         }
     }
 
@@ -36,8 +35,7 @@ class CestaController {
     //de artículos disponibles. Si alguno de los requisitos no se cumple, el usuario es redirigido a la página de 
     //inicio de administración.
     def agregarArticulo(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
         def articuloId = params.articulo
         def articulo = Articulo.get(articuloId)
         
@@ -55,8 +53,7 @@ class CestaController {
     //para eliminar el artículo de la cesta. Redirige al usuario a la vista de la cesta actualizada para que pueda 
     //ver los cambios realizados.
     def eliminarArticulo(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
         def articuloId = params.articulo
         def articulo = Articulo.get(articuloId)
         if(!cliente){

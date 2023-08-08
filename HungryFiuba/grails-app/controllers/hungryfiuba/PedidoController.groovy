@@ -10,20 +10,22 @@ class PedidoController {
 
     //muestra la vista de bienvenida 
     def comenzarPedido(){
-        render(view: "/bienvenida")
+        def cliente = Cliente.findById(session.clienteId)
+
+        render(view: "/bienvenida", model: [cliente: cliente])
     }
 
     //muestra la vista /pedidoCreado que contiene información sobre un pedido recién creado por el cliente. 
     //Después de realizar un pedido, el cliente es redirigido a esta vista para mostrar los detalles del pedido 
     //y proporcionar información sobre el estado del pedido.
     def pedidoCreado(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
+
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
         def pedido = Pedido.findByCliente(cliente)
-        render(view: "/pedidoCreado", model: [pedido: pedido])
+        render(view: "/pedidoCreado", model: [pedido: pedido, cliente: cliente])
     }
 
     //determina el horario de apertura del comedor
@@ -37,8 +39,8 @@ class PedidoController {
     //para garantizar que los pedidos se realicen dentro del horario permitido. La función muestra vistas específicas 
     //en función de las condiciones y acciones realizadas.
     def crearPedido(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
+
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -51,10 +53,12 @@ class PedidoController {
             render(view: "/cuentaBloqueada", model:[cliente: cliente])
             return
         }
+        /*
         if(!comedorAbierto()){
-            render(view:"/comedorCerrado")
+            render(view:"/comedorCerrado")          //comentado para que no joda
             return
         }
+        */
         if(!cesta.tieneArticulos()){
             render(view:"/cestaVacia")
             return
@@ -64,7 +68,7 @@ class PedidoController {
             redirect(action: "pedidoCreado")
         }else{
             def pedidoParticular = Pedido.findByCliente(cliente)
-            render(view: "/pedidoEnCurso", model:[pedido: pedidoParticular])
+            render(view: "/pedidoEnCurso", model:[pedido: pedidoParticular, cliente: cliente])
         }
     }
     
@@ -73,8 +77,8 @@ class PedidoController {
     // redirigido a la vista /bienvenida . Si el pedido no se puede cancelar, se muestra la vista /pedidoEnCurso con
     // información sobre el pedido en curso.
     def cancelarPedido(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
+
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -82,9 +86,9 @@ class PedidoController {
 
         if(pedido.enConfirmacion()){
             pedidoService.cancelacionPedido(cliente.id, pedido.id)
-            render(view: "/bienvenida")
+            render(view: "/bienvenida", model: [cliente: cliente])
         }else{
-            render(view: "/pedidoEnCurso", model:[pedido: pedido])
+            render(view: "/pedidoEnCurso", model:[pedido: pedido, cliente: cliente])
         }
     }
 
@@ -93,8 +97,8 @@ class PedidoController {
     // /pedidoPago. Si el pedido ya ha sido pagado, se muestra la vista /pedidoYaPago para indicar que no es posible
     //realizar otro pago para este pedido.
     def pagarPedido(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
+
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }

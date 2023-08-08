@@ -11,7 +11,6 @@ class PedidoService {
         Cliente cliente = Cliente.get(clienteId)
         Cesta cesta = cliente.cesta
         cliente.deuda += cesta.montoTotal
-        session.setAttribute('deuda',cliente.deuda)
         Pedido pedido = new Pedido(cliente, cesta)
         pedido.save(failOnError: true)
     }
@@ -61,7 +60,6 @@ class PedidoService {
         Pedido pedido = Pedido.get(pedidoId)
         pedido.cliente.deuda -= pedido.precioTotal
         pedido.estadoPago = EstadoDelPago.PAGADO
-        session.setAttribute('deuda',pedido.cliente.deuda)
         pedido.save(flush: true)
     }
 
@@ -73,8 +71,6 @@ class PedidoService {
         if (pedido.puedeSerCancelado()) {
             if(!pedido.estaPago() && pedido.listoParaEntregar()) {
                 cliente.penalizar()
-                session.setAttribute('strikes',cliente.strikes)
-                session.setAttribute('estado',cliente.estado.toString())
             }
             if(pedido.fueEntregado()){
                 cestaService.vaciarCestaDePedidoFinalizado(cliente.id)

@@ -32,8 +32,8 @@ class ClienteController {
     // Después de registrar la deuda, se actualiza el objeto Cliente en la base de datos y se muestra la vista 
     // /deudaPaga para mostrar un mensaje de confirmación o información relevante relacionada con la deuda registrada.
     def registrarDeuda(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
+
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -45,8 +45,8 @@ class ClienteController {
     //muestra una vista que permite al cliente visualizar y pagar su deuda. Al obtener el cliente actualizado de la
     //base de datos, se asegura de que cualquier cambio en el saldo del cliente se refleje adecuadamente en la vista /pagarDeuda
     def pagarDeuda(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
+
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -57,8 +57,8 @@ class ClienteController {
     //muestra al cliente una vista que contiene una lista de calificaciones pendientes. La vista /calificacionPendiente
     // muestra información sobre estas calificaciones pendientes. 
     def calificacionesPendientes(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
+
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -72,8 +72,7 @@ class ClienteController {
     // las calificaciones correspondientes. Si no hay calificaciones pendientes, se muestra la vista /ceroCalificacionesPendientes
     // para informar al cliente que no hay calificaciones por realizar en ese momento. 
     def calificar(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -94,8 +93,8 @@ class ClienteController {
     //actualiza la calificación del cliente en el primer aspecto y luego redirige al cliente a la siguiente etapa de
     // calificación
     def primerApecto(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
+
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -108,8 +107,8 @@ class ClienteController {
     //actualiza la calificación del cliente en el segundo aspecto y luego redirige al cliente a la siguiente etapa de
     // calificación
     def segundoApecto(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
+
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -122,8 +121,8 @@ class ClienteController {
     //actualiza la calificación del cliente en el tercer aspecto y luego redirige al cliente a la siguiente etapa de
     // calificación
     def tercerApecto(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
+
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -136,8 +135,8 @@ class ClienteController {
     //finaliza el proceso de calificación de un cliente, realiza acciones adicionales basadas en las 
     //calificaciones proporcionadas y muestra los resultados finales y un mensaje de finalización del proceso de calificación.
     def finCalificacion(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
+e
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }

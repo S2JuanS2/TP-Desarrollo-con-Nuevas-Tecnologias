@@ -6,13 +6,12 @@ class SessionController {
     //comenzar un nuevo pedido, muestra la página de inicio a los usuarios que no han iniciado sesión o no
     // tienen información de sesión asociada.
     def vistaInicio(){
-        /*if(session.cliente){
+
+        if(session.clienteId != null){
             redirect(controller: "pedido", action: "comenzarPedido")
-        }*/
-        if(session.getAttribute('id') != 0){
-            redirect(controller: "pedido", action: "comenzarPedido")
+        }else{
+            render(view: "/inicio")
         }
-        render(view: "/inicio")
     }
     
     //muestra la vista de registro
@@ -21,28 +20,11 @@ class SessionController {
     }
     
     def guardarSesion(Cliente cliente) {
-        session.setAttribute('id',cliente.identificadorValor)
-        session.setAttribute('nombre',cliente.nombre)
-        session.setAttribute('apellido',cliente.apellido)
-        session.setAttribute('estado',cliente.estado.toString())
-        session.setAttribute('deuda',cliente.deuda)
-        session.setAttribute('strikes',cliente.strikes)
-        session.setAttribute('aspectoUnoSuma',cliente.aspectoUnoSuma)
-        session.setAttribute('aspectoDosSuma',cliente.aspectoDosSuma)    
-        session.setAttribute('aspectoTresSuma',cliente.aspectoTresSuma)
-        session.setAttribute('calificacionesPendientes',cliente.calificacionesPendientes)         
+        session.clienteId = cliente.id       
     }
 
     def eliminarSesion() {
-        session.removeAttribute('nombre')
-        session.removeAttribute('apellido')
-        session.removeAttribute('estado')
-        session.removeAttribute('deuda')
-        session.removeAttribute('strikes')
-        session.removeAttribute('aspectoUnoSuma')
-        session.removeAttribute('aspectoDosSuma')    
-        session.removeAttribute('aspectoTresSuma')
-        session.removeAttribute('calificacionesPendientes')
+        session.clienteId = null
     }
 
     //proceso de autenticación de usuarios, si el cliente no existe se muestra la vista de registro fallido 
@@ -54,9 +36,8 @@ class SessionController {
         Cliente cliente = Cliente.findByIdentificadorValor(params.idValor)
         
         if(cliente && cliente.contrasenaCorrecta(params.contrasena)){
-            //session.cliente = cliente
             guardarSesion(cliente)
-            render(view: "/bienvenida")
+            redirect(controller: "pedido", action: "comenzarPedido")
         }else {
             render(view: "/registroFallido")
         } 
@@ -64,8 +45,6 @@ class SessionController {
 
     //cierra la sesión del cliente y lo redirije a la página de inicio de sesión, el estado de la sesión se elimina.
     def logout(){
-        //session.cliente = null
-        session.setAttribute('id',0)
         eliminarSesion()
         render(view:"/inicio")
     }

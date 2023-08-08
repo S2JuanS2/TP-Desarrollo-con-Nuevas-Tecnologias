@@ -25,8 +25,7 @@ class ArticuloController {
     //cliente autenticado, muestra la lista de artículos disponibles para su compra. Si no hay ningún cliente
     //autenticado en la sesión, muestra una vista de "registro fallido" para indicar que el usuario no tiene acceso sin autenticación.
     def mostrarArticulos(){
-        def cliente = Cliente.findByIdentificadorValor(session.getAttribute('id'))
-        //def cliente = session.cliente
+        def cliente = Cliente.findById(session.clienteId)
         if(!cliente){
             render(view: "/registroFallido")
             return
@@ -41,7 +40,7 @@ class ArticuloController {
         }
         if(cliente.tieneUnPedido(listaPedidos)){
             def pedido = Pedido.findByCliente(cliente)
-            render(view: "/pedidoEnCurso", model: [pedido: pedido])
+            render(view: "/pedidoEnCurso", model: [pedido: pedido, cliente: cliente])
         }else{
             Cesta cesta = cliente.cesta
             def articulos = Articulo.list()
