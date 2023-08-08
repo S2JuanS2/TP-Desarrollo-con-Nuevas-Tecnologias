@@ -1,11 +1,12 @@
 package hungryfiuba
+import java.time.LocalDateTime
 
 class Administrador {
 
     private static Administrador administrador
 
     static final int HORA_APERTURA_COMEDOR = 8
-    static final int HORA_CLAUSURA_COMEDOR = 2
+    static final int HORA_CLAUSURA_COMEDOR = 22
 
     String nombre
     int califRapidez
@@ -37,10 +38,6 @@ class Administrador {
         this.califEstado = 0
     }
 
-    //obtiene una única instancia del objeto Administrador y garantizar que 
-    //exista solo una instancia del Administrador en toda la aplicación.
-    
-    
     // Calcula y retorna la calificación promedio del estado si hay calificaciones registradas.
     // Si no hay calificaciones, simplemente retorna la calificación del estado existente.
     // Retorna -1 si la cantidad de calificaciones es negativa.
@@ -54,7 +51,6 @@ class Administrador {
             return califEstado;
         }
     }
-
 
     //calcula y retorna la calificación promedio para la rapidez si hay calificaciones
     // registradas. Si no hay calificaciones, simplemente retorna la calificación de rapidez existente.
@@ -87,6 +83,8 @@ class Administrador {
         cantidadCalificaciones++
     }
 
+    //toma las sumas de calificaciones en tres aspectos y actualiza las calificaciones 
+    //y cantidades correspondientes en el objeto administrador.
     void actualizarCalificaciones(int aspectoUnoSuma, int aspectoDosSuma, int aspectoTresSuma) {
         administrador.setCantidadCalificaciones(cantidadCalificaciones + 1)
         setCalifRapidez(califRapidez + aspectoUnoSuma)
@@ -94,4 +92,9 @@ class Administrador {
         setCalifPagina(califPagina + aspectoTresSuma)
     }
     
+    //determina el horario de apertura del comedor
+    boolean comedorAbierto(){
+        LocalDateTime hora = LocalDateTime.now()
+        return (hora.getHour() >= Administrador.HORA_APERTURA_COMEDOR && hora.getHour() < Administrador.HORA_CLAUSURA_COMEDOR)
+    }
 }

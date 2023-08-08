@@ -28,19 +28,13 @@ class PedidoController {
         render(view: "/pedidoCreado", model: [pedido: pedido, cliente: cliente])
     }
 
-    //determina el horario de apertura del comedor
-    boolean comedorAbierto(){
-        LocalDateTime hora = LocalDateTime.now()
-        return (hora.getHour() >= Administrador.HORA_APERTURA_COMEDOR && hora.getHour() < Administrador.HORA_CLAUSURA_COMEDOR)
-    }
-
     //permite a un cliente crear un nuevo pedido, siempre que el cliente no tenga la cuenta bloqueada, la cesta 
     //no esté vacía y no tenga ningún pedido en curso. Se realizan verificaciones adicionales de la hora actual 
     //para garantizar que los pedidos se realicen dentro del horario permitido. La función muestra vistas específicas 
     //en función de las condiciones y acciones realizadas.
     def crearPedido(){
         def cliente = Cliente.findById(session.clienteId)
-
+        Administrador admin = Administrador.findByNombre("admin")
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }
@@ -53,12 +47,12 @@ class PedidoController {
             render(view: "/cuentaBloqueada", model:[cliente: cliente])
             return
         }
-        /*
-        if(!comedorAbierto()){
+    
+        if(!admin.comedorAbierto()){
             render(view:"/comedorCerrado")          //comentado para que no joda
             return
         }
-        */
+        
         if(!cesta.tieneArticulos()){
             render(view:"/cestaVacia")
             return

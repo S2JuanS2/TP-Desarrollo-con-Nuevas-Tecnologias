@@ -11,7 +11,7 @@ class AdministradorService {
     @Transactional
     def calificaciones(Long clienteId){
         Cliente cliente = Cliente.get(clienteId)
-        Administrador administrador = Administrador.obtenerAdministrador()
+        Administrador administrador = Administrador.findByNombre("admin")
         administrador.actualizarCalificaciones(cliente.aspectoUnoSuma,cliente.aspectoDosSuma,cliente.aspectoTresSuma)      
         administrador.save()
     }
