@@ -13,7 +13,7 @@ class AdministradorController {
     //Obtiene listas de pedidos y artículos y muestra la vista  con estos datos y 
     //el objeto admin para la administración de la aplicación.
     def vistaAdministrador(){
-        Administrador admin = Administrador.obtenerAdministrador()
+        Administrador admin = Administrador.findByNombre("admin")
         if(!admin){
             throw new ObjetoNoExisteException("El admin no existe")
         }
@@ -40,7 +40,6 @@ class AdministradorController {
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
     
- 
     //permite cancelar un pedido específico en la aplicación de administración. Realiza acciones como actualizar
     // el estado del cliente y vaciar la cesta, dependiendo del estado y el estado de pago del pedido. Elimina el
     // pedido y redirige al administrador a la vista de administración.

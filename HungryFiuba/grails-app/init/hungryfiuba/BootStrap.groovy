@@ -3,9 +3,13 @@ package hungryfiuba
 class BootStrap {
 
     def init = { servletContext ->
-
-        Administrador administrador = Administrador.obtenerAdministrador()
-        administrador.save()
+        if (!Administrador.exists()) {
+            // Crea un nuevo administrador y guárdalo en la base de datos
+            Administrador administrador = new Administrador("admin", 0);
+            // Configura las propiedades del administrador según tus necesidades
+            administrador.save()
+        }
+        
 
         Articulo articulo = new Articulo("Pepsi", 320, 13, 20,"https://tusuper.com.ar/image/cache/catalog/P2020/Bebidas/Pepsi%201,5l-800x800.jpg", "750ml")
         articulo.save()

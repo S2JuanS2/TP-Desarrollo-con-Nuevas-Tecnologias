@@ -23,7 +23,7 @@ class Administrador {
         
     }
 
-    private Administrador(String nombre, int cantidadCalificaciones) {
+    Administrador(String nombre, int cantidadCalificaciones) {
         if(cantidadCalificaciones < 0){
             throw new IllegalArgumentException("La cantidad de calificaciones no puede ser menor a cero")
         }
@@ -39,12 +39,7 @@ class Administrador {
 
     //obtiene una única instancia del objeto Administrador y garantizar que 
     //exista solo una instancia del Administrador en toda la aplicación.
-    static Administrador obtenerAdministrador(){
-        if(!administrador){
-            administrador = new Administrador("admin", 0);
-        }
-        return administrador
-    }
+    
     
     // Calcula y retorna la calificación promedio del estado si hay calificaciones registradas.
     // Si no hay calificaciones, simplemente retorna la calificación del estado existente.

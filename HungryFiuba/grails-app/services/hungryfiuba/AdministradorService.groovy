@@ -13,7 +13,7 @@ class AdministradorService {
         Cliente cliente = Cliente.get(clienteId)
         Administrador administrador = Administrador.obtenerAdministrador()
         administrador.actualizarCalificaciones(cliente.aspectoUnoSuma,cliente.aspectoDosSuma,cliente.aspectoTresSuma)      
-        administrador.save(flush: true)
+        administrador.save()
     }
 
 }
