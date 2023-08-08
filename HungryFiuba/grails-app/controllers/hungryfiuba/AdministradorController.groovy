@@ -30,7 +30,13 @@ class AdministradorController {
         if(!pedido){
             throw new ObjetoNoExisteException("El pedido no existe")
         }
-        pedidoService.confirmarPedido(pedido.id)
+        if(pedido.enPreparacion()){
+            pedidoService.cambiarAListoParaEntregar(pedido)
+        }else if(pedido.enConfirmacion()){
+            pedidoService.cambiarAEnPreparacion(pedido)
+        }else if(pedido.listoParaEntregar()){
+            pedidoService.cambiarAEntregado(pedido)
+        }
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
     
