@@ -9,6 +9,7 @@ class ClienteService {
     def actualizarDeuda(long clienteId) {
         Cliente cliente = Cliente.get(clienteId)
         cliente.desbloquearCuenta()
+        session.setAttribute('estado',cliente.estado.toString())
         cliente.save(flush: true)
     }
 
@@ -25,12 +26,16 @@ class ClienteService {
 
         if(aspecto == 1){
             cliente.aspectoUnoSuma = numero
+            session.setAttribute('aspectoUnoSuma',numero)
         }else if(aspecto == 2){
             cliente.aspectoDosSuma = numero
+            session.setAttribute('aspectoDosSuma',numero)           
         }else if(aspecto == 3){
             cliente.aspectoTresSuma = numero
+            session.setAttribute('aspectoTresSuma',numero)
         }else if(aspecto == 0){
             cliente.calificacionesPendientes--
+            session.setAttribute('calificacionesPendientes',cliente.calificacionesPendientes)
         }
 
     cliente.save(flush: true) 

@@ -21,17 +21,6 @@ class SessionController {
     }
     
     def guardarSesion(Cliente cliente) {
-       /* session.id = cliente.identificadorValor
-        session.nombre = cliente.nombre
-        session.apellido = cliente.apellido
-        session.estado = cliente.estado.toString()
-        session.deuda = cliente.deuda
-        session.strikes = cliente.strikes
-        session.aspectoUnoSuma = cliente.aspectoUnoSuma
-        session.aspectoDosSuma = cliente.aspectoDosSuma
-        session.aspectoTresSuma = cliente.aspectoTresSuma
-        session.calificacionesPendientes = cliente.calificacionesPendientes
-*/
         session.setAttribute('id',cliente.identificadorValor)
         session.setAttribute('nombre',cliente.nombre)
         session.setAttribute('apellido',cliente.apellido)
