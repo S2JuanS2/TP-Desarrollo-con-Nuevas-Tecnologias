@@ -3,7 +3,7 @@ package hungryfiuba
 class ArticuloController {
 
     static scaffold = Articulo
-
+    def articuloService
     //permite al administrador agregar un nuevo artículo a la base de datos. Redirige al administrador de
     // vuelta a la vista de administración para que pueda seguir gestionando otros aspectos de la aplicación.
     def crearArticulo(){
@@ -53,15 +53,12 @@ class ArticuloController {
     //otros aspectos de la aplicación. La función garantiza que la operación de aumento del stock se realice 
     //de manera segura dentro de una transacción para mantener la integridad de los datos en la base de datos.
     def aumentarStock(){
-
-        Articulo.withTransaction{ 
             Articulo articulo = Articulo.get(params.articulo)
             if(!articulo){
                 throw new ObjetoNoExisteException("El articulo no existe")
             }
-            articulo.stock++
-            articulo.save(flush: true)
-        }
+
+        articuloService.aumentarStock(articulo)
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
 
