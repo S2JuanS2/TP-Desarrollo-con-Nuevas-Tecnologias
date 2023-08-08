@@ -12,12 +12,11 @@
             <tr>
                 <th>PEDIDO N°</th>
                 <th>CLIENTE</th>
-                <th>ESTADO DE CUENTA</th>
-                <th>STRIKES</th>
-                <th>DEUDA</th>
                 <th>PRECIO</th>
                 <th>ESTADO DEL PAGO</th>
                 <th>ESTADO DEL PEDIDO</th>
+                <th>ACCIÓN</th>
+                <th>ACCIÓN</th>
                 <th>ACCIÓN</th>
                 <th>ACCIÓN</th>
             </tr>
@@ -25,13 +24,12 @@
                 <tr  onmouseover="showTable()" onmouseout="hideTable()">
                     <th>${pedido.id}</th>
                     <th>${pedido.cliente.nombre} ${pedido.cliente.apellido}</th>
-                    <th>${pedido.cliente.estado}</th>
-                    <th> ${pedido.cliente.strikes}</th>
-                    <th>$ ${pedido.cliente.deuda}</th>
                     <th>$ ${pedido.precioTotal}</th>
                     <th>${pedido.estadoPago}</th>
                     <th>${pedido.estado}</th>
-                    <th><g:link controller="administrador" action="confirmarPedido" params="[pedido: pedido.id]" >Estado siguiente</g:link></th>
+                    <th><g:link controller="administrador" action="confirmarPedido" params="[pedido: pedido.id]" >Confirmar pedido</g:link></th>
+                    <th><g:link controller="administrador" action="cambiarAListoParaEntregar" params="[pedido: pedido.id]" >Cambiar a listo para entregar</g:link></th>
+                    <th><g:link controller="administrador" action="cambiarAEntregado" params="[pedido: pedido.id]" >Cambiar a entregado</g:link></th>
                     <th><g:link controller="administrador" action="cancelarPedido" params="[pedido: pedido.id]" >Remover</g:link></th>
                 </tr>
             </g:each>

@@ -3,8 +3,6 @@ import java.time.LocalDateTime
 
 class Administrador {
 
-    private static Administrador administrador
-
     static final int HORA_APERTURA_COMEDOR = 8
     static final int HORA_CLAUSURA_COMEDOR = 22
 

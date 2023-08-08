@@ -30,13 +30,40 @@ class AdministradorController {
         if(!pedido){
             throw new ObjetoNoExisteException("El pedido no existe")
         }
+
+        if(pedido.enConfirmacion()){
+            pedidoService.cambiarAEnPreparacion(pedido)
+        }else{
+            //falle
+        }
+        redirect(controller: "administrador", action: "vistaAdministrador")
+    }
+
+    def cambiarAListoParaEntregar(){
+        Pedido pedido = Pedido.get(params.pedido)
+        if(!pedido){
+            throw new ObjetoNoExisteException("El pedido no existe")
+        }
         if(pedido.enPreparacion()){
             pedidoService.cambiarAListoParaEntregar(pedido)
-        }else if(pedido.enConfirmacion()){
-            pedidoService.cambiarAEnPreparacion(pedido)
-        }else if(pedido.listoParaEntregar()){
-            pedidoService.cambiarAEntregado(pedido)
+        }else{
+            //falle
         }
+        redirect(controller: "administrador", action: "vistaAdministrador")
+    }
+
+    def cambiarAEntregado(){
+        Pedido pedido = Pedido.get(params.pedido)
+        if(!pedido){
+            throw new ObjetoNoExisteException("El pedido no existe")
+        }
+
+        if(pedido.listoParaEntregar()){
+            pedidoService.cambiarAEntregado(pedido)
+        }else{
+            //falle
+        }
+        
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
     
