@@ -4,6 +4,7 @@ import grails.gorm.transactions.Transactional
 
 class ClienteService {
     def administradorService
+    
     //actualiza la deuda de un cliente y establecer su estado de cuenta como no bloqueado. Al realizar esta acción, se actualiza la información del cliente en la base de datos. 
     @Transactional 
     def actualizarDeuda(long clienteId) {
@@ -36,7 +37,8 @@ class ClienteService {
     cliente.save(flush: true) 
     }
 
-    //
+    //actualiza la calificación de un cliente y luego realiza el cálculo y actualización 
+    //relacionados con las calificaciones en el sistema utilizando el servicio administradorService.
     @Transactional
     def mostrarCalificacion(long clienteId){
         actualizarCalificacion(clienteId,null, 0)

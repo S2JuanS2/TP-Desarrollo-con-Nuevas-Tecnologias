@@ -4,6 +4,7 @@ import grails.gorm.transactions.Transactional
 
 class PedidoService {
     def cestaService
+   
     //guarda el pedido realizado por un cliente en la base de datos. Al realizar esta acción, se actualiza
     // la deuda del cliente con el costo del pedido y se crea un registro del pedido en la base de datos. 
     @Transactional 
@@ -81,7 +82,7 @@ class PedidoService {
         }
     }   
 
-    //
+    //cancela un pedido eliminando el pedido de la base de datos y luego vacía la cesta del cliente eliminando los artículos de la cesta.
     @Transactional
     def cancelacionPedido(long clienteId, long pedidoId){
         eliminarPedido(clienteId, pedidoId)

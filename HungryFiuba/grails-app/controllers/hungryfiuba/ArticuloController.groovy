@@ -53,11 +53,10 @@ class ArticuloController {
     //otros aspectos de la aplicación. La función garantiza que la operación de aumento del stock se realice 
     //de manera segura dentro de una transacción para mantener la integridad de los datos en la base de datos.
     def aumentarStock(){
-            Articulo articulo = Articulo.get(params.articulo)
-            if(!articulo){
-                throw new ObjetoNoExisteException("El articulo no existe")
-            }
-
+        Articulo articulo = Articulo.get(params.articulo)
+        if(!articulo){
+            throw new ObjetoNoExisteException("El articulo no existe")
+        }
         articuloService.aumentarStock(articulo)
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
@@ -67,17 +66,11 @@ class ArticuloController {
     //Redirige al administrador de vuelta a la vista de administración para que pueda seguir gestionando 
     //otros aspectos de la aplicación.
     def reducirStock(){
-
-        Articulo.withTransaction{
             Articulo articulo = Articulo.get(params.articulo)
             if(!articulo){
                 throw new ObjetoNoExisteException("El articulo no existe")
             }
-            if(articulo.hayStock()){
-                articulo.stock--
-                articulo.save(flush: true)
-            }
-        }
+        articuloService.reducirStock(articulo)
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
 
