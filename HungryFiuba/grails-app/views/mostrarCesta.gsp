@@ -32,7 +32,7 @@
         </div>
         <g:if test="${cesta.cantidadDeArticulos > 0}" >
             <div class="cantidad-articulos">${cesta.cantidadDeArticulos} articulo(s) en la cesta.</div>
-                <h2 class="monto-total">Monto TOTAL: $${cesta.montoTotal}.00</h2>
+                <h2 class="monto-total">Monto TOTAL: $${cesta.montoTotal}</h2>
         </g:if>
         <g:link controller="Session" action="logout">Cerrar sesión</g:link>
         <a href="/inicio">Volver</a>

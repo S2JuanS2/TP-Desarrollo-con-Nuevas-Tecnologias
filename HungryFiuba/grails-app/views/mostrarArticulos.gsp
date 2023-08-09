@@ -8,7 +8,7 @@
     <body>
     <div class="conteiner">
         <h1>Articulos en stock</h1>
-        <p>Costo actual de tu cesta: $${cesta.montoTotal}.00</p>
+        <p>Costo actual de tu cesta: $${cesta.montoTotal}</p>
         <div class="articulos-container">
                 <g:if test="${!articulos}"><h3>No hay articulos en stock!</h3></g:if>
             <g:each var="articulo" in="${articulos}">

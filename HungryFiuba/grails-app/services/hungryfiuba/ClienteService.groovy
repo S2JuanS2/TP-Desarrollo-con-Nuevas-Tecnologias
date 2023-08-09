@@ -10,7 +10,7 @@ class ClienteService {
     def actualizarDeuda(long clienteId) {
         Cliente cliente = Cliente.get(clienteId)
         cliente.desbloquearCuenta()
-        cliente.save(flush: true)
+        cliente.save()
     }
 
     //permite actualizar las calificaciones de un cliente en diferentes aspectos. También permite marcar una 
@@ -31,10 +31,10 @@ class ClienteService {
         }else if(aspecto == 3){
             cliente.aspectoTresSuma = numero
         }else if(aspecto == 0){
-            cliente.calificacionesPendientes--
+            cliente.decrementarCalificacionEnUno()
         }
 
-    cliente.save(flush: true) 
+    cliente.save() 
     }
 
     //actualiza la calificación de un cliente y luego realiza el cálculo y actualización 

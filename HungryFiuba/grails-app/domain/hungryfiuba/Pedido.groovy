@@ -108,19 +108,7 @@ class Pedido {
        return estadoPago == EstadoDelPago.PAGADO
     }
     
-    //actualiza el estado de un pedido en función de su estado actual.
-    // Si el pedido está "En Confirmación", lo cambia a "En Preparación". 
-    //Si el pedido está "En Preparación", lo cambia a "Listo para Entregar". 
-    //Y si el pedido está "Listo para Entregar", lo cambia a "Entregado".
-    void confirmar(){
-        if(enConfirmacion()){
-            estado = EstadoPedido.EN_PREPARACION
-        }else if(enPreparacion()){
-            estado = EstadoPedido.LISTO_PARA_ENTREGAR
-        }else if(listoParaEntregar()){
-            estado = EstadoPedido.ENTREGADO
-        }
-    } 
+    
 
     //devuleve true si el pedido esta en confirmacion o listo para entregar o entregado
     boolean puedeSerCancelado(){

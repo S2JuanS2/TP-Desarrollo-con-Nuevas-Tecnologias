@@ -34,7 +34,8 @@ class AdministradorController {
         if(pedido.enConfirmacion()){
             pedidoService.cambiarAEnPreparacion(pedido)
         }else{
-            //falle
+            render(view: "/errorPedido")
+            return
         }
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
@@ -47,7 +48,8 @@ class AdministradorController {
         if(pedido.enPreparacion()){
             pedidoService.cambiarAListoParaEntregar(pedido)
         }else{
-            //falle
+            render(view: "/errorPedido")
+            return
         }
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
@@ -61,7 +63,8 @@ class AdministradorController {
         if(pedido.listoParaEntregar()){
             pedidoService.cambiarAEntregado(pedido)
         }else{
-            //falle
+            render(view: "/errorPedido")
+            return
         }
         
         redirect(controller: "administrador", action: "vistaAdministrador")

@@ -2,22 +2,18 @@ package hungryfiuba
 
 class Cesta {
 
-    static final int MAXIMO_COMPRA = 5000
+    static final BigDecimal MAXIMO_COMPRA = 5000.00
 
     List<Articulo> articulos
     int cantidadDeArticulos
-    int montoTotal
+    BigDecimal montoTotal
 
     static hasMany = [articulos: Articulo]
 
     static constraints = {
         articulos nullable: true
         cantidadDeArticulos nullable: false, min: 0
-        montoTotal nullable: false, validator: { BigDecimal value, obj ->
-            if (value < BigDecimal.ZERO) {
-                return ['montoTotal.negative']
-            }
-        }
+        montoTotal nullable: false, min: 0.00
     }
 
     Cesta() {
@@ -49,8 +45,8 @@ class Cesta {
     }
 
     void eliminarArticulo(Articulo articulo) {
-        setCantidadDeArticulos(cantidadDeArticulos-1)
-        setMontoTotal((int) (montoTotal - articulo.precio))
+        disminuirCantidadDeArticulos()
+        setMontoTotal(montoTotal - articulo.precio)
         articulos.remove(articulo)
     }
 
@@ -62,12 +58,12 @@ class Cesta {
 
     void actualizarCesta(BigDecimal precio) {
         disminuirCantidadDeArticulos()
-        setMontoTotal((int)(montoTotal - precio))
+        setMontoTotal(montoTotal - precio)
     }
 
     void agregarArticulo(Articulo articulo) {
         incrementarCantidadDeArticulos()
-        setMontoTotal((int)(montoTotal + articulo.precio))
+        setMontoTotal(montoTotal + articulo.precio)
         articulos.add(articulo)
     }
 

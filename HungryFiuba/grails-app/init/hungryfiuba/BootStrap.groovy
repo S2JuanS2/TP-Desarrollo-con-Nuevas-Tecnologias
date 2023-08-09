@@ -6,7 +6,6 @@ class BootStrap {
         if (!Administrador.exists()) {
             // Crea un nuevo administrador y guárdalo en la base de datos
             Administrador administrador = new Administrador("admin", 0);
-            // Configura las propiedades del administrador según tus necesidades
             administrador.save()
         }
         

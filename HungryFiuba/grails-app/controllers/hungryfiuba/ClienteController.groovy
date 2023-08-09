@@ -20,8 +20,7 @@ class ClienteController {
             contrasena: params.contrasena
         )
         cliente.deuda = 0
-        Cesta cesta = new Cesta()
-        cliente.cesta = cesta
+        cliente.cesta = new Cesta()
         cliente.estado = EstadoCuenta.NO_BLOQUEADA
         cliente.save(failOnError: true)
         
@@ -136,7 +135,6 @@ class ClienteController {
     //calificaciones proporcionadas y muestra los resultados finales y un mensaje de finalización del proceso de calificación.
     def finCalificacion(){
         def cliente = Cliente.findById(session.clienteId)
-e
         if(!cliente){
             throw new ObjetoNoExisteException("El cliente no existe")
         }

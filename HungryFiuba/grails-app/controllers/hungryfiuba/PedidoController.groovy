@@ -11,6 +11,9 @@ class PedidoController {
     //muestra la vista de bienvenida 
     def comenzarPedido(){
         def cliente = Cliente.findById(session.clienteId)
+        if(!cliente){
+            throw new ObjetoNoExisteException("El cliente no existe")
+        }
 
         render(view: "/bienvenida", model: [cliente: cliente])
     }
@@ -49,7 +52,7 @@ class PedidoController {
         }
     
         if(!admin.comedorAbierto()){
-            render(view:"/comedorCerrado")          //comentado para que no joda
+            render(view:"/comedorCerrado")
             return
         }
         

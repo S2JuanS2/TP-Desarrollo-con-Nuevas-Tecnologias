@@ -44,7 +44,7 @@ class CestaController {
         }
         def cesta = Cesta.get(cliente.id)
         
-        cestaService.agregarACesta(articulo,cesta, cliente.id)
+        cestaService.agregarACesta(articulo, cesta, cliente.id)
         redirect(controller:"articulo", action: "mostrarArticulos")
     }
 

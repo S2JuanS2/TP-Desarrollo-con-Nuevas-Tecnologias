@@ -23,7 +23,7 @@ class UrlMappings {
             }
         }
         
-        "/"(view:"/index")// algun dia le ponemos mostrarinicio
+        "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')
 

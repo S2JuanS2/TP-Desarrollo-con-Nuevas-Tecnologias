@@ -78,13 +78,13 @@ class Administrador {
 
     //incrementa la cantidad de calificaciones
     void aumentarCantidadCalificaciones(){
-        cantidadCalificaciones++
+        setCantidadCalificaciones(cantidadCalificaciones + 1)
     }
 
     //toma las sumas de calificaciones en tres aspectos y actualiza las calificaciones 
     //y cantidades correspondientes en el objeto administrador.
     void actualizarCalificaciones(int aspectoUnoSuma, int aspectoDosSuma, int aspectoTresSuma) {
-        administrador.setCantidadCalificaciones(cantidadCalificaciones + 1)
+        aumentarCantidadCalificaciones()
         setCalifRapidez(califRapidez + aspectoUnoSuma)
         setCalifEstado(califEstado + aspectoDosSuma)
         setCalifPagina(califPagina + aspectoTresSuma)

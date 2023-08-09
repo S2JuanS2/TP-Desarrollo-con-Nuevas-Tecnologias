@@ -26,6 +26,7 @@ class SessionController {
         }
         return administrador
     }
+    
     //muestra la vista de registro
     def register(){
         render(view: "/register")

@@ -13,12 +13,9 @@ class CestaService {
         Cliente cliente = Cliente.get(clienteId)
         Articulo articulo = Articulo.get(articuloId)
 
-        //cliente.cesta.cantidadDeArticulos++
-        articulo.stock--
-        //cliente.cesta.montoTotal += articulo.precio
-        //cliente.cesta.articulos.add(articulo)
+        articulo.decrementarStockEnUno()
         cliente.cesta.agregarArticulo(articulo)
-        cliente.cesta.save(flush: true)
+        cliente.cesta.save()
     }
 
     //agrega un artículo a la cesta de un cliente siempre que el artículo 
@@ -39,10 +36,10 @@ class CestaService {
     def eliminarArticuloACesta(long articuloId, long clienteId) {
         Cliente cliente = Cliente.get(clienteId)
         Articulo articulo = Articulo.get(articuloId)
-        
-        articulo.stock++
+
+        articulo.incrementarStockEnUno()
         cliente.cesta.eliminarArticulo(articulo)
-        cliente.cesta.save(flush: true)
+        cliente.cesta.save()
     }
 
     //permite al cliente vaciar completamente su cesta de compras. 
@@ -53,14 +50,15 @@ class CestaService {
         Cliente cliente = Cliente.get(clienteId)
         Cesta cesta = cliente.cesta
         Articulo articuloEnStock
+        
         cesta.articulos.each{ articulo ->
             articuloEnStock = Articulo.get(articulo.id)
-            articuloEnStock.stock++
+            articuloEnStock.incrementarStockEnUno()
             cliente.disminuirDeuda(articuloEnStock.precio)
             cesta.actualizarCesta(articuloEnStock.precio)
         }
         cliente.cesta.vaciarCesta()
-        cliente.cesta.save(flush: true)
+        cliente.cesta.save()
     }
 
     //permite al cliente vaciar completamente su cesta de compras después de que se haya finalizado un pedido.
@@ -71,12 +69,12 @@ class CestaService {
         Cliente cliente = Cliente.get(clienteId)
         Cesta cesta = cliente.cesta
         Articulo articuloEnStock
+
         cesta.articulos.each{ articulo ->
             articuloEnStock = Articulo.get(articulo.id)
             cesta.actualizarCesta(articuloEnStock.precio)
         }
         cliente.cesta.vaciarCesta()
-        //cliente.cesta.articulos.clear()
-        cliente.cesta.save(flush: true)
+        cliente.cesta.save()
     }
 }

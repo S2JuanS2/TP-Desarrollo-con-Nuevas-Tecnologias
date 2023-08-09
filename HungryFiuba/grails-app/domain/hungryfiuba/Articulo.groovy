@@ -3,7 +3,7 @@ package hungryfiuba
 class Articulo {
 
     String nombre
-    int precio
+    BigDecimal precio
     int codigo
     int stock
     String imagenUrl
@@ -14,7 +14,7 @@ class Articulo {
         nombre nullable: false
         codigo nullable: false, min: 0
         stock nullable: false, min: 0
-        precio min: 1 
+        precio nullable: false, min: 0.00
         imagenUrl nullable: false
         descripcion nullable: false
     }
@@ -39,6 +39,16 @@ class Articulo {
     //devuleve true si el stock es mayor a 0
     boolean hayStock(){
         return stock > 0
+    }
+
+    void decrementarStockEnUno(){
+        if(hayStock()){
+            setStock(stock -1)
+        }
+    }
+
+    void incrementarStockEnUno(){
+        setStock(stock +1)
     }
 
     //verificar si agregar un artículo a la cesta hará que el precio total de la cesta supere

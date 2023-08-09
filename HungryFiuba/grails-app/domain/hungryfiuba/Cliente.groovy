@@ -24,7 +24,7 @@ class Cliente {
     String contrasena
     Cesta cesta
     EstadoCuenta estado
-    int deuda
+    BigDecimal deuda
     int strikes
     int aspectoUnoSuma
     int aspectoDosSuma
@@ -64,14 +64,11 @@ class Cliente {
         this.identificadorTipo = identificadorTipo
         this.identificadorValor = identificadorValor
         this.contrasena = contrasena
-        this.deuda = 0
         this.strikes = 0
         this.aspectoUnoSuma = 0
         this.aspectoDosSuma = 0
         this.aspectoTresSuma = 0
         this.calificacionesPendientes = 0
-        this.estado = EstadoCuenta.NO_BLOQUEADA
-        this.cesta = new Cesta()
     }
 
     //devuleve true si la contrasenia es correcta 
@@ -105,16 +102,20 @@ class Cliente {
 
     //aumenta el numero de calificaciones pendientes
     void agregarCalificacion(){
-        calificacionesPendientes++
+        setCalificacionesPendientes(calificacionesPendientes +1)
+    }
+
+    void decrementarCalificacionEnUno(){
+        setCalificacionesPendientes(calificacionesPendientes -1)
     }
 
     //aumenta el valor de la deuda
-    void aumentarDeuda(int montoTotal){
+    void aumentarDeuda(BigDecimal montoTotal){
         setDeuda(deuda + montoTotal)
     }
 
     //disminuye el valor de una deuda
-    void disminuirDeuda(int montoTotal){
+    void disminuirDeuda(BigDecimal montoTotal){
         setDeuda(deuda - montoTotal)
     }
 

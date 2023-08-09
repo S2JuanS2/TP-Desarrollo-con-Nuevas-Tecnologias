@@ -11,47 +11,38 @@ class PedidoService {
     def guardarPedido(long clienteId) {
         Cliente cliente = Cliente.get(clienteId)
         Cesta cesta = cliente.cesta
-        cliente.deuda += cesta.montoTotal
+        cliente.aumentarDeuda(cesta.montoTotal)
         Pedido pedido = new Pedido(cliente, cesta)
         pedido.save(failOnError: true)
-    }
-
-    //elimina un pedido específico realizado por un cliente en la base de datos. 
-    @Transactional
-    def eliminarPedido(long clienteId, long pedidoId){
-        def cliente = Cliente.get(clienteId)
-        def pedido = Pedido.get(pedidoId)
-        def cesta = pedido.cesta
-        pedido.delete(flush: true)
     }
 
     //elimina un pedido específico en la base de datos
     @Transactional
     def eliminarPedido(long pedidoId){
         Pedido pedido = Pedido.get(pedidoId)
-        pedido.delete(flush: true)
+        pedido.delete()
     }
     
     //actualiza el estado de un pedido a "En Preparación" y guarda los cambios en la base de datos.
     @Transactional
     def cambiarAEnPreparacion(Pedido pedido) {
-            pedido.estado = EstadoPedido.EN_PREPARACION
-            pedido.save(flush: true)
+            pedido.setEstado(EstadoPedido.EN_PREPARACION)
+            pedido.save()
     }
 
     ////actualiza el estado de un pedido a "Listo para entregar" y guarda los cambios en la base de datos.
     @Transactional
     def cambiarAListoParaEntregar(Pedido pedido) {
-            pedido.estado = EstadoPedido.LISTO_PARA_ENTREGAR
-            pedido.save(flush: true)
+            pedido.setEstado(EstadoPedido.LISTO_PARA_ENTREGAR)
+            pedido.save()
     }
 
     ////actualiza el estado de un pedido a "entregado" y guarda los cambios en la base de datos.
     @Transactional
     def cambiarAEntregado(Pedido pedido) {
-            pedido.estado = EstadoPedido.ENTREGADO
-            pedido.cliente.calificacionesPendientes++
-            pedido.save(flush: true)
+            pedido.setEstado(EstadoPedido.ENTREGADO)
+            pedido.cliente.agregarCalificacion()
+            pedido.save()
     }
 
     //realiza el pago de un pedido en la base de datos. Actualiza el saldo de la deuda del cliente y marca el 
@@ -59,9 +50,9 @@ class PedidoService {
     @Transactional
     def pagarPedido(long pedidoId){
         Pedido pedido = Pedido.get(pedidoId)
-        pedido.cliente.deuda -= pedido.precioTotal
-        pedido.estadoPago = EstadoDelPago.PAGADO
-        pedido.save(flush: true)
+        pedido.cliente.disminuirDeuda(pedido.precioTotal)
+        pedido.setEstadoPago(EstadoDelPago.PAGADO)
+        pedido.save()
     }
 
     //cancela un pedido si se cumplen ciertas condiciones y realiza acciones adicionales como penalizar al cliente 
@@ -85,7 +76,7 @@ class PedidoService {
     //cancela un pedido eliminando el pedido de la base de datos y luego vacía la cesta del cliente eliminando los artículos de la cesta.
     @Transactional
     def cancelacionPedido(long clienteId, long pedidoId){
-        eliminarPedido(clienteId, pedidoId)
+        eliminarPedido(pedidoId)
         cestaService.vaciarCesta(clienteId)
     } 
 }
