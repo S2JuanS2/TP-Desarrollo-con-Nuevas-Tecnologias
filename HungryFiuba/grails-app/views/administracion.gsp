@@ -30,7 +30,7 @@
                     <th><g:link controller="administrador" action="confirmarPedido" params="[pedido: pedido.id]" >Confirmar pedido</g:link></th>
                     <th><g:link controller="administrador" action="cambiarAListoParaEntregar" params="[pedido: pedido.id]" >Cambiar a listo para entregar</g:link></th>
                     <th><g:link controller="administrador" action="cambiarAEntregado" params="[pedido: pedido.id]" >Cambiar a entregado</g:link></th>
-                    <th><g:link controller="administrador" action="cancelarPedido" params="[pedido: pedido.id]" >Remover</g:link></th>
+                    <th><g:link controller="administrador" action="cancelarPedido" params="[pedido: pedido.id]" >Cancelar</g:link></th>
                 </tr>
             </g:each>
 

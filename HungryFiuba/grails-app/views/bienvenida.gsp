@@ -14,7 +14,7 @@
         <div class="estado">
             <p><u>Estado de cuenta:</u> ${cliente.estado}</p>
             <p><u>penalizaciones:</u> ${cliente.strikes}</p>
-            <p><u>Saldo:</u> $${cliente.deuda}</p>
+            <p><u>Deuda:</u> $${cliente.deuda}</p>
             <g:link controller="Cliente" action="calificacionesPendientes">Calificaciones Pendientes</g:link>
         </div>
         <asset:image src="logo.png" class="imagen" alt="Logo de la empresa"></asset:image>
