@@ -40,6 +40,8 @@ class AdministradorController {
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
 
+    //verifica si un pedido existe, si está en estado "En Preparación" y luego lo actualiza al estado "Listo para Entregar".
+    // Si el pedido no cumple con las condiciones, muestra un mensaje de error o redirige al administrador según corresponda.
     def cambiarAListoParaEntregar(){
         Pedido pedido = Pedido.get(params.pedido)
         if(!pedido){
@@ -54,6 +56,8 @@ class AdministradorController {
         redirect(controller: "administrador", action: "vistaAdministrador")
     }
 
+    //verifica si un pedido existe, si está en estado "Listo para Entregar" y luego lo actualiza al estado "Entregado".
+    // Si el pedido no cumple con las condiciones, muestra un mensaje de error o redirige al administrador según corresponda.
     def cambiarAEntregado(){
         Pedido pedido = Pedido.get(params.pedido)
         if(!pedido){
