@@ -69,6 +69,8 @@ class Cliente {
         this.aspectoDosSuma = 0
         this.aspectoTresSuma = 0
         this.calificacionesPendientes = 0
+
+        this.cesta = new Cesta()
     }
 
     //devuleve true si la contrasenia es correcta 
