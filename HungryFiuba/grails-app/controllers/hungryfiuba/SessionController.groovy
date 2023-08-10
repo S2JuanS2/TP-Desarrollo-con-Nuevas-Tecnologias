@@ -13,20 +13,7 @@ class SessionController {
             render(view: "/inicio")
         }
     }
-    
-    //obtiene una única instancia del objeto Administrador y garantizar que 
-    //exista solo una instancia del Administrador en toda la aplicación.
-    static Administrador obtenerAdministrador(){
-        Administrador administrador = Administrador.get(1) // Suponiendo que el ID del administrador es 1
-        if (!administrador) {
-            // Manejar el caso en el que no se encuentra el administrador
-        }
-        if(!administrador){
-            administrador = new Administrador("admin", 0);
-        }
-        return administrador
-    }
-    
+
     //muestra la vista de registro
     def register(){
         render(view: "/register")
