@@ -206,7 +206,7 @@ class ClienteSpec extends Specification implements DomainUnitTest<Cliente> {
     }
 
     void "test probar que un cliente con 1 strike al sumarle otro strike no se le bloquea la cuenta"() {
-        given:
+        given:"Dado un cliente con 1 stike"
         Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
         cliente.strikes = 1
 
