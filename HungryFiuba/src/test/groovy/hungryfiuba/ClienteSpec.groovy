@@ -126,10 +126,10 @@ class ClienteSpec extends Specification implements DomainUnitTest<Cliente> {
         Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
 
         when:"Cuando aumento su deuda en 500"
-        cliente.aumentarDeuda(500)
+        cliente.aumentarDeuda(500.00)
 
         then:"El cliente tendra una deuda de 500"
-        cliente.deuda == 500
+        cliente.deuda == 500.00
     }
 
     void "test disminuir la deuda de un cliente"() {
@@ -138,10 +138,10 @@ class ClienteSpec extends Specification implements DomainUnitTest<Cliente> {
         cliente.deuda = 1000
 
         when:"Cuando disminuyo su deuda en 300"
-        cliente.disminuirDeuda(300)
+        cliente.disminuirDeuda(300.00)
 
         then:"El cliente tendra una deuda de 700"
-        cliente.deuda == 700
+        cliente.deuda == 700.00
     }
 
     void "test probar que un cliente con calificaciones pendientes, tiene calificaciones pendientes"() {
