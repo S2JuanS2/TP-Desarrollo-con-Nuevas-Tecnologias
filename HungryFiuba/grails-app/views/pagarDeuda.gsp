@@ -7,7 +7,7 @@
 <body>
     <div class="conteiner">
         <h1>Pago de deuda</h1>
-        <p>Usted tiene una penalización de: $15000.00<br></p>
+        <p>Usted tiene una deuda de: $${cliente.deuda}<br></p>
         <p>Ingrese su número de comprobante de pago:<br></p>
         <form>
             

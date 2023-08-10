@@ -60,14 +60,19 @@ class PedidoService {
     //(dependiendo del estado del pedido).
     @Transactional
     def cancelarYActualizarPedido(Pedido pedido, Cliente cliente){
+        boolean penalizarDeuda = false
         if (pedido.puedeSerCancelado()) {
             if(!pedido.estaPago() && pedido.listoParaEntregar()) {
                 cliente.penalizar()
+                penalizarDeuda = true
             }
+            if(pedido.estaPago() && pedido.listoParaEntregar()) {
+                penalizarDeuda = true
+            } 
             if(pedido.fueEntregado()){
                 cestaService.vaciarCestaDePedidoFinalizado(cliente.id)
             }else{
-                cestaService.vaciarCesta(cliente.id)
+                cestaService.vaciarCesta(cliente.id, penalizarDeuda)
             }
             eliminarPedido(pedido.id)
         }
@@ -77,6 +82,6 @@ class PedidoService {
     @Transactional
     def cancelacionPedido(long clienteId, long pedidoId){
         eliminarPedido(pedidoId)
-        cestaService.vaciarCesta(clienteId)
+        cestaService.vaciarCesta(clienteId, false)
     } 
 }

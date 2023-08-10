@@ -46,7 +46,7 @@ class CestaService {
     //Al realizar esta acción, se actualiza la cantidad de artículos, 
     //el monto total, el stock disponible y la deuda del cliente en la base de datos. 
     @Transactional
-    def vaciarCesta(long clienteId){
+    def vaciarCesta(long clienteId, boolean penalizado){
         Cliente cliente = Cliente.get(clienteId)
         Cesta cesta = cliente.cesta
         Articulo articuloEnStock
@@ -54,7 +54,9 @@ class CestaService {
         cesta.articulos.each{ articulo ->
             articuloEnStock = Articulo.get(articulo.id)
             articuloEnStock.incrementarStockEnUno()
-            cliente.disminuirDeuda(articuloEnStock.precio)
+            if(!penalizado){
+                cliente.disminuirDeuda(articuloEnStock.precio)
+            }
             cesta.actualizarCesta(articuloEnStock.precio)
         }
         cliente.cesta.vaciarCesta()
@@ -68,12 +70,6 @@ class CestaService {
     def vaciarCestaDePedidoFinalizado(long clienteId){
         Cliente cliente = Cliente.get(clienteId)
         Cesta cesta = cliente.cesta
-        Articulo articuloEnStock
-
-        cesta.articulos.each{ articulo ->
-            articuloEnStock = Articulo.get(articulo.id)
-            cesta.actualizarCesta(articuloEnStock.precio)
-        }
         cliente.cesta.vaciarCesta()
         cliente.cesta.save()
     }
