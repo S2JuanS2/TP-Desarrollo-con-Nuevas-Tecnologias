@@ -69,7 +69,7 @@ class Cliente {
         this.aspectoDosSuma = 0
         this.aspectoTresSuma = 0
         this.calificacionesPendientes = 0
-
+        this.deuda = 0
         this.cesta = new Cesta()
     }
 
