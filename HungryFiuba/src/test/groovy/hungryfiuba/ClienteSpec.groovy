@@ -68,7 +68,7 @@ class ClienteSpec extends Specification implements DomainUnitTest<Cliente> {
         cliente.strikes = 2
 
         when:"cuando consulto si tiene menos de 3 strikes"
-        boolean resultado = cliente.tieneMenosDeTresStrikes()
+        boolean resultado = cliente.estaEnCondicionesDeSeguirUsandoLaApp()
 
         then:"El cliente tiene menos de 3 strikes"
         resultado == true
@@ -80,7 +80,7 @@ class ClienteSpec extends Specification implements DomainUnitTest<Cliente> {
         cliente.strikes = 3
 
         when:"cuando consulto si tiene menos de 3 strikes"
-        boolean resultado = cliente.tieneMenosDeTresStrikes()
+        boolean resultado = cliente.estaEnCondicionesDeSeguirUsandoLaApp()
 
         then:"El cliente no tiene menos de 3 strikes"
         resultado == false
@@ -92,7 +92,7 @@ class ClienteSpec extends Specification implements DomainUnitTest<Cliente> {
         cliente.strikes = 3
 
         when:"cuando consulto si tiene 3 strikes"
-        boolean resultado = cliente.tieneTresStrikes()
+        boolean resultado = cliente.estaEnCondicionesDeSerBloqueado()
 
         then:"El cliente tiene 3 strikes"
         resultado == true
@@ -104,7 +104,7 @@ class ClienteSpec extends Specification implements DomainUnitTest<Cliente> {
         cliente.strikes = 2
 
         when:"cuando consulto si tiene 3 strikes"
-        boolean resultado = cliente.tieneTresStrikes()
+        boolean resultado = cliente.estaEnCondicionesDeSerBloqueado()
 
         then:"El cliente no tiene 3 strikes"
         resultado == false

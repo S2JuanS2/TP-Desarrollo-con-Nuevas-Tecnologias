@@ -14,12 +14,12 @@ class AdministradorSpec extends Specification implements DomainUnitTest<Administ
 
     void "test calcular el promedio de la calificacion de estado"() {
         given:"Dado una calificacion total de estado de 15 y una cantidad de calificaciones de 3"
-        Administrador admin = Administrador.obtenerAdministrador()
+        Administrador admin = new Administrador("admin", 0);
         admin.califEstado = 15
         admin.cantidadCalificaciones = 3
 
         when:"Cuando se pide mostrar la calificacion"
-        int calificacionEstado = admin.mostrarCalificacionEstado()
+        int calificacionEstado = admin.calcularCalificacionPromedioEstado()
 
         then:"Se muestra en promedio"
         calificacionEstado == 5
@@ -28,12 +28,12 @@ class AdministradorSpec extends Specification implements DomainUnitTest<Administ
 
     void "test calcular el promedio de la calificacion de rapidez"() {
         given:"Dado una calificacion de rapidez total de 20 y una cantidad de calificaciones de 4"
-        Administrador admin = Administrador.obtenerAdministrador()
+        Administrador admin = new Administrador("admin", 0);
         admin.califRapidez = 20
         admin.cantidadCalificaciones = 4
 
         when:"Cuando se pide mostrar la calificacion"
-        int calificacionRapidez = admin.mostrarCalificacionRapidez()
+        int calificacionRapidez = admin.calcularCalificacionPromedioRapidez()
 
         then:"Se muestra en promedio"
         calificacionRapidez == 5
@@ -41,12 +41,12 @@ class AdministradorSpec extends Specification implements DomainUnitTest<Administ
 
     void "test calcular el promedio de la calificacion de pagina"() {
         given:"Dado una calificacion de pagina total de 25 y una cantidad de calificaciones de 5"
-        Administrador admin = Administrador.obtenerAdministrador()
+        Administrador admin = new Administrador("admin", 0);
         admin.califPagina = 25
         admin.cantidadCalificaciones = 5
 
         when:"Cuando se pide mostrar la calificacion"
-        int calificacionPagina = admin.mostrarCalificacionPagina()
+        int calificacionPagina = admin.calcularCalificacionPromedioPagina()
 
         then:"Se muestra en promedio"
         calificacionPagina == 5
@@ -54,7 +54,7 @@ class AdministradorSpec extends Specification implements DomainUnitTest<Administ
 
     void "test aumentar la cantidad de calificaciones"() {
         given:"Dada una cantidad inicial de calificaciones"
-        Administrador admin = Administrador.obtenerAdministrador()
+        Administrador admin = new Administrador("admin", 0);
         int cantidadInicial = admin.cantidadCalificaciones
 
         when:"Cuando se aumenta en 1"

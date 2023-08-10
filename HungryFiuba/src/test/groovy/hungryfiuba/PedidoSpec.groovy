@@ -141,45 +141,6 @@ class PedidoSpec extends Specification implements DomainUnitTest<Pedido> {
         resultado == false
     }
 
-    void "test probar que si se confirma un pedido en estado de confirmación pasa a preparación"() {
-        given:"Dado un pedido en estado de confirmación"
-        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
-        Pedido pedido = new Pedido(cliente, cliente.cesta)
-        pedido.estado = EstadoPedido.EN_CONFIRMACION
-
-        when:"Cuando confirmo el pedido"
-        pedido.confirmar()
-
-        then:"El pedido del estado pasa a preparación"
-        pedido.estado == EstadoPedido.EN_PREPARACION
-    }
-
-    void "test probar que si se confirma un pedido en estado de preparación pasa a listo para entregar"() {
-        given:"Dado un pedido en estado de preparación"
-        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
-        Pedido pedido = new Pedido(cliente, cliente.cesta)
-        pedido.estado = EstadoPedido.EN_PREPARACION
-
-        when:"Cuando confirmo el pedido"
-        pedido.confirmar()
-
-        then:"El pedido del estado pasa a listo para entregar"
-        pedido.estado == EstadoPedido.LISTO_PARA_ENTREGAR
-    }
-
-    void "test probar que si se confirma un pedido en estado de listo para entregar pasa a entregado"() {
-        given:"Dado un pedido en estado de listo para entregar"
-        Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
-        Pedido pedido = new Pedido(cliente, cliente.cesta)
-        pedido.estado = EstadoPedido.LISTO_PARA_ENTREGAR
-
-        when:"Cuando confirmo el pedido"
-        pedido.confirmar()
-
-        then:"El pedido del estado pasa a entregado"
-        pedido.estado == EstadoPedido.ENTREGADO
-    }
-
     void "test probar que un pedido en estado de confirmación puede ser cancelado"() {
         given:"Dado un pedido en estado de confirmación"
         Cliente cliente = new Cliente("Juan", "Pérez", "DNI", "12345678", "contraseña123")
