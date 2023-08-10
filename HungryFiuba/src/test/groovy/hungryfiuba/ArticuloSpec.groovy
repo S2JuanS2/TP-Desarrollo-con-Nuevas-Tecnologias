@@ -13,7 +13,7 @@ class ArticuloSpec extends Specification implements DomainUnitTest<Articulo> {
 
     void "test consultar si hay stock en un articulo con stock mayor a 0"() {
         given:"Dado un articulo con stock mayor a 0"
-        Articulo articulo = new Articulo("Pepsi", 100.0, 1, 10, "urlimagen", "Descrip")
+        Articulo articulo = new Articulo("Pepsi", 100.00, 1, 10, "urlimagen", "Descrip")
 
         when:"Cuando se pregunta si hay stock"
         boolean resultado = articulo.hayStock()
@@ -24,7 +24,7 @@ class ArticuloSpec extends Specification implements DomainUnitTest<Articulo> {
 
     void "test consultar si hay stock en un articulo con stock igual a 0"() {
         given:"Dado un articulo con stock igual a 0"
-        Articulo articulo = new Articulo("Pepsi", 100.0, 1, 0, "urlimagen", "Descrip")
+        Articulo articulo = new Articulo("Pepsi", 100.00, 1, 0, "urlimagen", "Descrip")
 
         when:"Cuando se pregunta si hay stock"
         boolean resultado = articulo.hayStock()
@@ -36,8 +36,8 @@ class ArticuloSpec extends Specification implements DomainUnitTest<Articulo> {
     void "test Se agrega un articulo a una cesta con un precio mayor al limite de compra"() {
         given:"Dado una cesta con un monto actual de 4900 y un articulo de precio 150"
         Cesta cesta = new Cesta()
-        cesta.montoTotal = 4900.0
-        Articulo articulo = new Articulo("Pepsi", 150.0, 2, 1, "urlimagen", "Descrip")
+        cesta.montoTotal = 4900.00
+        Articulo articulo = new Articulo("Pepsi", 150.00, 2, 1, "urlimagen", "Descrip")
 
         when:"Cuando se consulta si supera el limite de 5000"
         boolean resultado = articulo.superaElLimiteDeCompra(cesta)
@@ -49,8 +49,8 @@ class ArticuloSpec extends Specification implements DomainUnitTest<Articulo> {
     void "test Se agrega un articulo a una cesta con un precio igual al limite de compra"() {
         given:"Dado una cesta con un monto actual de 5000 y un articulo de precio 200"
         Cesta cesta = new Cesta()
-        cesta.montoTotal = 5000.0 
-        Articulo articulo = new Articulo("Pepsi", 200.0, 3, 1, "urlimagen", "Descrip")
+        cesta.montoTotal = 5000.00 
+        Articulo articulo = new Articulo("Pepsi", 200.00, 3, 1, "urlimagen", "Descrip")
 
         when:"Cuando se consulta si supera el limite de 5000"
         boolean resultado = articulo.superaElLimiteDeCompra(cesta)
@@ -62,8 +62,8 @@ class ArticuloSpec extends Specification implements DomainUnitTest<Articulo> {
     void "test Se agrega un articulo a una cesta con un precio menor al limite de compra"() {
         given:"Dado una cesta con un monto actual de 4700 y un articulo de precio 300"
         Cesta cesta = new Cesta()
-        cesta.montoTotal = 4700.0
-        Articulo articulo = new Articulo("Pepsi", 300.0, 4, 1, "urlimagen", "Descrip")
+        cesta.montoTotal = 4700.00
+        Articulo articulo = new Articulo("Pepsi", 300.00, 4, 1, "urlimagen", "Descrip")
 
         when:"Cuando se consulta si supera el limite de 5000"
         boolean resultado = articulo.superaElLimiteDeCompra(cesta)
