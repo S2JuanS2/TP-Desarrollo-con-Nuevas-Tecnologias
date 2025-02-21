@@ -1,7 +1,7 @@
 # Desarrollo con Nuevas Tecnologias - 1er Cuatrimestre - 2023
 
-#HungryFIUBA - Sistema de pedidos del comedor de la facultad.
-
+# HungryFIUBA - Sistema de pedidos del comedor de la facultad.
+Aplicación fue desarrollada utilizando Groovy y Grails
 Alumnos: 
 
 Bruck, María Paula
