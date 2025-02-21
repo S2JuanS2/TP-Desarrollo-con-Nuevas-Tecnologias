@@ -1,15 +1,16 @@
 # HungryFIUBA - Sistema de pedidos del comedor de la facultad.
-Aplicación fue desarrollada utilizando Groovy y Grails
-Alumnos: 
+Aplicación desarrollada utilizando el lenguaje Groovy y el framework Grails.
 
-Bruck, María Paula
+Desarrolladores: 
 
-Del Rio, Juan Sebastián
+~ Bruck, María Paula
 
-Ruano Frugoli, Clara
+~ Del Rio, Juan Sebastián
+
+~ Ruano Frugoli, Clara
 
 -----------------------------------------------------------------------------
 
-Link al doc.
+[Link al doc]
 
 https://docs.google.com/document/d/1xYjndfHK6cXpI11flNVRR-Mv7EoPgJ5g/edit?usp=sharing&ouid=114765086935339206389&rtpof=true&sd=true
